@@ -1,246 +1,276 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Com Org // Red de Debate Soberano</title>
+        <meta
+            name="description"
+            content="Infraestructura descentralizada para una comunidad organizada. Red de debate directo, soberana y libre de algoritmos de manipulación." />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Com Org // Red de Debate Soberano</title>
-    <meta name="description" content="Infraestructura descentralizada para una comunidad organizada. Red de debate directo, soberana y libre de algoritmos de manipulación.">
+        <!-- Open Graph / Facebook / WhatsApp / Telegram -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://com-org.pages.dev/" />
+        <meta property="og:title" content="Com Org // Red de Debate Soberano" />
+        <meta
+            property="og:description"
+            content="Infraestructura descentralizada para una comunidad organizada. Red de debate directo, soberana y libre de algoritmos de manipulación." />
+        <meta property="og:image" content="https://com-org.pages.dev/com-org.jpg" />
 
-    <!-- Open Graph / Facebook / WhatsApp / Telegram -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://com-org.pages.dev/">
-    <meta property="og:title" content="Com Org // Red de Debate Soberano">
-    <meta property="og:description" content="Infraestructura descentralizada para una comunidad organizada. Red de debate directo, soberana y libre de algoritmos de manipulación.">
-    <meta property="og:image" content="https://com-org.pages.dev/com-org.jpg">
+        <!-- Twitter / Red X -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://com-org.pages.dev/" />
+        <meta name="twitter:title" content="Com Org // Red de Debate Soberano" />
+        <meta
+            name="twitter:description"
+            content="Infraestructura descentralizada para una comunidad organizada. Red de debate directo, soberana y libre de algoritmos de manipulación." />
+        <meta name="twitter:image" content="https://com-org.pages.dev/com-org.jpg" />
 
-    <!-- Twitter / Red X -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://com-org.pages.dev/">
-    <meta name="twitter:title" content="Com Org // Red de Debate Soberano">
-    <meta name="twitter:description" content="Infraestructura descentralizada para una comunidad organizada. Red de debate directo, soberana y libre de algoritmos de manipulación.">
-    <meta name="twitter:image" content="https://com-org.pages.dev/com-org.jpg">
+        <style>
+            :root {
+                --bg-principal: #0f172a;
+                --bg-tarjeta: #1e293b;
+                --texto-claro: #f8fafc;
+                --texto-mutado: #94a3b8;
+                --borde: #334155;
+                --acento: #38bdf8;
+                --alerta: #f43f5e;
+            }
 
-    <style>
-        :root {
-            --bg-principal: #0F172A;
-            --bg-tarjeta: #1E293B;
-            --texto-claro: #F8FAFC;
-            --texto-mutado: #94A3B8;
-            --borde: #334155;
-            --acento: #38BDF8;
-            --alerta: #F43F5E;
-        }
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                background-color: var(--bg-principal);
+                color: var(--texto-claro);
+                line-height: 1.6;
+                margin: 0;
+                padding: 0;
+            }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-principal);
-            color: var(--texto-claro);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
+            .contenedor {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 40px 20px;
+            }
 
-        .contenedor {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+            header {
+                text-align: center;
+                border-bottom: 1px solid var(--borde);
+                padding-bottom: 30px;
+                margin-bottom: 40px;
+            }
 
-        header {
-            text-align: center;
-            border-bottom: 1px solid var(--borde);
-            padding-bottom: 30px;
-            margin-bottom: 40px;
-        }
+            .logo-img {
+                max-width: 140px;
+                height: auto;
+                margin: 0 auto 15px auto;
+                display: block;
+                filter: drop-shadow(0 4px 12px rgba(56, 189, 248, 0.25));
+                transition:
+                    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    filter 0.3s ease;
+            }
 
-        .logo-img {
-            max-width: 140px;
-            height: auto;
-            margin: 0 auto 15px auto;
-            display: block;
-            filter: drop-shadow(0 4px 12px rgba(56, 189, 248, 0.25));
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s ease;
-        }
+            .logo-img:hover {
+                transform: scale(1.06) rotate(1deg);
+                filter: drop-shadow(0 8px 20px rgba(56, 189, 248, 0.45));
+            }
 
-        .logo-img:hover {
-            transform: scale(1.06) rotate(1deg);
-            filter: drop-shadow(0 8px 20px rgba(56, 189, 248, 0.45));
-        }
+            .bajada {
+                font-size: 1.2rem;
+                color: var(--texto-mutado);
+                margin-top: 10px;
+            }
 
-        .bajada {
-            font-size: 1.2rem;
-            color: var(--texto-mutado);
-            margin-top: 10px;
-        }
+            .tarjeta {
+                background-color: var(--bg-tarjeta);
+                border: 1px solid var(--borde);
+                border-radius: 12px;
+                padding: 25px;
+                margin-bottom: 25px;
+            }
 
-        .tarjeta {
-            background-color: var(--bg-tarjeta);
-            border: 1px solid var(--borde);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-        }
+            h2 {
+                color: var(--acento);
+                margin-top: 0;
+                font-size: 1.4rem;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
 
-        h2 {
-            color: var(--acento);
-            margin-top: 0;
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+            ul {
+                padding-left: 20px;
+                margin: 10px 0;
+            }
 
-        ul {
-            padding-left: 20px;
-            margin: 10px 0;
-        }
+            li {
+                margin-bottom: 12px;
+            }
 
-        li {
-            margin-bottom: 12px;
-        }
+            strong {
+                color: var(--texto-claro);
+            }
 
-        strong {
-            color: var(--texto-claro);
-        }
+            .alerta-box {
+                border-left: 4px solid var(--alerta);
+                background-color: rgba(244, 63, 94, 0.1);
+            }
 
-        .alerta-box {
-            border-left: 4px solid var(--alerta);
-            background-color: rgba(244, 63, 94, 0.1);
-        }
+            .faq-item {
+                border-bottom: 1px solid var(--borde);
+                padding: 15px 0;
+            }
 
-        .faq-item {
-            border-bottom: 1px solid var(--borde);
-            padding: 15px 0;
-        }
+            .faq-item:last-child {
+                border-bottom: none;
+            }
 
-        .faq-item:last-child {
-            border-bottom: none;
-        }
+            .faq-pregunta {
+                font-weight: bold;
+                color: var(--texto-claro);
+                margin-bottom: 5px;
+            }
 
-        .faq-pregunta {
-            font-weight: bold;
-            color: var(--texto-claro);
-            margin-bottom: 5px;
-        }
+            .faq-respuesta {
+                color: var(--texto-mutado);
+                font-size: 0.95rem;
+            }
 
-        .faq-respuesta {
-            color: var(--texto-mutado);
-            font-size: 0.95rem;
-        }
+            footer {
+                text-align: center;
+                margin-top: 60px;
+                color: var(--texto-mutado);
+                font-size: 0.85rem;
+                border-top: 1px solid var(--borde);
+                padding-top: 20px;
+            }
 
-        footer {
-            text-align: center;
-            margin-top: 60px;
-            color: var(--texto-mutado);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--borde);
-            padding-top: 20px;
-        }
+            footer a {
+                color: var(--acento);
+                text-decoration: none;
+                transition: color 0.2s ease;
+            }
 
-        footer a {
-            color: var(--acento);
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
+            footer a:hover {
+                color: #7dd3fc;
+                text-decoration: underline;
+            }
 
-        footer a:hover {
-            color: #7dd3fc;
-            text-decoration: underline;
-        }
+            .contacto-footer {
+                margin-top: 8px;
+                font-size: 0.8rem;
+            }
+        </style>
+    </head>
 
-        .contacto-footer {
-            margin-top: 8px;
-            font-size: 0.8rem;
-        }
-    </style>
-</head>
+    <body>
+        <div class="contenedor">
+            <header>
+                <img src="com-org.jpg" alt="Com Org" class="logo-img" />
+                <p class="bajada">Infraestructura Descentralizada para una Comunidad Organizada</p>
+            </header>
 
-<body>
-
-    <div class="contenedor">
-        <header>
-            <img src="com-org.jpg" alt="Com Org" class="logo-img">
-            <p class="bajada">Infraestructura Descentralizada para una Comunidad Organizada</p>
-        </header>
-
-        <section class="tarjeta">
-            <h2>📡 ¿Qué es Com Org?</h2>
-            <p>Es una infraestructura de comunicación y debate social basada en una <strong>red mesh soberana y
-                    directa</strong>. Inspirada en la doctrina de resistencia y autonomía de las comunicaciones de
-                campaña, aquí no existen empresas intermediarias, servidores de datos centralizados, ni algoritmos
-                vigilando o manipulando lo que dices. Una vez coordinada la conexión, los datos viajan encriptados de
-                forma directa entre los dispositivos de los usuarios.</p>
-        </section>
-
-        <section class="tarjeta">
-            <h2>🛠️ Principios de Arquitectura y Soberanía</h2>
-            <ul>
-                <li><strong>Tu dispositivo es tu servidor:</strong> Cada posteo, imagen o archivo se almacena en tu
-                    propio sistema (Windows, Android, Linux). Si borras la aplicación o pones tu nodo offline, tu
-                    contenido deja de ser accesible en la red. Tienes el control absoluto del interruptor.</li>
-                <li><strong>Filosofía Contracultural (Sin "Likes"):</strong> El botón de 'like' es el mecanismo de
-                    adicción y manipulación psicológica de las redes comerciales. En <strong>Com Org</strong> no
-                    acumulas aprobación vacía. Si te interesa un post, te expresas y aportas valor usando el botón único
-                    <code>💬 Responder con argumentos</code>.
-                </li>
-                <li><strong>Límite Físico al Spam y Bots:</strong> Al no haber servidores centrales pagados por
-                    corporaciones que absorban el tráfico basura, el costo de publicar recae sobre el emisor
-                    (procesamiento, espacio y batería local). Quien pretenda inundar la red con miles de bots, colapsará
-                    su propia máquina. El filtro es físico.</li>
-                <li><strong>Huella Permanente Opcional:</strong> Para evitar la pérdida de visibilidad cuando apagas tu
-                    equipo, puedes activar voluntariamente la exportación a tu propio almacenamiento en la nube (Google
-                    Drive, Proton Drive, etc.) mediante tu correo personal. El costo de persistencia lo maneja el
-                    emisor, no la red.</li>
-            </ul>
-        </section>
-
-        <section class="tarjeta alerta-box">
-            <h2>⚠️ Aclaración para Opinólogos y Críticos de Sillón</h2>
-            <p>Esto <strong>no es una red federada</strong> (como Mastodon o Bluesky) ni un P2P comercial abierto. En
-                <strong>Com Org</strong> los nodos validan su identidad mediante una Autoridad de Certificación (CA)
-                privada y establecen túneles seguros punto a punto empleando la infraestructura de red mesh de
-                <strong>Nebula</strong>. El Faro solo actúa como coordinador de enlaces; el control de la transmisión es
-                100% tuyo.
-            </p>
-        </section>
-
-        <section class="tarjeta">
-            <h2>💬 Preguntas Frecuentes</h2>
-
-            <div class="faq-item">
-                <p class="faq-pregunta">¿Por qué es gratis?</p>
-                <p class="faq-respuesta">Porque mantener la red cuesta prácticamente cero. Los "Faros" de Nebula solo
-                    coordinan las IPs para los apretones de manos mediante texto plano ligero, y pueden correr desde un
-                    teléfono viejo sin uso. No hay gastos de infraestructura pesada.</p>
-            </div>
-
-            <div class="faq-item">
-                <p class="faq-pregunta">¿Quién modera el contenido?</p>
-                <p class="faq-respuesta">Tú. Tu cliente local procesa los índices mediante un etiquetado estricto (ADN
-                    del Post: Opinión, Datos Públicos, Meme). Si configuras tu nodo para no leer determinadas etiquetas
-                    o bloquear un hash específico, tu máquina obedece de inmediato. La moderación es soberana e
-                    individual.</p>
-            </div>
-
-            <div class="faq-item">
-                <p class="faq-pregunta">Quiero sugerir que la red funcione de otra forma...</p>
-                <p class="faq-respuesta">La arquitectura técnica y la lógica humana de Com Org ya están cerradas y en
-                    fase de desarrollo. El proyecto avanza enfocado en la libertad y la cordura digital. Si buscas
-                    algoritmos de indignación y validación rápida, las redes comerciales tradicionales siguen abiertas.
+            <section class="tarjeta">
+                <h2>📡 ¿Qué es Com Org?</h2>
+                <p>
+                    Es una infraestructura de comunicación y debate social basada en una
+                    <strong>red mesh soberana y directa</strong>. Inspirada en la doctrina de resistencia y autonomía de
+                    las comunicaciones de campaña, aquí no existen empresas intermediarias, servidores de datos
+                    centralizados, ni algoritmos vigilando o manipulando lo que dices. Una vez coordinada la conexión,
+                    los datos viajan encriptados de forma directa entre los dispositivos de los usuarios.
                 </p>
-            </div>
-        </section>
+            </section>
 
-        <footer>
-            <p>Com Org // Proyecto Libre y Soberano // Mayo 2026</p>
-            <p class="contacto-footer">
-                Contacto: <a href="mailto:G.ferre2025@gmail.com">G.ferre2025@gmail.com</a> &bull; 
-                Red X: <a href="https://x.com/Miguel_CCom5" target="_blank" rel="noopener noreferrer">@Miguel_CCom5</a>
-            </p>
-        </footer>
-    </div>
+            <section class="tarjeta">
+                <h2>🛠️ Principios de Arquitectura y Soberanía</h2>
+                <ul>
+                    <li>
+                        <strong>Tu dispositivo es tu servidor:</strong> Cada posteo, imagen o archivo se almacena en tu
+                        propio sistema (Windows, Android, Linux). Si borras la aplicación o pones tu nodo offline, tu
+                        contenido deja de ser accesible en la red. Tienes el control absoluto del interruptor.
+                    </li>
+                    <li>
+                        <strong>Filosofía Contracultural (Sin "Likes"):</strong> El botón de 'like' es el mecanismo de
+                        adicción y manipulación psicológica de las redes comerciales. En <strong>Com Org</strong> no
+                        acumulas aprobación vacía. Si te interesa un post, te expresas y aportas valor usando el botón
+                        único <code>💬 Responder con argumentos</code>.
+                    </li>
+                    <li>
+                        <strong>Límite Físico al Spam y Bots:</strong> Al no haber servidores centrales pagados por
+                        corporaciones que absorban el tráfico basura, el costo de publicar recae sobre el emisor
+                        (procesamiento, espacio y batería local). Quien pretenda inundar la red con miles de bots,
+                        colapsará su propia máquina. El filtro es físico.
+                    </li>
+                    <li>
+                        <strong>Huella Permanente Opcional:</strong> Para evitar la pérdida de visibilidad cuando apagas
+                        tu equipo, puedes activar voluntariamente la exportación a tu propio almacenamiento en la nube
+                        (Google Drive, Proton Drive, etc.) mediante tu correo personal. El costo de persistencia lo
+                        maneja el emisor, no la red.
+                    </li>
+                </ul>
+            </section>
 
-</body>
+            <section class="tarjeta alerta-box">
+                <h2>⚠️ Aclaración para Opinólogos y Críticos de Sillón</h2>
+                <p>
+                    Esto <strong>no es una red federada</strong> (como Mastodon o Bluesky) ni un P2P comercial abierto.
+                    En <strong>Com Org</strong> los nodos validan su identidad mediante una Autoridad de Certificación
+                    (CA) privada y establecen túneles seguros punto a punto empleando la infraestructura de red mesh de
+                    <strong>Nebula</strong>. El Faro solo actúa como coordinador de enlaces; el control de la
+                    transmisión es 100% tuyo.
+                </p>
+            </section>
 
+            <section class="tarjeta">
+                <h2>💬 Preguntas Frecuentes</h2>
+
+                <div class="faq-item">
+                    <p class="faq-pregunta">¿Por qué es gratis?</p>
+                    <p class="faq-respuesta">
+                        Porque mantener la red cuesta prácticamente cero. Los "Faros" de Nebula solo coordinan las IPs
+                        para los apretones de manos mediante texto plano ligero, y pueden correr desde un teléfono viejo
+                        sin uso. No hay gastos de infraestructura pesada.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-pregunta">¿Quién modera el contenido?</p>
+                    <p class="faq-respuesta">
+                        Tú. Tu cliente local procesa los índices mediante un etiquetado estricto (ADN del Post: Opinión,
+                        Datos Públicos, Meme). Si configuras tu nodo para no leer determinadas etiquetas o bloquear un
+                        hash específico, tu máquina obedece de inmediato. La moderación es soberana e individual.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <p class="faq-pregunta">
+                        ¿Cómo se controla el contenido ilegal, la pornografía o la violencia si no hay un dueño?
+                    </p>
+                    <p class="faq-respuesta">
+                        Se controla mediante inmunidad y aislamiento, no con censura central. Primero, para entrar a la
+                        red necesitas un certificado validado; si un nodo viola las reglas comunitarias, su certificado
+                        se revoca y queda aislado en el vacío. Segundo, la moderación es local: tu aplicación
+                        permite bloquear cualquier ID criptográfico al instante. El contenido indeseable se queda
+                        atrapado en el dispositivo de quien lo creó, consumiendo su propio espacio y batería, sin poder
+                        propagarse al resto de la comunidad.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <p class="faq-pregunta">Quiero sugerir que la red funcione de otra forma...</p>
+                    <p class="faq-respuesta">
+                        La arquitectura técnica y la lógica humana de Com Org ya están cerradas y en fase de desarrollo.
+                        El proyecto avanza enfocado en la libertad y la cordura digital. Si buscas algoritmos de
+                        indignación y validación rápida, las redes comerciales tradicionales siguen abiertas.
+                    </p>
+                </div>
+            </section>
+
+            <footer>
+                <p>Com Org // Proyecto Libre y Soberano // Mayo 2026</p>
+                <p class="contacto-footer">
+                    Contacto: <a href="mailto:G.ferre2025@gmail.com">G.ferre2025@gmail.com</a> &bull; Red X:
+                    <a href="https://x.com/Miguel_CCom5" target="_blank" rel="noopener noreferrer">@Miguel_CCom5</a>
+                </p>
+            </footer>
+        </div>
+    </body>
 </html>
