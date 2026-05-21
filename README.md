@@ -88,7 +88,7 @@ La identidad visual y el nombre de **Com Org** no son elecciones casuales; repre
 filosófica frente al software y la organización humana.
 
 <p align="center">
-  <img src="com-org.jpg" width="250" alt="Com Org Logo" style="border-radius: 40px;"/>
+  <img src="com-org.png" width="250" alt="Com Org Logo" style="border-radius: 40px;"/>
 </p>
 
 ### La Filosofía de la "Comunidad Organizada"
