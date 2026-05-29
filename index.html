@@ -1,426 +1,1232 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Com Org // Red de Debate Soberano</title>
-        <meta
-            name="description"
-            content="Infraestructura descentralizada para una comunidad organizada. Red de debate directo, soberana y libre de algoritmos de manipulación." />
 
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://com-org.pages.dev/" />
-        <meta property="og:title" content="Com Org // Red de Debate Soberano" />
-        <meta
-            property="og:description"
-            content="Infraestructura descentralizada para una comunidad organizada. Red de debate directo, soberana y libre de algoritmos de manipulación." />
-        <meta property="og:image" content="https://com-org.pages.dev/com-org.png" />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Com Org // Red de Debate Soberano</title>
+    <meta name="description"
+        content="Infraestructura descentralizada para una comunidad organizada. Red de debate directo, soberana y libre de algoritmos de manipulación." />
 
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content="https://com-org.pages.dev/" />
-        <meta name="twitter:title" content="Com Org // Red de Debate Soberano" />
-        <meta
-            name="twitter:description"
-            content="Infraestructura descentralizada para una comunidad organizada. Red de debate directo, soberana y libre de algoritmos de manipulación." />
-        <meta name="twitter:image" content="https://com-org.pages.dev/com-org.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://com-org.pages.dev/" />
+    <meta property="og:title" content="Com Org // Red de Debate Soberano" />
+    <meta property="og:description"
+        content="Infraestructura descentralizada para una comunidad organizada. Red de debate directo, soberana y libre de algoritmos de manipulación." />
+    <meta property="og:image" content="https://com-org.pages.dev/img/1.png" />
 
-        <style>
-            :root {
-                --bg-principal: #0f1419;
-                /* Actualizado al 'Petróleo Profundo' del manifiesto */
-                --bg-tarjeta: #13202c;
-                /* Tarjetas del manifiesto */
-                --texto-claro: #f8fafc;
-                --texto-mutado: #94a3b8;
-                --borde: #2e455c;
-                /* Azul acero frío */
-                --acento: #c97a2b;
-                /* Naranja terracota clásico */
-                --alerta: #f43f5e;
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://com-org.pages.dev/" />
+    <meta name="twitter:title" content="Com Org // Red de Debate Soberano" />
+    <meta name="twitter:description"
+        content="Infraestructura descentralizada para una comunidad organizada. Red de debate directo, soberana y libre de algoritmos de manipulación." />
+    <meta name="twitter:image" content="https://com-org.pages.dev/img/1.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700&display=swap"
+        rel="stylesheet" />
+
+    <style>
+        /* ============================================================
+           VARIABLES Y RESET
+        ============================================================ */
+        :root {
+            --bg-dark: #0F1419;
+            --bg-card: #13202C;
+            --bg-section-alt: #0b0e12;
+            --border-glow: #2E455C;
+            --accent-terracota: #C97A2B;
+            --accent-glow: rgba(201, 122, 43, 0.35);
+            --text-main: #EEF1F5;
+            --text-muted: #8fa3b8;
+            --danger: #f43f5e;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-glow);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-terracota);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .mono {
+            font-family: 'Fira Code', monospace;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+
+        /* ============================================================
+           LAYOUT HELPERS
+        ============================================================ */
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 72px 0;
+        }
+
+        .section-alt {
+            background-color: var(--bg-section-alt);
+        }
+
+        .section-title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            text-align: center;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 56px;
+            height: 3px;
+            background: var(--accent-terracota);
+            margin: 12px auto 0;
+            border-radius: 2px;
+        }
+
+        .section-lead {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 680px;
+            margin: 0 auto 52px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 700px) {
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
             }
 
-            body {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                background-color: var(--bg-principal);
-                color: var(--texto-claro);
-                line-height: 1.6;
-                margin: 0;
-                padding: 0;
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* ============================================================
+           CARDS
+        ============================================================ */
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 10px;
+            padding: 28px;
+            transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .card:hover {
+            border-color: var(--accent-terracota);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .card img {
+            border: 1px solid rgba(46, 69, 92, 0.4);
+        }
+
+        .card-highlight {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent-terracota);
+            border-left: 3px solid var(--accent-terracota);
+            padding-left: 12px;
+        }
+
+        /* Pilares / pequeños */
+        .pillar-card {
+            background-color: rgba(19, 32, 44, 0.7);
+            border: 1px solid var(--border-glow);
+            border-radius: 10px;
+            padding: 28px 24px;
+            text-align: center;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .pillar-card:hover {
+            border-color: var(--accent-terracota);
+            transform: translateY(-4px);
+        }
+
+        .pillar-card .num {
+            font-family: 'Fira Code', monospace;
+            font-size: 2rem;
+            color: var(--accent-terracota);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .pillar-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+
+        /* ============================================================
+           BOTONES
+        ============================================================ */
+        .btn {
+            display: inline-block;
+            padding: 13px 32px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: 'Fira Code', monospace;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 0 12px rgba(46, 69, 92, 0.25);
+        }
+
+        .btn-primary:hover {
+            border-color: var(--accent-terracota);
+            box-shadow: 0 0 20px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid transparent;
+        }
+
+        .btn-ghost:hover {
+            color: var(--accent-terracota);
+        }
+
+        /* ============================================================
+           NAV
+        ============================================================ */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 20, 25, 0.88);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(46, 69, 92, 0.4);
+            padding: 14px 0;
+        }
+
+        .nav-inner {
+            width: 92%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .nav-logo {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 6px rgba(201, 122, 43, 0.35));
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+
+        .nav-logo:hover img {
+            filter: drop-shadow(0 0 10px rgba(201, 122, 43, 0.6));
+            transform: rotate(8deg) scale(1.1);
+        }
+
+        .nav-logo span {
+            color: var(--accent-terracota);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-terracota);
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* ============================================================
+           HERO
+        ============================================================ */
+        .hero {
+            background: radial-gradient(ellipse at top, #1a2d3d 0%, var(--bg-dark) 65%);
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding: 60px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* grid lines decorativas */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(46, 69, 92, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(46, 69, 92, 0.07) 1px, transparent 1px);
+            background-size: 48px 48px;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        .hero-img-wrap {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 36px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(46, 69, 92, 0.5);
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+            transition: box-shadow 0.4s ease;
+        }
+
+        .hero-img-wrap:hover {
+            box-shadow: 0 24px 72px var(--accent-glow);
+        }
+
+        .hero-img-wrap img {
+            border-radius: 0;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 14px;
+        }
+
+        .hero p.tagline {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto 32px;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* badge estado */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(19, 32, 44, 0.8);
+            border: 1px solid var(--border-glow);
+            border-radius: 999px;
+            padding: 6px 16px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 8px #22c55e;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
             }
 
-            .contenedor {
-                max-width: 800px;
-                margin: 0 auto;
-                padding: 40px 20px;
+            50% {
+                opacity: 0.4;
             }
+        }
 
-            header {
-                text-align: center;
-                border-bottom: 1px solid var(--borde);
-                padding-bottom: 30px;
-                margin-bottom: 40px;
-            }
+        /* ============================================================
+           SECCIÓN: PARADIGMA (contraste)
+        ============================================================ */
+        .paradigm-section {
+            border-top: 1px solid rgba(46, 69, 92, 0.2);
+            border-bottom: 1px solid rgba(46, 69, 92, 0.2);
+        }
 
-            .logo-img {
-                max-width: 140px;
-                height: auto;
-                margin: 0 auto 15px auto;
-                display: block;
-                filter: drop-shadow(0 4px 12px rgba(201, 122, 43, 0.25));
-                transition:
-                    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                    filter 0.3s ease;
-            }
+        /* ============================================================
+           FEATURE ITEMS (cómo funciona)
+        ============================================================ */
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
 
-            .logo-img:hover {
-                transform: scale(1.06) rotate(1deg);
-                filter: drop-shadow(0 8px 20px rgba(201, 122, 43, 0.45));
-            }
+        .feature-item {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 10px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
 
-            .bajada {
-                font-size: 1.2rem;
-                color: var(--texto-mutado);
-                margin-top: 10px;
-            }
+        .feature-item:hover {
+            border-color: var(--accent-terracota);
+            transform: translateY(-3px);
+        }
 
-            .tarjeta {
-                background-color: var(--bg-tarjeta);
-                border: 1px solid var(--borde);
-                border-radius: 12px;
-                padding: 25px;
-                margin-bottom: 25px;
-            }
-
-            h2 {
-                color: var(--acento);
-                margin-top: 0;
-                font-size: 1.4rem;
-                display: flex;
+        @media (min-width: 700px) {
+            .feature-item {
+                flex-direction: row;
                 align-items: center;
-                gap: 10px;
             }
 
-            ul {
-                padding-left: 20px;
-                margin: 10px 0;
+            .feature-thumb {
+                width: 220px;
+                flex-shrink: 0;
             }
+        }
 
-            li {
-                margin-bottom: 12px;
-            }
+        .feature-text h3 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-            strong {
-                color: var(--texto-claro);
-            }
+        .feature-text p {
+            color: var(--text-muted);
+            font-size: 0.93rem;
+        }
 
-            .alerta-box {
-                border-left: 4px solid var(--alerta);
-                background-color: rgba(244, 63, 94, 0.1);
-            }
+        /* ============================================================
+           COOP / LLAMADO
+        ============================================================ */
+        .coop-section {
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #111820 100%);
+        }
 
-            .faq-item {
-                border-bottom: 1px solid var(--borde);
-                padding: 15px 0;
-            }
+        .coop-quote {
+            text-align: center;
+            font-family: 'Fira Code', monospace;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--accent-terracota);
+            border: 1px solid rgba(201, 122, 43, 0.25);
+            border-radius: 8px;
+            padding: 20px 28px;
+            margin-bottom: 36px;
+            background: rgba(201, 122, 43, 0.06);
+        }
 
-            .faq-item:last-child {
-                border-bottom: none;
-            }
+        /* ============================================================
+           ALERTA / MANIFIESTO
+        ============================================================ */
+        .alert-box {
+            background: rgba(244, 63, 94, 0.07);
+            border: 1px solid rgba(244, 63, 94, 0.35);
+            border-left: 4px solid var(--danger);
+            border-radius: 8px;
+            padding: 24px 28px;
+            max-width: 860px;
+            margin: 0 auto;
+        }
 
-            .faq-pregunta {
-                font-weight: bold;
-                color: var(--texto-claro);
-                margin-bottom: 5px;
-            }
+        .alert-box h3 {
+            color: var(--danger);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
 
-            .faq-respuesta {
-                color: var(--texto-mutado);
-                font-size: 0.95rem;
-            }
+        .alert-box p {
+            color: var(--text-muted);
+            font-size: 0.93rem;
+        }
 
-            /* Estilos para la tabla comparativa */
-            .tabla-contenedor {
-                overflow-x: auto;
-                margin-top: 15px;
-            }
+        /* ============================================================
+           ROADMAP / METADATA
+        ============================================================ */
+        .roadmap-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 28px;
+        }
 
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                text-align: left;
-                font-size: 0.95rem;
-            }
+        .meta-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 8px;
+            padding: 16px 20px;
+            transition: border-color 0.3s ease;
+        }
 
-            th,
-            td {
-                padding: 12px;
-                border-bottom: 1px solid var(--borde);
-            }
+        .meta-card:hover {
+            border-color: var(--accent-terracota);
+        }
 
-            th {
-                color: var(--acento);
-                font-weight: bold;
-            }
+        .meta-card h4 {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
 
-            tr:last-child td {
-                border-bottom: none;
-            }
+        .meta-card p {
+            font-size: 0.87rem;
+            color: var(--text-muted);
+        }
 
-            footer {
-                text-align: center;
-                margin-top: 60px;
-                color: var(--texto-mutado);
-                font-size: 0.85rem;
-                border-top: 1px solid var(--borde);
-                padding-top: 20px;
-            }
+        .tag {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.72rem;
+            color: var(--accent-terracota);
+            background: rgba(201, 122, 43, 0.1);
+            border: 1px solid rgba(201, 122, 43, 0.25);
+            border-radius: 4px;
+            padding: 2px 6px;
+            vertical-align: middle;
+            margin-left: 6px;
+        }
 
-            footer a {
-                color: var(--acento);
-                text-decoration: none;
-                transition: color 0.2s ease;
-            }
+        /* ============================================================
+           FAQ
+        ============================================================ */
+        .faq-list {
+            max-width: 820px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
 
-            footer a:hover {
-                color: #e59342;
-                text-decoration: underline;
-            }
+        .faq-item {
+            border-bottom: 1px solid rgba(46, 69, 92, 0.3);
+            padding: 20px 0;
+        }
 
-            .contacto-footer {
-                margin-top: 8px;
-                font-size: 0.8rem;
-            }
-        </style>
-    </head>
+        .faq-item:last-child {
+            border-bottom: none;
+        }
 
-    <body>
-        <div class="contenedor">
-            <header>
-                <img src="com-org.png" alt="Logo Com Org" class="logo-img" />
-                <h1 style="font-size: 2.2rem; margin: 0; color: var(--texto-claro)">Com Org</h1>
-                <p class="bajada">La red social donde tus datos te pertenecen y el control es físico.</p>
-            </header>
+        .faq-q {
+            font-weight: 600;
+            font-size: 0.98rem;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
 
-            <section class="tarjeta">
-                <h2>📡 ¿Qué es una Red Mesh Soberana? (Explicado en criollo)</h2>
-                <p>
-                    En las redes comunes (como X o Instagram), todos los usuarios se conectan a un
-                    <strong>servidor central</strong> de una empresa. Si esa empresa decide borrar tu cuenta, vender tus
-                    datos o cambiar el algoritmo para indignarte, no podés hacer nada.
-                </p>
-                <p>
-                    <strong>Com Org funciona al revés: a través de una Red Mesh (Red de Malla).</strong> Acá no existen
-                    servidores centrales en la nube. Los dispositivos de los usuarios se conectan directamente entre sí
-                    de forma segura. Es como una mesa redonda donde la información fluye de mano en mano: tu computadora
-                    o celular es tu propia porción de la red.
-                </p>
-            </section>
+        .faq-q::before {
+            content: '//';
+            font-family: 'Fira Code', monospace;
+            color: var(--accent-terracota);
+            flex-shrink: 0;
+            font-size: 0.9rem;
+            padding-top: 2px;
+        }
 
-            <section class="tarjeta">
-                <h2>📊 Com Org vs. Las Redes Tradicionales (Ej: X)</h2>
-                <div class="tabla-contenedor">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Característica</th>
-                                <th>Red Centralizada (Ej: X)</th>
-                                <th>Com Org (Red Mesh Soberana)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>¿Dónde viven tus datos?</strong></td>
-                                <td>En servidores ajenos en el extranjero.</td>
-                                <td><strong>Únicamente en tu dispositivo local.</strong></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Si borrás una publicación...</strong></td>
-                                <td>Queda guardada para siempre en sus bases de datos.</td>
-                                <td><strong>Desaparece por completo de la red.</strong></td>
-                            </tr>
-                            <tr>
-                                <td><strong>¿Cómo se ordena lo que ves?</strong></td>
-                                <td>Por un algoritmo diseñado para volverte adicto.</td>
-                                <td>A demanda. Vos elegís qué leer y cuándo explorar.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Interacción básica</strong></td>
-                                <td>"Likes" vacíos que manipulan tu dopamina.</td>
-                                <td>Botón directo <code>↩ Responder</code> con argumentos.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Si se cae el Internet global...</strong></td>
-                                <td>La plataforma muere por completo.</td>
-                                <td><strong>Sigue funcionando localmente</strong> entre usuarios conectados.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
+        .faq-a {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            padding-left: 26px;
+        }
 
-            <section class="tarjeta">
-                <h2>🛠️ Los Pilares de Nuestra Filosofía</h2>
-                <ul>
-                    <li>
-                        <strong>Soberanía Absoluta del Dato:</strong> Tu identidad local y tus publicaciones se guardan
-                        en tu disco. Tenés el control total del interruptor físico: si apagás tu aplicación, tu nodo se
-                        desconecta.
-                    </li>
-                    <li>
-                        <strong>Diseño Humano Sin Dopamina:</strong> Eliminamos los "likes" y las mecánicas adictivas.
-                        Para interactuar con una idea, la única vía es el debate real y constructivo a través de
-                        argumentos.
-                    </li>
-                    <li>
-                        <strong>Filtro Físico Antispam:</strong> Al no haber empresas pagando servidores gigantes, el
-                        costo de procesamiento y almacenamiento recae en quien emite el mensaje. Si alguien quiere
-                        inundar la red con miles de bots falsos, colapsará su propia máquina por el esfuerzo de cómputo.
-                        El límite no es un moderador, es la física.
-                    </li>
-                </ul>
-            </section>
+        /* ============================================================
+           TABLE COMPARATIVA
+        ============================================================ */
+        .table-wrap {
+            overflow-x: auto;
+            margin-top: 0;
+        }
 
-            <section class="tarjeta alerta-box">
-                <h2>⚠️ Para que quede claro: Esto no es otra copia de Twitter</h2>
-                <p>
-                    Com Org <strong>no es una red comercial ni una red federada (como Mastodon o Bluesky)</strong>. No
-                    vas a encontrar un muro infinito diseñado para hacerte perder el tiempo. Es una herramienta de
-                    software sofisticada pensada para la resistencia cultural, la autonomía comunicativa y la libre
-                    expresión blindada por hardware inmutable.
-                </p>
-            </section>
-            <section class="tarjeta">
-                <h2>📝 El Faro Comunitario: Nuestro Manifiesto</h2>
-                <p style="font-size: 1.1rem; font-style: italic; color: var(--texto-mutado); margin-bottom: 25px">
-                    ¿Quién es el dueño de la red donde hablamos? La diferencia entre ser el producto o ser los dueños.
-                </p>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
 
-                <div class="faq-item">
-                    <p class="faq-pregunta">1. Romper el sentido común de las redes comerciales</p>
-                    <p class="faq-secondary" style="color: var(--texto-mutado); font-size: 0.95rem">
-                        Cuando usás una red social tradicional (Facebook, X, Instagram), la red no es tuya. Tiene un
-                        dueño: un multimillonario en Silicon Valley. Si al dueño no le gusta lo que decís, te borra. Si
-                        quiere vender tus datos al mejor postor o a un partido político para manipularte, lo hace. Te
-                        dicen que es "gratis" porque
-                        <strong>el producto en venta sos vos, tu tiempo y tu privacidad</strong>.
-                    </p>
-                </div>
+        th,
+        td {
+            padding: 13px 16px;
+            border-bottom: 1px solid rgba(46, 69, 92, 0.3);
+            text-align: left;
+        }
 
-                <div class="faq-item">
-                    <p class="faq-pregunta">2. La Identidad de Com Org (La red de la comunidad)</p>
-                    <p class="faq-secondary" style="color: var(--texto-mutado); font-size: 0.95rem">
-                        Com Org nació de forma distinta. No tiene oficinas lujosas, no tiene acciones en la bolsa ni un
-                        CEO tirano que decide qué se lee y qué no. Es una <strong>red mesh (en malla)</strong>: un
-                        enjambre donde la comunicación viaja encriptada directo de tu dispositivo al de tu vecino, sin
-                        intermediarios. Como herramienta de organización popular y debate libre, está blindada contra la
-                        censura.
-                    </p>
-                </div>
+        th {
+            font-family: 'Fira Code', monospace;
+            color: var(--accent-terracota);
+            font-size: 0.82rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
 
-                <div class="faq-item">
-                    <p class="faq-pregunta">3. La Necesidad del Crecimiento "Faro Comunitario"</p>
-                    <p class="faq-secondary" style="color: var(--texto-mutado); font-size: 0.95rem">
-                        Para que los mensajes y los espacios de audio se encuentren rápido en todo el país sin que tu IP
-                        real quede expuesta a ataques, la red necesita <strong>Faros de Encuentro</strong>. Hoy, el
-                        primer faro está sostenido a pulmón sobre hardware reciclado en nuestro propio laboratorio. Pero
-                        como sabemos que esta herramienta de organización va a expandirse rápido, no podemos cometer el
-                        error de tener un único faro controlado por una sola persona. Si la infraestructura dependiera
-                        de un dueño único, esta red sería tan débil como las comerciales.
-                        <strong>El poder popular no puede depender de una sola voluntad.</strong>
-                    </p>
-                </div>
+        tr:last-child td {
+            border-bottom: none;
+        }
 
-                <div class="faq-item">
-                    <p class="faq-pregunta">4. La Solución: El Modelo de Cooperativa Digital</p>
-                    <p class="faq-secondary" style="color: var(--texto-mutado); font-size: 0.95rem">
-                        Para asegurar que la red sea inmortal e incontrolable por cualquier poder de turno, la
-                        infraestructura se expandirá bajo el modelo de <strong>Faros Comunitarios</strong>:
-                    </p>
-                    <ul style="color: var(--texto-mutado); font-size: 0.95rem; margin-top: 10px">
-                        <li>
-                            <strong>Nadie es dueño de todo, todos somos dueños de una parte:</strong> Cuando una
-                            asamblea vecinal, un sindicato o una comunidad regional decida sumarse en masa, ellos mismos
-                            aportarán y sostendrán el costo de su propio faro regional.
-                        </li>
-                        <li>
-                            <strong>Independencia absoluta:</strong> Esos faros se pagan de forma comunitaria y anónima.
-                            Si un faro se cae o es atacado, el enjambre de Com Org sigue vivo porque se apoya
-                            automáticamente en los faros de las otras regiones.
-                        </li>
-                        <li>
-                            <strong>Transparencia total:</strong> Acá no hay cuotas ocultas para enriquecer a un
-                            programador. Cada centavo invertido por las comunidades va directo a los equipos virtuales
-                            que sostienen su propia libertad de comunicación.
-                        </li>
-                    </ul>
-                </div>
-            </section>
+        td strong {
+            color: var(--text-main);
+        }
 
-            <section
-                class="tarjeta"
-                style="border-left: 4px solid var(--acento); background-color: rgba(201, 122, 43, 0.05)">
-                <h2>✊ Llamado a la Acción (El orgullo de cooperar)</h2>
-                <p style="margin-bottom: 0">
-                    No te estamos ofreciendo una aplicación para consumir contenido de forma pasiva. Te estamos
-                    invitando a fundar la primera infraestructura de comunicación verdaderamente libre y soberana de
-                    nuestro territorio.
-                    <br /><br />
-                    Aprender a usarla es el primer paso. Sostenerla entre todos, de forma transparente y distribuida, es
-                    lo que va a garantizar que nuestra voz nunca pueda ser silenciada por el algoritmo de ningún tirano.
-                </p>
-            </section>
+        /* ============================================================
+           FULL-WIDTH IMAGE BANNER
+        ============================================================ */
+        .img-banner {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 40px;
+            border: 1px solid rgba(46, 69, 92, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transition: box-shadow 0.3s ease;
+        }
 
-            <section class="tarjeta">
-                <h2>💻 Un entorno pensado para el usuario, no para el algoritmo</h2>
-                <p style="color: var(--texto-mutado); margin-bottom: 20px">
-                    Te mostramos una vista previa de la interfaz de escritorio en desarrollo (PySide6). Un diseño
-                    limpio, asíncrono y enfocado 100% en el debate real, con módulos integrados de asamblea de voz local
-                    y soberanía de datos.
-                </p>
-                <div
-                    style="
-                        width: 100%;
-                        border: 1px solid var(--borde);
-                        border-radius: 8px;
-                        overflow: hidden;
-                        background-color: #050709;
-                    ">
-                    <img
-                        src="assets/CO.png "
-                        alt="Interfaz de Desarrollo Com Org"
-                        style="width: 100%; height: auto; display: block; object-fit: contain" />
-                </div>
-            </section>
+        .img-banner:hover {
+            box-shadow: 0 14px 48px var(--accent-glow);
+        }
 
-            <section class="tarjeta">
-                <h2>💬 Despejando Dudas Rápidas</h2>
+        .img-banner img {
+            border-radius: 0;
+        }
 
-                <div class="faq-item">
-                    <p class="faq-pregunta">¿Quién modera lo que se publica?</p>
-                    <p class="faq-respuesta">
-                        <strong>Vos de forma soberana.</strong> Tu aplicación local clasifica estrictamente el
-                        contenido. Si bloqueás una firma criptográfica o filtrás una etiqueta, tu máquina obedece al
-                        instante en tu base de datos local. Nadie centralmente decide por vos qué leer.
-                    </p>
-                </div>
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        footer {
+            background-color: #05070a;
+            border-top: 2px solid var(--border-glow);
+            padding: 48px 0;
+            text-align: center;
+        }
 
-                <div class="faq-item">
-                    <p class="faq-pregunta">¿Cómo se frena el contenido dañino sin un dueño central?</p>
-                    <p class="faq-respuesta">
-                        Mediante aislamiento físico. Para ingresar a debatir se requiere un certificado comunitario. Si
-                        un nodo viola las reglas éticas, su acceso se revoca de los Faros de encuentro y queda aislado
-                        en el vacío. Al bloquear una firma, ese contenido basura se queda atrapado consumiendo el
-                        espacio del emisor.
-                    </p>
-                </div>
-            </section>
-            <footer>
-                <p>Com Org // Proyecto Libre y Soberano // Mayo 2026</p>
-                <p class="contacto-footer">
-                    Contacto: <a href="mailto:G.ferre2025@gmail.com">G.ferre2025@gmail.com</a> &bull; Red X:
-                    <a href="https://x.com/Miguel_CCom5" target="_blank" rel="noopener noreferrer">@Miguel_CCom5</a>
-                </p>
-            </footer>
+        .footer-logo {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.15rem;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            margin-bottom: 8px;
+        }
+
+        footer a {
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--accent-terracota);
+        }
+
+        .legal {
+            font-size: 0.78rem;
+            font-style: italic;
+            color: #4a6070;
+            margin-top: 16px;
+        }
+
+        /* ============================================================
+           SEPARADOR DECORATIVO
+        ============================================================ */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 0 auto 48px;
+            max-width: 400px;
+            color: var(--border-glow);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-glow);
+            opacity: 0.4;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ====================================================
+         NAV
+    ==================================================== -->
+    <nav id="nav-main">
+        <div class="nav-inner">
+            <a href="#inicio" class="nav-logo">
+                <img src="img/com-org.png" alt="Logo Com Org" />
+                Com<span>-</span>Org
+            </a>
+            <ul class="nav-links">
+                <li><a href="#paradigma">El Problema</a></li>
+                <li><a href="#como-funciona">Cómo Funciona</a></li>
+                <li><a href="#cooperativa">Cooperativa</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
         </div>
-    </body>
+    </nav>
+
+    <!-- ====================================================
+         HERO
+    ==================================================== -->
+    <header class="hero" id="inicio">
+        <div class="container hero-content">
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                Nodo Base: Operativo // Fase Android: 40% Implementada
+            </div>
+
+            <!-- img/1.png: Hero banner — Com Org, Red de Debate Soberano -->
+            <div class="hero-img-wrap">
+                <img src="img/1.png" alt="Com Org — Red de Debate Soberano. Circuito con la bandera argentina." />
+            </div>
+
+            <h1>◆ COM ORG ◆</h1>
+            <p class="tagline">
+                Una herramienta de organización popular y debate libre, 100&nbsp;% blindada contra la censura.
+                Sin empresas, sin algoritmos adictivos, sostenida por la propia comunidad.
+            </p>
+            <div class="hero-ctas">
+                <a href="#como-funciona" class="btn btn-primary" id="cta-descarga">⬇ Llevar mi muro (Descargar Nodo)</a>
+                <a href="#paradigma" class="btn btn-ghost" id="cta-leer">📄 Entender el problema</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ====================================================
+         SECCIÓN 1: EL PARADIGMA (El problema)
+    ==================================================== -->
+    <section class="paradigm-section section-alt" id="paradigma">
+        <div class="container">
+            <h2 class="section-title">Cambiando el Paradigma</h2>
+            <p class="section-lead">
+                Las plataformas corporativas no son herramientas: son trampas diseñadas para secuestrar tu atención y
+                monetizar tu indignación.
+            </p>
+
+            <div class="grid-2">
+                <!-- img/2.png: El Paradigma Actual — embudo hacia servidor centralizado -->
+                <div class="card">
+                    <h3>El Paradigma Actual</h3>
+                    <p class="card-highlight">"Cuando el producto es gratis, el producto eres tú."</p>
+                    <img src="img/2.png"
+                        alt="El Paradigma Actual: la conectividad no es comunidad. Usuarios fluyendo hacia un servidor corporativo centralizado." />
+                    <p>Las corporaciones de Silicon Valley secuestran tu atención. Tu indignación es su combustible
+                        financiero. No sos dueño de lo que escribís; te lo pueden borrar con un click.</p>
+                </div>
+
+                <!-- img/3.png: Cambio de Paradigma — tabla comparativa -->
+                <div class="card">
+                    <h3>La Solución Soberana</h3>
+                    <p class="card-highlight">Tu dispositivo es tu territorio.</p>
+                    <img src="img/3.png"
+                        alt="El Cambio de Paradigma: tabla comparativa entre Red Corporativa Centralizada y Red Mesh Soberana Com Org." />
+                    <p>En Com Org no hay servidores centrales en el extranjero. El contenido vive en tu máquina. Las
+                        interacciones no buscan adicción, buscan profundidad. Si borrás algo, desaparece de la red de
+                        verdad.</p>
+                </div>
+            </div>
+
+            <!-- Alerta: No es otra copia de Twitter -->
+            <div style="margin-top: 40px;">
+                <div class="alert-box">
+                    <h3>⚠️ Para que quede claro: esto no es otra copia de Twitter</h3>
+                    <p>
+                        Com Org <strong style="color: var(--text-main);">no es una red comercial ni una red federada
+                            (como Mastodon o Bluesky)</strong>.
+                        No vas a encontrar un muro infinito diseñado para hacerte perder el tiempo.
+                        Es una herramienta de software sofisticada pensada para la resistencia cultural,
+                        la autonomía comunicativa y la libre expresión blindada por hardware inmutable.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         SECCIÓN 2: LOS 3 PILARES
+    ==================================================== -->
+    <section id="pilares">
+        <div class="container">
+            <h2 class="section-title">Los Tres Pilares Filosófico-Técnicos</h2>
+            <p class="section-lead">Cada decisión de diseño tiene una razón ética y una razón técnica. Ambas son
+                inseparables.</p>
+
+            <!-- img/4.png: Los Tres Pilares Filosófico-Técnicos -->
+            <div class="img-banner">
+                <img src="img/4.png"
+                    alt="Los Tres Pilares Filosófico-Técnicos de Com Org: Soberanía Absoluta, Sin Dopamina, Filtro Físico Antispam." />
+            </div>
+
+            <div class="grid-3">
+                <div class="pillar-card">
+                    <div class="num">01</div>
+                    <h3>Soberanía del Dato</h3>
+                    <p>Tu identidad y publicaciones viven únicamente en tu disco. El control es físico: apagar la app
+                        desconecta tu nodo.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="num">02</div>
+                    <h3>Sin Dopamina Artificial</h3>
+                    <p>Eliminamos los "likes" y las métricas de vanidad. La única vía de interacción es el debate real
+                        mediante argumentos.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="num">03</div>
+                    <h3>Filtro Físico Antispam</h3>
+                    <p>Sin servidores centrales que subsidien bots: emitir mensajes tiene un costo real en CPU y disco
+                        local. El límite es la física.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         SECCIÓN 3: DISEÑO HUMANO
+    ==================================================== -->
+    <section class="section-alt" id="diseno">
+        <div class="container">
+            <h2 class="section-title">Diseño Humano y Restricción Semántica</h2>
+            <p class="section-lead">La interfaz asíncrona guía al usuario de manera orgánica sin bloquearlo
+                abruptamente. Las reglas numéricas exigen profundidad sobre inmediatez.</p>
+
+            <!-- img/5.png: Diseño Humano y Restricción Semántica -->
+            <div class="img-banner">
+                <img src="img/5.png"
+                    alt="Diseño Humano y Restricción Semántica: tablero de control con límite de 1000 a 1200 caracteres y botón de publicar desactivado si se excede." />
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Red Centralizada (Ej: X)</th>
+                            <th>Com Org (Red Mesh Soberana)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>¿Dónde viven tus datos?</strong></td>
+                            <td>En servidores ajenos en el extranjero.</td>
+                            <td><strong>Únicamente en tu dispositivo local.</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Si borrás una publicación…</strong></td>
+                            <td>Queda guardada para siempre en sus bases de datos.</td>
+                            <td><strong>Desaparece por completo de la red.</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>¿Cómo se ordena lo que ves?</strong></td>
+                            <td>Por un algoritmo diseñado para volverte adicto.</td>
+                            <td>A demanda. Vos elegís qué leer y cuándo explorar.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Interacción básica</strong></td>
+                            <td>"Likes" vacíos que manipulan tu dopamina.</td>
+                            <td>Botón directo <code>↩ Responder</code> con argumentos.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Si se cae el Internet global…</strong></td>
+                            <td>La plataforma muere por completo.</td>
+                            <td><strong>Sigue funcionando localmente</strong> entre usuarios conectados.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         SECCIÓN 4: CÓMO FUNCIONA EL ENJAMBRE
+    ==================================================== -->
+    <section id="como-funciona">
+        <div class="container">
+            <h2 class="section-title">¿Cómo Funciona el Enjambre?</h2>
+            <p class="section-lead">Explicamos la arquitectura técnica de igual a igual (P2P) sin abrumarte. Cada pieza
+                tiene un propósito.</p>
+
+            <div class="divider">ARQUITECTURA TÉCNICA</div>
+
+            <!-- img/6.png: Arquitectura del Nodo Base Local -->
+            <div class="img-banner">
+                <img src="img/6.png"
+                    alt="Arquitectura del Nodo Base Local: SQLite local, identidad inmutable por hardware, ADN del post SHA-256." />
+            </div>
+
+            <div class="features-list">
+
+                <!-- img/7.png: Superando el NAT -->
+                <div class="feature-item">
+                    <img src="img/7.png"
+                        alt="La Red Mesh superando el NAT: conexiones P2P directas a través de firewalls domésticos."
+                        class="feature-thumb" />
+                    <div class="feature-text">
+                        <h3>🔒 Superando el NAT</h3>
+                        <p>Com Org usa el motor Nebula para crear redes superpuestas criptográficas. Las conexiones son
+                            directas de igual a igual (P2P), sin importar las restricciones o bloqueos de tu proveedor
+                            local de internet. El tráfico se valida por <em>quién sos</em> (certificado CA de la
+                            comunidad), no por dónde estás (dirección IP).</p>
+                    </div>
+                </div>
+
+                <!-- img/8.png: El problema de los Faros -->
+                <div class="feature-item">
+                    <img src="img/8.png"
+                        alt="El Problema de los Faros de Encuentro: faro centralizado que expone IPs y puede ser explotado por un atacante."
+                        class="feature-thumb" />
+                    <div class="feature-text">
+                        <h3>⚠️ El Problema de los Faros Centralizados</h3>
+                        <p>Para que los nodos se encuentren, se necesitan Faros de coordinación. Pero si un faro
+                            almacena IPs en texto plano, se convierte en un punto central de vulnerabilidad. Un atacante
+                            podría mapear ubicaciones geográficas y destruir el anonimato. Com Org resuelve esto con una
+                            solución criptográfica radical.</p>
+                    </div>
+                </div>
+
+                <!-- img/9.png: Cajero a Ciegas -->
+                <div class="feature-item">
+                    <img src="img/9.png"
+                        alt="La Solución Soberana: Cajero a Ciegas (Blind Rendezvous). Salt efímero en RAM volátil con HMAC-SHA256 para obfuscar IPs."
+                        class="feature-thumb" />
+                    <div class="feature-text">
+                        <h3>🕶️ El Faro como "Cajero a Ciegas" (Blind Rendezvous)</h3>
+                        <p>Nuestros faros actúan como carteros ciegos: unen nodos mediante llaves públicas sin conocer
+                            jamás sus IPs reales. Usamos un Salt efímero rotativo en RAM volátil con HMAC-SHA256. Al
+                            reiniciar el VPS, el secreto desaparece instantáneamente. Cero rastro forense.</p>
+                    </div>
+                </div>
+
+                <!-- img/10.png: Moderación Soberana -->
+                <div class="feature-item">
+                    <img src="img/10.png"
+                        alt="Moderación Soberana y Aislamiento Físico: bloqueo criptográfico que aísla al infractor. El contenido basura consume sus propios recursos."
+                        class="feature-thumb" />
+                    <div class="feature-text">
+                        <h3>✊ Moderación Soberana y Aislamiento Físico</h3>
+                        <p>Aquí no hay comité de censura empresarial. Vos decidís qué procesa tu máquina. Al bloquear
+                            una firma criptográfica, el infractor queda aislado del túnel. El contenido basura queda
+                            atrapado consumiendo su propio disco y CPU. El filtro no es ideológico: es físico.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         SECCIÓN 5: COOPERATIVA DIGITAL
+    ==================================================== -->
+    <section class="coop-section" id="cooperativa">
+        <div class="container">
+            <h2 class="section-title">La Cooperativa Digital</h2>
+
+            <div class="coop-quote">
+                "Nadie es dueño de todo; todos somos dueños de una parte."
+            </div>
+
+            <!-- img/15.png: Cooperativa Digital — Llamado a la Acción -->
+            <div class="img-banner">
+                <img src="img/15.png"
+                    alt="La Cooperativa Digital: Nuestro Llamado a la Acción. Red de faros comunitarios interconectados con autonomía, resiliencia e historia." />
+            </div>
+
+            <p style="color: var(--text-muted); text-align: center; max-width: 700px; margin: 0 auto 40px;">
+                El primer faro de la red fue construido a pulmón con hardware reciclado.
+                Pero para que esta infraestructura sea inmortal e incontrolable por el poder de turno,
+                no puede depender de una sola persona. Si el software es libre, la infraestructura también debe ser
+                comunitaria.
+            </p>
+
+            <!-- img/13.png: Laboratorio de Hardware Reciclado -->
+            <div class="img-banner" style="margin-bottom: 40px;">
+                <img src="img/13.png"
+                    alt="Laboratorio de Hardware Reciclado: faro comunitario en Xiaomi Mi A2 y nodo cliente en Alcatel 6025 H3, conectados P2P por Blind Rendezvous." />
+            </div>
+
+            <div class="grid-3">
+                <div class="pillar-card">
+                    <div class="num">01</div>
+                    <h3>Autonomía</h3>
+                    <p>Asambleas, sindicatos y comunidades financian de forma anónima sus propios faros regionales a un
+                        costo mínimo.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="num">02</div>
+                    <h3>Resiliencia</h3>
+                    <p>Si un faro cae o es atacado, el enjambre se apoya instantáneamente en la infraestructura vecina.
+                        La red no muere.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="num">03</div>
+                    <h3>Historia</h3>
+                    <p>Sentí el orgullo de fundar la primera red de comunicación verdaderamente soberana y libre de
+                        nuestro territorio.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         SECCIÓN 6: SÍNTESIS DEL ECOSISTEMA
+    ==================================================== -->
+    <section class="section-alt" id="ecosistema">
+        <div class="container">
+            <h2 class="section-title">Síntesis del Ecosistema: El Enjambre</h2>
+            <p class="section-lead">
+                Múltiples arquitecturas y sistemas operativos unidos por una malla criptográfica inquebrantable.
+                Ningún servidor corporativo. Control absoluto en los márgenes.
+            </p>
+
+            <!-- img/14.png: Síntesis del Ecosistema — El Enjambre Com Org -->
+            <div class="img-banner">
+                <img src="img/14.png"
+                    alt="Síntesis del Ecosistema Com Org: Nodo de Bolsillo Android, Xiaomi Faro, Nodo Base Windows y Nodo Satélite Linux, todos conectados con cifrado E2EE." />
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         SECCIÓN 7: ROADMAP
+    ==================================================== -->
+    <section id="roadmap">
+        <div class="container">
+            <h2 class="section-title">Hoja de Ruta y Transparencia</h2>
+            <p class="section-lead">Com Org es un proyecto vivo y transparente. Generamos confianza permitiendo auditar
+                el código y el comportamiento de la red.</p>
+
+            <div class="grid-2" style="align-items: start; gap: 48px;">
+                <div>
+                    <!-- img/11.png: Hoja de Ruta — Roadmap de Despliegue -->
+                    <div class="img-banner" style="margin-bottom: 28px;">
+                        <img src="img/11.png"
+                            alt="Hoja de Ruta (Roadmap de Despliegue): Fase Escritorio (estado actual), Fase Móvil Android (40% implementado), Fase Sincronización Portátil." />
+                    </div>
+
+                    <!-- img/12.png: Nodo de Bolsillo Android -->
+                    <div class="img-banner" style="margin-bottom: 0;">
+                        <img src="img/12.png"
+                            alt="El Desafío del Nodo de Bolsillo Android: rutas absolutas, arquitectura ARM64, Hilo Sagrado async y ciclo de vida VPN sin matar la batería." />
+                    </div>
+                </div>
+
+                <div>
+                    <p style="margin-bottom: 20px;">
+                        <strong>Actualmente consolidamos el Nodo Base de Escritorio</strong> (con persistencia estricta
+                        en SQLite local
+                        y túneles P2P nativos) y avanzamos en el Nodo de Bolsillo para Android mediante servicios VPN
+                        nativos sin requerir root.
+                    </p>
+                    <div class="roadmap-meta">
+                        <div class="meta-card">
+                            <h4>⚙️ Restricción Semántica <span class="tag">[Diseño Humano]</span></h4>
+                            <p>Nuestra interfaz asíncrona exige profundidad sobre inmediatez. El sistema premia la
+                                redacción fluida y desalienta el spam masivo mediante límites físicos de 1000 a 1200
+                                caracteres.</p>
+                        </div>
+                        <div class="meta-card">
+                            <h4>🔑 Identidad Inmutable <span class="tag">[Criptografía]</span></h4>
+                            <p>Tus llaves criptográficas de firma se generan directamente a partir de tu hardware físico
+                                (MachineGuid → Ed25519), garantizando que tu identidad sea tuya y de nadie más.</p>
+                        </div>
+                        <div class="meta-card">
+                            <h4>📱 Nodo de Bolsillo Android <span class="tag">[En Progreso]</span></h4>
+                            <p>Red superpuesta en Android mediante VpnService sin requerir root. Desacople del UI Thread
+                                para evitar errores ANR y soporte para arquitectura ARM64 compilada de forma cruzada.
+                            </p>
+                        </div>
+                        <div class="meta-card">
+                            <h4>🌐 Fase Sincronización Portátil <span class="tag">[Próximo]</span></h4>
+                            <p>Importación/Exportación de archivos .comorg para resiliencia offline. Soporte ante
+                                apagones de internet global con sincronización local entre dispositivos vecinos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         SECCIÓN 8: FAQ
+    ==================================================== -->
+    <section class="section-alt" id="faq">
+        <div class="container">
+            <h2 class="section-title">Preguntas Frecuentes</h2>
+            <p class="section-lead">Respuestas directas. Sin eufemismos corporativos.</p>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <p class="faq-q">¿Por qué es gratis si no tiene publicidad?</p>
+                    <p class="faq-a">Porque mantener la red cuesta prácticamente cero. Cada usuario aporta un grano de
+                        arena prestando una fracción de su procesador y almacenamiento. No hay que pagarle
+                        infraestructura millonaria a ninguna corporación tecnológica.</p>
+                </div>
+                <div class="faq-item">
+                    <p class="faq-q">¿Quién modera lo que se publica?</p>
+                    <p class="faq-a">Vos. Tu aplicación local clasifica estrictamente el contenido (Opinión, Datos
+                        Públicos o Memes). Si configurás tu pantalla para no leer ciertas etiquetas o bloquear a un
+                        usuario, tu máquina obedece al instante. Nadie centralmente decide por vos qué es aceptable.</p>
+                </div>
+                <div class="faq-item">
+                    <p class="faq-q">¿Cómo se frena el contenido dañino o ilegal si no hay un dueño?</p>
+                    <p class="faq-a">Mediante aislamiento físico, no con censura. Para ingresar a debatir necesitás un
+                        certificado comunitario. Si un usuario viola las reglas éticas, su acceso se revoca y queda
+                        completamente aislado. Ese contenido basura consume la batería y el espacio de quien lo creó,
+                        sin poder propagarse a los demás.</p>
+                </div>
+                <div class="faq-item">
+                    <p class="faq-q">¿Funciona si no tengo internet?</p>
+                    <p class="faq-a">Sí. En la Fase de Sincronización Portátil (próxima), los nodos locales en la misma
+                        red Wi-Fi o Bluetooth podrán intercambiar contenido sin necesidad de internet global. El
+                        enjambre local sobrevive a los apagones.</p>
+                </div>
+                <div class="faq-item">
+                    <p class="faq-q">¿Es seguro instalar un nodo en mi celular?</p>
+                    <p class="faq-a">El Nodo de Bolsillo Android usa VpnService nativo sin requerir root ni permisos
+                        especiales de sistema. Tu IP real nunca se almacena; solo se transmite un ID obfuscado de 24
+                        horas que desaparece automáticamente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         FOOTER
+    ==================================================== -->
+    <footer id="contacto">
+        <div class="container" style="padding-top: 0; padding-bottom: 0;">
+            <p class="footer-logo">◆ Com-Org // Proyecto Libre y Soberano ◆</p>
+            <p>Contacto de Desarrollo: <a href="mailto:G.ferre2025@gmail.com">G.ferre2025@gmail.com</a></p>
+            <p>Red X: <a href="https://x.com/Miguel_CCom5" target="_blank" rel="noopener noreferrer">@Miguel_CCom5</a>
+            </p>
+            <p class="legal">"Esta página no utiliza cookies de rastreo, no guarda tu IP y respeta tu existencia."</p>
+        </div>
+    </footer>
+
+</body>
+
 </html>
