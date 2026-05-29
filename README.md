@@ -1,5 +1,7 @@
 # Com Org — Red Social Mesh & Soberanía Individual
 
+[![Sitio Web](https://img.shields.io/badge/Sitio_Web-com--org.pages.dev-74ACDF?style=for-the-badge&logo=googlechrome&logoColor=white)](https://com-org.pages.dev/)
+
 > **Comunidad Organizada:** Un nuevo paradigma de interacción humana libre de manipulación algorítmica, construido sobre
 > redes superpuestas descentralizadas (_Mesh Overlay Networks_). Una respuesta soberana de Tercera Posición frente al
 > colonialismo digital.
