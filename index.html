@@ -703,6 +703,33 @@
         }
 
         /* ============================================================
+           VIDEO EXPLICATIVO BANNER
+        ============================================================ */
+        .video-banner {
+            width: 100%;
+            max-width: 680px;
+            margin: 0 auto;
+            border: 1px solid rgba(46, 69, 92, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transition: box-shadow 0.3s ease;
+            background-color: var(--bg-card);
+        }
+
+        .video-banner:hover {
+            box-shadow: 0 14px 48px var(--accent-glow);
+        }
+
+        .video-banner video {
+            width: 100%;
+            display: block;
+            border-radius: 0;
+            outline: none;
+        }
+
+
+        /* ============================================================
            FOOTER
         ============================================================ */
         footer {
@@ -786,6 +813,7 @@
                 <li><a href="#cooperativa">Cooperativa</a></li>
                 <li><a href="#roadmap">Roadmap</a></li>
                 <li><a href="#faq">FAQ</a></li>
+                <li><a href="#video">Video</a></li>
             </ul>
         </div>
     </nav>
@@ -1213,6 +1241,26 @@
             </div>
         </div>
     </section>
+
+    <!-- ====================================================
+         SECCIÓN: VIDEO EXPLICATIVO
+    ==================================================== -->
+    <section class="coop-section" id="video">
+        <div class="container">
+            <h2 class="section-title">Video Explicativo</h2>
+            <p class="section-lead">
+                Visualizá el funcionamiento de la red soberana Com-Org y el flujo del enjambre P2P.
+            </p>
+            
+            <div class="video-banner">
+                <video controls poster="img/com-org.png">
+                    <source src="img/Com-Org.mp4" type="video/mp4">
+                    Tu navegador no soporta el elemento de video.
+                </video>
+            </div>
+        </div>
+    </section>
+
 
     <!-- ====================================================
          FOOTER
