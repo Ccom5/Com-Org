@@ -1,0 +1,867 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Manual de Usuario — Com Org</title>
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet" />
+
+        <style>
+            /* ============================================================
+           VARIABLES Y CONFIGURACIÓN DE TEMA OSCURO (Com-Org)
+           ============================================================ */
+            :root {
+                --bg-dark: #0f1419;
+                --bg-card: #13202c;
+                --bg-sidebar: #0b0e12;
+                --border-glow: #2e455c;
+                --accent-terracota: #c97a2b;
+                --accent-glow: rgba(201, 122, 43, 0.25);
+                --text-main: #eef1f5;
+                --text-muted: #8fa3b8;
+                --danger: #f43f5e;
+                --sidebar-width: 315px;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                background-color: var(--bg-dark);
+                color: var(--text-main);
+                font-family: "Inter", sans-serif;
+                line-height: 1.65;
+                display: flex;
+                min-height: 100vh;
+            }
+
+            /* Scrollbar personalizada */
+            ::-webkit-scrollbar {
+                width: 8px;
+                height: 8px;
+            }
+            ::-webkit-scrollbar-track {
+                background: var(--bg-dark);
+            }
+            ::-webkit-scrollbar-thumb {
+                background: var(--border-glow);
+                border-radius: 4px;
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: var(--accent-terracota);
+            }
+
+            h1,
+            h2,
+            h3,
+            h4,
+            .mono {
+                font-family: "Fira Code", monospace;
+                font-weight: 600;
+            }
+
+            code {
+                font-family: "Fira Code", monospace;
+                background-color: rgba(46, 69, 92, 0.3);
+                color: #eef1f5;
+                padding: 2px 6px;
+                border-radius: 4px;
+                font-size: 0.9em;
+            }
+@media print {
+    /* 1. Mantenemos el contenedor principal adaptado al papel */
+    .app-container {
+        display: flex !important;
+        flex-direction: row !important;
+        width: 100% !important;
+        background-color: var(--bg-dark) !important;
+    }
+
+    /* 2. Fijamos el índice lateral para que no se mueva ni se rompa */
+    .sidebar {
+        display: block !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: var(--sidebar-width) !important;
+        height: 100% !important;
+        background-color: var(--bg-sidebar) !important;
+        border-right: 1px solid var(--border-glow) !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    /* 3. Ajustamos el contenido principal para que respete el margen del índice */
+    .main-content {
+        width: calc(100% - var(--sidebar-width)) !important;
+        margin-left: var(--sidebar-width) !important;
+        padding: 20px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 4. Control estricto de las secciones para que no corten el margen derecho */
+    section {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    /* 5. Tarjetas e imágenes alineadas y controladas */
+    .image-frame {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        max-width: 100% !important;
+        width: fit-content !important;
+        margin: 20px auto !important;
+    }
+
+    .image-frame img {
+        max-width: 100% !important;
+        max-height: 52vh !important; /* Evita que las imágenes empujen el texto fuera de la hoja */
+        width: auto !important;
+        height: auto !important;
+        display: block !important;
+        margin: 0 auto !important;
+    }
+
+    .image-caption {
+        max-width: 100% !important;
+        width: fit-content !important;
+        margin: 8px auto 0 auto !important;
+        text-align: center !important;
+    }
+}
+            /* ============================================================
+           SIDEBAR DE NAVEGACIÓN
+           ============================================================ */
+            .sidebar {
+                width: var(--sidebar-width);
+                background-color: var(--bg-sidebar);
+                border-right: 1px solid rgba(46, 69, 92, 0.4);
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 10;
+                display: flex;
+                flex-direction: column;
+                padding: 24px;
+                overflow-y: auto;
+            }
+
+            .sidebar-logo {
+                font-family: "Fira Code", monospace;
+                font-size: 1.2rem;
+                font-weight: bold;
+                color: var(--text-main);
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 32px;
+                padding-bottom: 16px;
+                border-bottom: 1px solid rgba(46, 69, 92, 0.3);
+            }
+
+            .sidebar-logo span {
+                color: var(--accent-terracota);
+            }
+
+            .sidebar-logo img {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                object-fit: contain;
+                filter: drop-shadow(0 0 6px rgba(201, 122, 43, 0.35));
+                transition:
+                    filter 0.3s ease,
+                    transform 0.3s ease;
+            }
+
+            .sidebar-logo:hover img {
+                filter: drop-shadow(0 0 10px rgba(201, 122, 43, 0.6));
+                transform: rotate(8deg) scale(1.1);
+            }
+
+            .nav-menu {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .nav-item a {
+                display: flex;
+                align-items: center;
+                padding: 10px 14px;
+                color: var(--text-muted);
+                text-decoration: none;
+                border-radius: 6px;
+                font-size: 0.9rem;
+                font-weight: 500;
+                transition: all 0.2s ease;
+            }
+
+            .nav-item a:hover {
+                color: var(--accent-terracota);
+                background-color: rgba(201, 122, 43, 0.08);
+                transform: translateX(4px);
+            }
+
+            .nav-item.active a {
+                color: var(--text-main);
+                background-color: var(--accent-terracota);
+                font-weight: 600;
+            }
+
+            /* ============================================================
+           CONTENIDOR PRINCIPAL (CENTRADOR)
+           ============================================================ */
+            .main-content {
+                margin-left: var(--sidebar-width);
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 48px 24px;
+                overflow-x: hidden;
+            }
+
+            .content-container {
+                width: 100%;
+                max-width: 820px; /* Centrado y acotado para lectura profesional */
+            }
+
+            /* ============================================================
+           ESTILADO DE SECCIONES Y CONTENIDO
+           ============================================================ */
+            section {
+                padding-top: 48px;
+                margin-bottom: 64px;
+                border-bottom: 1px solid rgba(46, 69, 92, 0.2);
+                padding-bottom: 48px;
+            }
+
+            section:last-of-type {
+                border-bottom: none;
+                margin-bottom: 0;
+            }
+
+            .welcome-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                background: rgba(201, 122, 43, 0.08);
+                border: 1px solid rgba(201, 122, 43, 0.3);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-family: "Fira Code", monospace;
+                font-size: 0.8rem;
+                color: var(--accent-terracota);
+                margin-bottom: 20px;
+            }
+
+            h1 {
+                font-size: clamp(2rem, 4vw, 2.5rem);
+                color: var(--text-main);
+                margin-bottom: 16px;
+                letter-spacing: -1px;
+                line-height: 1.2;
+            }
+
+            h2 {
+                font-size: clamp(1.4rem, 3vw, 1.8rem);
+                color: var(--text-main);
+                margin-top: 24px;
+                margin-bottom: 20px;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            h3 {
+                font-size: 1.15rem;
+                color: var(--text-main);
+                margin-top: 24px;
+                margin-bottom: 12px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            p {
+                color: var(--text-muted);
+                margin-bottom: 16px;
+                font-size: 1.02rem;
+            }
+
+            ul,
+            ol {
+                margin-bottom: 20px;
+                padding-left: 24px;
+                color: var(--text-muted);
+            }
+
+            li {
+                margin-bottom: 8px;
+                font-size: 1rem;
+            }
+
+            /* Tarjetas de información y pilares */
+            .pillar-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+                margin: 24px 0;
+            }
+
+            @media (max-width: 600px) {
+                .pillar-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            .card {
+                background-color: var(--bg-card);
+                border: 1px solid var(--border-glow);
+                border-radius: 8px;
+                padding: 24px;
+                transition: all 0.3s ease;
+            }
+
+            .card:hover {
+                border-color: var(--accent-terracota);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            }
+
+            .card h4 {
+                color: var(--accent-terracota);
+                margin-bottom: 8px;
+                font-size: 1rem;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .card p {
+                margin-bottom: 0;
+                font-size: 0.93rem;
+            }
+
+            /* Atajos de teclado */
+            kbd {
+                background-color: var(--bg-dark);
+                border: 1px solid var(--border-glow);
+                border-radius: 4px;
+                padding: 2px 6px;
+                font-size: 0.85em;
+                font-family: inherit;
+                color: var(--text-main);
+                box-shadow: 0 2px 0 var(--border-glow);
+            }
+
+            /* ============================================================
+           ENMARCADO DE IMÁGENES
+           ============================================================ */
+           .image-frame {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-glow);
+    border-radius: 10px;
+    padding: 12px;
+    margin: 28px auto; /* 💡 CAMBIO: El 'auto' la centra horizontalmente si se achica */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+
+    /* 🛠️ EL TRUCO CLAVE PARA LA TARJETA SOBERANA: */
+    width: fit-content;      /* 💡 Hace que la tarjeta mida EXACTAMENTE lo mismo que la imagen interna */
+    max-width: 100%;         /* 💡 Evita que se desborde si la imagen es muy ancha */
+    box-sizing: border-box;  /* 💡 Asegura que el padding no rompa los límites */
+}
+            width: auto;             /* Que use su ancho natural si es chica */
+    max-width: 100%;         /* Pero que nunca se desborde del contenedor horizontalmente */
+    
+    /* El truco clave para capturas muy verticales: */
+    max-height: 65vh;        /* Que nunca ocupe más del 65% de la altura de la pantalla */
+    object-fit: contain;     /* Escala la imagen perfectamente sin deformarla */
+    
+    border-radius: 6px;
+    display: block;
+    margin: 0 auto;          /* Centra la imagen si es más angosta que el contenedor */
+    border: 1px solid rgba(46, 69, 92, 0.3);
+
+            .image-caption {
+                text-align: center;
+                font-size: 0.85rem;
+                color: var(--text-muted);
+                margin-top: 10px;
+                font-family: "Fira Code", monospace;
+            }
+
+            .double-image-grid {
+                display: grid;
+                grid-template-columns: 1.2fr 0.8fr;
+                gap: 16px;
+                margin: 28px 0;
+            }
+
+            @media (max-width: 600px) {
+                .double-image-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            /* ============================================================
+           FAQ ACORDEÓN / ÍTEMS
+           ============================================================ */
+            .faq-item {
+                border-bottom: 1px solid rgba(46, 69, 92, 0.2);
+                padding: 18px 0;
+            }
+
+            .faq-item:last-child {
+                border-bottom: none;
+            }
+
+            .faq-question {
+                font-weight: 600;
+                color: var(--text-main);
+                margin-bottom: 6px;
+                display: flex;
+                align-items: flex-start;
+                gap: 8px;
+                font-size: 1rem;
+            }
+
+            .faq-question::before {
+                content: "›";
+                color: var(--accent-terracota);
+                font-size: 1.3rem;
+                line-height: 1;
+            }
+
+            .faq-answer {
+                color: var(--text-muted);
+                font-size: 0.95rem;
+                padding-left: 20px;
+            }
+
+            /* ============================================================
+           RESPONSIVIDAD MÓVIL
+           ============================================================ */
+            @media screen and (max-width: 900px) {
+                body {
+                    flex-direction: column;
+                }
+                .sidebar {
+                    position: relative;
+                    width: 100%;
+                    height: auto;
+                    border-right: none;
+                    border-bottom: 1px solid rgba(46, 69, 92, 0.4);
+                    padding: 16px 24px;
+                }
+                .sidebar-logo {
+                    margin-bottom: 16px;
+                }
+                .nav-menu {
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    gap: 8px;
+                }
+                .main-content {
+                    margin-left: 0;
+                    padding: 24px 16px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- SIDEBAR INDEX -->
+        <nav class="sidebar">
+            <a href="#bienvenida" class="sidebar-logo">
+                <img src="com-org.png" alt="Logo Com Org" />
+                Com<span>-</span>Org
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#bienvenida">Inicio</a></li>
+                <li class="nav-item"><a href="#filosofia">1. Filosofía</a></li>
+                <li class="nav-item"><a href="#interfaz">2. Interfaz Principal</a></li>
+                <li class="nav-item"><a href="#perfil">3. Perfil y Apariencia</a></li>
+                <li class="nav-item"><a href="#publicar">4. Crear Publicación</a></li>
+                <li class="nav-item"><a href="#interaccion">5. Respuestas y Búsqueda</a></li>
+                <li class="nav-item"><a href="#moderacion">6. Borrado y Moderación</a></li>
+                <li class="nav-item"><a href="#mudar">7. Copias de Seguridad</a></li>
+                <li class="nav-item"><a href="#asamblea">8. Asamblea en Vivo</a></li>
+                <li class="nav-item"><a href="#faq">FAQ / Dudas</a></li>
+            </ul>
+        </nav>
+
+        <!-- MAIN CONTENT CONTAINER -->
+        <main class="main-content">
+            <div class="content-container">
+                <!-- BIENVENIDA -->
+                <section id="bienvenida">
+                    <div class="welcome-badge">◆ GUÍA DE USUARIO SOBERANA</div>
+                    <h1>¡Te damos la bienvenida a tu espacio de comunicación soberano!</h1>
+                    <p>
+                        <strong>Com Org</strong> no es una red social común. Es un espacio diseñado para devolverte el
+                        control absoluto sobre tus datos, libre de algoritmos de adicción, publicidad invasiva o
+                        intermediarios corporativos. Aquí, tú eres el dueño absoluto de tu información. Todo lo que
+                        creas, compartes y ves reside única y exclusivamente en tu propio dispositivo.
+                    </p>
+                    <p>
+                        Esta guía está diseñada especialmente para personas <strong>no técnicas</strong>, explicándote
+                        de manera sencilla cómo está organizada la aplicación, qué hace cada botón y cómo sacarle el
+                        máximo provecho.
+                    </p>
+                </section>
+
+                <!-- FILOSOFIA -->
+                <section id="filosofia">
+                    <h2>🧭 1. Nuestra Filosofía</h2>
+                    <p>
+                        Antes de empezar, es importante que conozcas los cuatro pilares fundamentales que hacen de
+                        <strong>Com Org</strong> un sistema completamente diferente:
+                    </p>
+
+                    <div class="pillar-grid">
+                        <div class="card">
+                            <h4>💾 Soberanía del Dato</h4>
+                            <p>
+                                No hay servidores centrales en la nube. Tus fotos, publicaciones y perfil están
+                                guardados localmente. Si decides borrar algo, desaparece de verdad.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h4>🚫 Sin Mecánicas Adictivas</h4>
+                            <p>
+                                Eliminamos los "Me gusta", las reacciones y contadores infinitos. El foco es la
+                                conversación y el intercambio de ideas reales.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h4>🔑 Seguridad Criptográfica</h4>
+                            <p>
+                                Tu identidad está vinculada a tu dispositivo con llaves privadas por hardware. Cada post
+                                se firma automáticamente con una huella criptográfica infalsificable.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h4>🔒 VPN Nebula Automática</h4>
+                            <p>
+                                La aplicación se conecta en menos de un segundo a una red de seguridad privada y
+                                descentralizada de forma totalmente silenciosa.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- RECORRIDO INTERFAZ -->
+                <section id="interfaz">
+                    <h2>🖥️ 2. Recorrido por la Interfaz</h2>
+                    <p>
+                        Al abrir la aplicación por primera vez, verás un diseño organizado en tres columnas principales,
+                        estructurado para un acceso cómodo y veloz:
+                    </p>
+
+                    <div class="image-frame">
+                        <img src="1-interfaz-claro.png" alt="Interfaz Principal Claro" />
+                        <div class="image-caption">Mapa conceptual de la pantalla principal (Modo Claro)</div>
+                    </div>
+
+                    <h3>A. La Barra Superior (Topbar)</h3>
+                    <ul>
+                        <li>
+                            <strong>Logo (<code>◆ Com Org</code>):</strong> Identificador de tu nodo local.
+                        </li>
+                        <li>
+                            <strong>Buscador Central:</strong> Localización inmediata de perfiles y textos en la red.
+                        </li>
+                        <li>
+                            <strong>Botón <code>◈ Perfil</code>:</strong> Configuración rápida de tu identidad visual
+                            (también accesible vía <kbd>Ctrl</kbd> + <kbd>P</kbd>).
+                        </li>
+                    </ul>
+
+                    <h3>B. Columna Izquierda (Identidad y Controles Rápidos)</h3>
+                    <ul>
+                        <li>
+                            <strong>Tu Tarjeta de Identidad:</strong> Visualiza tu avatar y tu
+                            <strong>Firma Criptográfica (ID)</strong> (una serie de caracteres únicos y seguros).
+                        </li>
+                        <li>
+                            <strong>Límite de Caracteres:</strong> Selector rápido para ajustar tus preferencias de
+                            redacción.
+                        </li>
+                        <li>
+                            <strong>Botón <code>🔊 Asamblea en Vivo</code>:</strong> Acceso rápido a las salas de voz y
+                            debate en directo.
+                        </li>
+                        <li>
+                            <strong>Botón <code>⊘ Nodo Bloqueado</code>:</strong> Panel rápido para gestionar los
+                            usuarios bloqueados o silenciados.
+                        </li>
+                    </ul>
+
+                    <h3>C. Columna Central (El Corazón de la Conversación)</h3>
+                    <ul>
+                        <li>
+                            <strong>Mi Muro:</strong> Tus publicaciones y las respuestas directas que otros usuarios te
+                            han enviado.
+                        </li>
+                        <li>
+                            <strong>Explorar:</strong> Feed global descentralizado de publicaciones recientes en
+                            estricto orden cronológico.
+                        </li>
+                    </ul>
+<br>
+                    <h3>D. Columna Derecha (Filtros y Estadísticas)</h3>
+                    <ul>
+                        <li><strong>Buscador en Vivo por Nombre:</strong> Filtro de contenidos instantáneo.</li>
+                        <li><strong>Tendencias Locales:</strong> Temas recurrentes de debate en tu red.</li>
+                        <li>
+                            <strong>Estadísticas:</strong> Monitoreo técnico del uso de espacio local y estado de la
+                            sincronización.
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- PERFIL Y APARIENCIA -->
+                <section id="perfil">
+                    <h2>👤 3. Gestión de tu Perfil y Apariencia</h2>
+                    <p>
+                        Haz clic en <strong><code>◈ Perfil</code></strong> en la esquina superior derecha o usa el atajo
+                        de teclado <kbd>Ctrl</kbd> + <kbd>P</kbd> para abrir el panel flotante. Aquí podrás cambiar tu
+                        Nombre de Fantasía, biografía, subir un banner de fondo y modificar tu avatar.
+                    </p>
+
+                    <div class="image-frame">
+                        <img src="2-perfil-claro.png" alt="Gestión de Perfil Claro" />
+                        
+                        <div class="image-caption">Configuracion de perfil, tema, Nombre etc</div>
+                    </div>
+
+                    <p>
+                        <strong>Alternar entre Modo Claro y Oscuro:</strong> Desde la configuración de Perfil puedes
+                        definir si prefieres la visualización clara y de alto contraste o el tema oscuro de azul
+                        petróleo que descansa tu vista. La aplicación recordará tu elección automáticamente en cada
+                        inicio.
+                    </p>
+                </section>
+
+                <!-- CREAR PUBLICACION -->
+                <section id="publicar">
+                    <h2>📝 4. Cómo Crear una Publicación</h2>
+                    <p>
+                        Hemos diseñado una interfaz de escritura minimalista que se enfoca en ideas concisas y directas:
+                    </p>
+                    <ol>
+                        <li>
+                            Haz clic en el botón naranja <strong><code>► Publicar</code></strong> (columna izquierda o
+                            central).
+                        </li>
+                        <li>Se desplegará la <strong>Caja de Publicación</strong> en primer plano.</li>
+                        <li>Escribe tu contenido (hasta un límite predeterminado de 280 caracteres).</li>
+                        <li>
+                            <strong>Adjuntar Imagen (Opcional):</strong> Utiliza el botón
+                            <strong><code>▣ Imagen</code></strong
+                            >. La aplicación copiará la foto a tus carpetas internas locales para asegurar que esté
+                            disponible sin conexión.
+                        </li>
+                        <li>
+                            Presiona <strong><code>► Publicar</code></strong
+                            >. El post se firmará criptográficamente de inmediato y se guardará localmente.
+                        </li>
+                    </ol>
+
+                    <div class="image-frame">
+                        <img src="3-publicacion-abierta.png" alt="Caja de Publicación" />
+                        <div class="image-caption">Redacción de una publicación con imagen adjunta</div>
+                    </div>
+                </section>
+
+                <!-- RESPUESTAS Y BUSQUEDA -->
+                <section id="interaccion">
+                    <h2>↩️ 5. Responder a Publicaciones y Búsqueda Reactiva</h2>
+                    <p>El motor de Com Org es el debate respetuoso y la búsqueda veloz de contenidos:</p>
+                    <h3>Conversaciones Anidadas</h3>
+                    <p>
+                        Al presionar <strong><code>↩ Responder</code></strong> en cualquier publicación en tu feed, se
+                        abrirá el editor para que envíes tu punto de vista. En el muro, las respuestas aparecerán de
+                        forma indentada (desplazadas hacia la derecha) debajo del mensaje original, facilitando
+                        enormemente el seguimiento de discusiones largas.
+                    </p>
+
+                    <h3>Búsqueda Reactiva en Vivo</h3>
+                    <p>
+                        Escribe directamente en el buscador de la <strong>columna derecha</strong>. De forma inmediata y
+                        reactiva (sin presionar Enter), la interfaz cambiará al feed de <strong>Explorar</strong> y
+                        filtrará los posts que coincidan con tu término en tiempo real.
+                    </p>
+
+                    <div class="double-image-grid">
+                        <div class="image-frame" style="margin: 0">
+                            <img src="4-general-oscuro.png" alt="Interfaz Principal Oscuro" />
+                            <div class="image-caption">Feed en Modo Oscuro con respuestas hiladas</div>
+                        </div>
+                        <div class="image-frame" style="margin: 0">
+                            <img src="5-Cuadro-busqueda.png" alt="Cuadro Búsqueda" />
+                            <div class="image-caption">Filtrado en vivo en columna derecha</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BORRADO Y MODERACION -->
+                <section id="moderacion">
+                    <h2>⊘ 6. Borrado y Moderación Soberana</h2>
+                    <h3>🗑️ Borrado Definitivo</h3>
+                    <p>
+                        A diferencia de las redes sociales convencionales, cuando haces clic en el botón rojo
+                        <strong><code>🗑 Borrar</code></strong> en uno de tus posts y confirmas la acción, este y todas
+                        sus respuestas asociadas se eliminan físicamente de la base de datos de tu disco duro de forma
+                        inmediata.
+                    </p>
+
+                    <h3>⊘ Bloqueo de Nodos</h3>
+                    <p>
+                        Si consideras que algún usuario es molesto o no deseas leer sus aportaciones, presiona
+                        <strong><code>⊘ Bloquear</code></strong> a un costado de su nombre. Automáticamente, sus
+                        publicaciones desaparecerán de tus feeds. Puedes revertir esta acción ingresando a
+                        <strong><code>⊘ Nodo Bloqueado</code></strong> en el menú de la izquierda y quitándolo de la
+                        lista.
+                    </p>
+                </section>
+
+                <!-- COPIAS DE SEGURIDAD -->
+                <section id="mudar">
+                    <h2>⬇️ 7. Mudar y Llevar tu Muro</h2>
+                    <p>
+                        Puesto que no hay almacenamiento central, eres el absoluto custodio de tus publicaciones. En la
+                        columna izquierda encontrarás las herramientas portátiles de migración:
+                    </p>
+                    <ul>
+                        <li>
+                            <strong><code>⬇ Llevar mi muro</code> (Exportar):</strong> Guarda todo tu historial en un
+                            único archivo portátil con extensión <code>.comorg</code>.
+                        </li>
+                        <li>
+                            <strong><code>⬆ Mudar mi muro</code> (Importar):</strong> Recupera tu historial a partir de
+                            un archivo <code>.comorg</code> existente. El sistema ignorará registros duplicados de forma
+                            inteligente para no alterar tu muro actual.
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- ASAMBLEA EN VIVO -->
+                <section id="asamblea">
+                    <h2>🔊 8. Asamblea en Vivo (Módulo de Voz)</h2>
+                    <p>Participa en debates y asambleas grupales de audio directo y descentralizado:</p>
+                    <ul>
+                        <li>
+                            Haz clic en <strong><code>🔊 Asamblea en Vivo</code></strong> en el menú de la izquierda
+                            para abrir la interfaz interactiva.
+                        </li>
+                        <li>
+                            <strong>Si eres el fundador de la sala:</strong> Verás una insignia de
+                            <code>👑 CREADOR</code> junto a tu perfil. Tendrás la facultad de silenciar selectivamente a
+                            los participantes o presionar <strong><code>Silenciar a Todos</code></strong> para coordinar
+                            la palabra en debates amplios.
+                        </li>
+                        <li>
+                            <strong>Si eres participante:</strong> Verás la lista de nodos activos y podrás alternar el
+                            estado de tu micrófono para solicitar intervención.
+                        </li>
+                    </ul>
+
+                    <div class="image-frame">
+                        <img src="6-asamblea-audio.png" alt="Asamblea de Audio" />
+                        <div class="image-caption">Interfaz del panel flotante de Asamblea por voz en vivo</div>
+                    </div>
+                </section>
+
+                <!-- PREGUNTAS FRECUENTES -->
+                <section id="faq">
+                    <h2>❓ Preguntas Frecuentes (FAQ)</h2>
+
+                    <div class="faq-item">
+                        <div class="faq-question">¿Dónde se guardan mis fotos y datos exactamente?</div>
+                        <div class="faq-answer">
+                            Todo se almacena en la carpeta local <code>personal/</code> del directorio de la aplicación.
+                            Encontrarás subcarpetas para <code>avatares/</code> y <code>imagenes/</code> de
+                            publicaciones. Los datos lógicos y relaciones de red se guardan en el archivo SQLite único
+                            <code>comorg_local.db</code>.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">¿Qué sucede si elimino la aplicación por error?</div>
+                        <div class="faq-answer">
+                            Si borras la aplicación junto a la carpeta <code>personal/</code> sin respaldos, toda la
+                            información se perderá irremediablemente, ya que no hay copias en la nube. ¡Se aconseja usar
+                            la opción <strong>Llevar mi muro</strong> de forma regular!
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">¿Por qué no hay contadores de "Me Gusta"?</div>
+                        <div class="faq-answer">
+                            Com Org prioriza el diálogo reflexivo. Quitar las métricas de popularidad y reacciones
+                            previene la búsqueda constante de aprobación social y fomenta el intercambio franco y
+                            constructivo.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">¿Necesito internet constante para interactuar con Com Org?</div>
+                        <div class="faq-answer">
+                            No. Puedes arrancar la app offline, revisar tus posts archivados, redactar nuevos borradores
+                            y editar la apariencia de tu perfil. La conexión (VPN Nebula integrada) solo es requerida
+                            para sincronizar las novedades de tus contactos y dialogar en la Asamblea en Vivo.
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <script>
+            // Script simple de navegación activa en el sidebar
+            const sections = document.querySelectorAll("section");
+            const navLi = document.querySelectorAll(".nav-item");
+
+            window.addEventListener("scroll", () => {
+                let current = "";
+                sections.forEach((section) => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop - 120) {
+                        current = section.getAttribute("id");
+                    }
+                });
+
+                navLi.forEach((li) => {
+                    li.classList.remove("active");
+                    if (li.querySelector("a").getAttribute("href") === `#${current}`) {
+                        li.classList.add("active");
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
