@@ -394,7 +394,9 @@
     max-width: 100%;         /* 💡 Evita que se desborde si la imagen es muy ancha */
     box-sizing: border-box;  /* 💡 Asegura que el padding no rompa los límites */
 }
-            width: auto;             /* Que use su ancho natural si es chica */
+
+.image-frame img {
+    width: auto;             /* Que use su ancho natural si es chica */
     max-width: 100%;         /* Pero que nunca se desborde del contenedor horizontalmente */
     
     /* El truco clave para capturas muy verticales: */
@@ -405,6 +407,7 @@
     display: block;
     margin: 0 auto;          /* Centra la imagen si es más angosta que el contenedor */
     border: 1px solid rgba(46, 69, 92, 0.3);
+}
 
             .image-caption {
                 text-align: center;
