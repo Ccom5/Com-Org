@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estatuto Fundacional — Com Org // Red de Debate Soberano</title>
+    <meta name="description" content="Estatuto Fundacional de la Comunidad Organizada Digital (RED COM ORG). Marco de soberanía del dato, responsabilidad social e identidad de silicio.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ============================================================
+           VARIABLES Y RESET (idéntico a index.html)
+        ============================================================ */
+        :root {
+            --bg-dark: #0F1419;
+            --bg-card: #13202C;
+            --bg-section-alt: #0b0e12;
+            --border-glow: #2E455C;
+            --accent-terracota: #C97A2B;
+            --accent-glow: rgba(201, 122, 43, 0.35);
+            --text-main: #EEF1F5;
+            --text-muted: #8fa3b8;
+            --danger: #f43f5e;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 7px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--border-glow); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-terracota); }
+
+        h1, h2, h3, h4, .mono { font-family: 'Fira Code', monospace; }
+
+        /* ============================================================
+           NAVBAR
+        ============================================================ */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 20, 25, 0.88);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(46, 69, 92, 0.4);
+            padding: 14px 0;
+        }
+
+        .nav-inner {
+            width: 92%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .nav-logo {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s;
+        }
+
+        .nav-logo:hover { color: var(--accent-terracota); }
+
+        .nav-logo .arrow {
+            color: var(--accent-terracota);
+            font-size: 1rem;
+        }
+
+        /* ============================================================
+           STATUTE CONTAINER — lectura cómoda
+        ============================================================ */
+        .statute-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 5% 80px;
+        }
+
+        /* Encabezado del estatuto */
+        .statute-header {
+            text-align: center;
+            margin-bottom: 52px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid rgba(46, 69, 92, 0.4);
+        }
+
+        .statute-header h1 {
+            font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .statute-header .subtitle {
+            font-family: 'Fira Code', monospace;
+            color: var(--accent-terracota);
+            font-size: 1rem;
+            margin-bottom: 0;
+            letter-spacing: 2px;
+        }
+
+        .statute-header .doc-meta {
+            margin-top: 16px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* ============================================================
+           SECCIONES Y TÍTULOS
+        ============================================================ */
+        .preamble,
+        .title-section {
+            margin-bottom: 48px;
+        }
+
+        .preamble h2,
+        .title-section > h2 {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: var(--accent-terracota);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(201, 122, 43, 0.25);
+            letter-spacing: 0.3px;
+        }
+
+        /* Párrafos del preámbulo */
+        .preamble p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 0.97rem;
+        }
+
+        /* ============================================================
+           ARTÍCULOS
+        ============================================================ */
+        .article {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-left: 3px solid var(--accent-terracota);
+            border-radius: 0 8px 8px 0;
+            padding: 20px 24px;
+            margin-bottom: 1.5rem;
+            transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .article:hover {
+            border-left-color: var(--accent-terracota);
+            border-color: var(--accent-terracota);
+            transform: translateX(4px);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+        }
+
+        .article h3 {
+            font-size: 0.92rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            font-family: 'Fira Code', monospace;
+            letter-spacing: 0.3px;
+        }
+
+        .article p {
+            color: var(--text-muted);
+            line-height: 1.75;
+            font-size: 0.94rem;
+            margin-bottom: 0;
+        }
+
+        /* Notas de referencia (citas) */
+        .cite {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.72rem;
+            color: rgba(143, 163, 184, 0.45);
+            margin-left: 6px;
+        }
+
+        /* ============================================================
+           PIE DEL DOCUMENTO
+        ============================================================ */
+        .statute-footer-note {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(46, 69, 92, 0.4);
+            text-align: center;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* ============================================================
+           FOOTER GLOBAL
+        ============================================================ */
+        footer {
+            background-color: #05070a;
+            border-top: 2px solid var(--border-glow);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            margin-bottom: 8px;
+        }
+
+        footer a {
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover { color: var(--accent-terracota); }
+
+        .legal {
+            font-size: 0.78rem;
+            font-style: italic;
+            color: #4a6070;
+            margin-top: 16px;
+        }
+
+        /* ============================================================
+           SEPARADOR DECORATIVO
+        ============================================================ */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin: 40px auto;
+            color: var(--border-glow);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-glow);
+            opacity: 0.4;
+        }
+
+        @media (max-width: 600px) {
+            .statute-container { padding: 40px 5% 60px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====================================================
+         NAV
+    ==================================================== -->
+    <nav id="nav-estatuto">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <span class="arrow">←</span>
+                Com<span style="color: var(--accent-terracota);">-</span>Org
+            </a>
+            <span style="font-family: 'Fira Code', monospace; font-size: 0.8rem; color: var(--text-muted); letter-spacing: 1px;">ESTATUTO FUNDACIONAL</span>
+        </div>
+    </nav>
+
+    <!-- ====================================================
+         CONTENIDO PRINCIPAL
+    ==================================================== -->
+    <main class="statute-container">
+
+        <header class="statute-header">
+            <h1>Estatuto Fundacional de la Comunidad Organizada Digital</h1>
+            <p class="subtitle">(RED COM ORG)</p>
+            <p class="doc-meta">Marco fundamental · Versión 1.0 · 2026</p>
+        </header>
+
+        <!-- PREÁMBULO -->
+        <section class="preamble">
+            <h2>Preámbulo: Del Propósito del Enjambre y el Debate Profundo</h2>
+            <p>
+                Com Org es una herramienta de software sofisticada diseñada para la resistencia cultural,
+                la autonomía comunicativa y la libre expresión blindada por hardware inmutable. Rechazamos
+                categóricamente el paradigma de las corporaciones de Silicon Valley: no somos una red
+                comercial ni una plataforma federada convencional diseñada para la adicción.
+            </p>
+            <p>
+                Esta red no ha sido concebida para la superficialidad, la vanidad o la búsqueda de atención
+                social. Se constituye como una plaza pública para el debate maduro, crítico y acalorado sobre
+                la realidad política y social, donde la única interacción válida es la confrontación de ideas
+                mediante argumentos articulados.
+            </p>
+        </section>
+
+        <div class="divider">◆ · ◆</div>
+
+        <!-- TÍTULO I -->
+        <section class="title-section">
+            <h2>Título I: De la Soberanía Absoluta del Dato y la Inmutabilidad Territorial</h2>
+
+            <article class="article">
+                <h3>Artículo 1. El Dispositivo como Territorio</h3>
+                <p>Cada nodo es territorio soberano. Se descarta la existencia de servidores centrales en el extranjero o nubes propietarias.</p>
+            </article>
+
+            <article class="article">
+                <h3>Artículo 2. Ubicación y Gestión Local</h3>
+                <p>Toda identidad e historial de debate viven exclusivamente en el almacenamiento físico local de la máquina del usuario, gestionado de forma descentralizada.</p>
+            </article>
+
+            <article class="article">
+                <h3>Artículo 3. Persistencia Real y Derecho al Olvido</h3>
+                <p>Si el autor decide eliminar una publicación, esta desaparece de forma absoluta e irreversible.</p>
+            </article>
+
+            <article class="article">
+                <h3>Artículo 4. Propiedad por Desconexión</h3>
+                <p>El control es estrictamente físico: cerrar la aplicación desconecta el nodo de inmediato del enjambre.</p>
+            </article>
+
+            <article class="article">
+                <h3>Artículo 5. Exploración Soberana</h3>
+                <p>Prohibido el ordenamiento algorítmico automatizado. El usuario posee la potestad absoluta de configurar qué leer o a qué bloquear.</p>
+            </article>
+        </section>
+
+        <div class="divider">◆ · ◆</div>
+
+        <!-- TÍTULO II -->
+        <section class="title-section">
+            <h2>Título II: De la Responsabilidad Social Comunitaria y la Identidad de Silicio</h2>
+
+            <article class="article">
+                <h3>Artículo 6. El Antídoto al Anonimato Tóxico</h3>
+                <p>Se prohíbe la creación de cuentas virtuales descartables o granjas de bots para ataques coordinados.</p>
+            </article>
+
+            <article class="article">
+                <h3>Artículo 7. Aprovisionamiento y Anclaje de Hardware</h3>
+                <p>Toda identidad se genera vinculando de forma unívoca la clave criptográfica del usuario (Ed25519) al silicio real del dispositivo (MachineGuid, ANDROID_ID, product_uuid). Esto hace que el costo económico del sabotaje sea prohibitivo.</p>
+            </article>
+
+            <article class="article">
+                <h3>Artículo 8. Restricción Semántica</h3>
+                <p>Se imponen límites físicos de 1000 a 1200 caracteres para priorizar la argumentación sobre el agravio.</p>
+            </article>
+
+            <article class="article">
+                <h3>Artículo 9. Filtro Físico Antispam</h3>
+                <p>El costo de procesamiento recae sobre el emisor; la saturación queda autolimitada por las leyes físicas de la computación local.</p>
+            </article>
+
+            <article class="article">
+                <h3>Artículo 10. Cooperativa Digital</h3>
+                <p>Organizaciones como gremios o asambleas gestionan sus propios Faros y Autoridades de Certificación (CA), descentralizando el poder técnico.</p>
+            </article>
+        </section>
+
+        <div class="divider">◆ · ◆</div>
+
+        <!-- TÍTULO III -->
+        <section class="title-section">
+            <h2>Título III: De los Mecanismos Inmunitarios y la Defensa Técnica</h2>
+
+            <article class="article">
+                <h3>Artículo 11. Moderación por Aislamiento Físico</h3>
+                <p>El filtrado es físico. Si un usuario bloquea una firma dañina, el contenido queda atrapado en el dispositivo de origen sin propagarse.</p>
+            </article>
+
+            <article class="article">
+                <h3>Artículo 12. El Umbral del 15% (Autodefensa)</h3>
+                <p>Basado en dinámicas de masas, si el 15% del padrón denuncia un nodo, el software habilita la revocación de la firma criptográfica, aislando al agente nocivo del enjambre.</p>
+            </article>
+
+            <article class="article">
+                <h3>Artículo 13. Defensa contra el Uso Criminal (Revocación de Faros)</h3>
+                <p>Como medida extrema contra grupos criminales que levanten su propia infraestructura para encubrir actividades ilegales, el sistema permite la "Revocación de Faro por Consenso Federado". Si un faro viola las reglas éticas de la comunidad, el resto de la malla lo desautoriza en la Lista de Exclusión de Faros (FRL), cortando su conectividad sin depender de un botón central dictatorial.</p>
+            </article>
+        </section>
+
+        <div class="statute-footer-note">
+            "Este estatuto es el marco fundamental para la Comunidad Organizada Digital."
+        </div>
+
+    </main>
+
+    <!-- ====================================================
+         FOOTER
+    ==================================================== -->
+    <footer>
+        <div style="width: 92%; max-width: 1200px; margin: 0 auto;">
+            <p class="footer-logo">◆ Com-Org // Proyecto Libre y Soberano ◆</p>
+            <p>Contacto de Desarrollo: <a href="mailto:G.ferre2025@gmail.com">G.ferre2025@gmail.com</a></p>
+            <p>Red X: <a href="https://x.com/Miguel_CCom5" target="_blank" rel="noopener noreferrer">@Miguel_CCom5</a></p>
+            <p><a href="index.html">← Volver a la Landing</a></p>
+            <p class="legal">"Esta página no utiliza cookies de rastreo, no guarda tu IP y respeta tu existencia."</p>
+        </div>
+    </footer>
+
+</body>
+</html>
