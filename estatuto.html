@@ -15,16 +15,46 @@
            VARIABLES Y RESET (idéntico a index.html)
         ============================================================ */
         :root {
-            --bg-dark: #0F1419;
-            --bg-card: #13202C;
-            --bg-section-alt: #0b0e12;
-            --border-glow: #2E455C;
-            --accent-terracota: #C97A2B;
-            --accent-glow: rgba(201, 122, 43, 0.35);
-            --text-main: #EEF1F5;
-            --text-muted: #8fa3b8;
+            /* Sistema DUAL: Modo Claro (por defecto) */
+            --bg-principal: #f4f6f9;
+            --bg-card: #ffffff;
+            --bg-section-alt: #eef2f6;
+            --texto-main: #1a202c;
+            --texto-secundario: #64748b;
+            --acento: #cc7023;
+            --acento-hover: #b35f1b;
+            --borde: #e2e8f0;
+            --estado-exito: #059669;
+            --bg-codigo: #e2e8f0;
+            --texto-codigo: #cc7023;
+
+            /* Mapeo para retrocompatibilidad con las clases existentes */
+            --bg-dark: var(--bg-principal);
+            --border-glow: var(--borde);
+            --accent-terracota: var(--acento);
+            --accent-glow: rgba(204, 112, 35, 0.25);
+            --text-main: var(--texto-main);
+            --text-muted: var(--texto-secundario);
             --danger: #f43f5e;
         }
+
+        /* @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-principal: #0b1116;
+                --bg-card: #121a21;
+                --bg-section-alt: #0e161c;
+                --texto-main: #e2e8f0;
+                --texto-secundario: #94a3b8;
+                --acento: #f59e0b;
+                --acento-hover: #d97706;
+                --borde: #1e293b;
+                --estado-exito: #10b981;
+                --bg-codigo: #1a232c;
+                --texto-codigo: #10b981;
+                
+                --accent-glow: rgba(245, 158, 11, 0.25);
+            }
+        } */
 
         *, *::before, *::after {
             margin: 0;
@@ -35,11 +65,12 @@
         html { scroll-behavior: smooth; }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            background-color: var(--bg-principal);
+            color: var(--texto-main);
             font-family: 'Inter', sans-serif;
             line-height: 1.65;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* Scrollbar */
@@ -50,6 +81,29 @@
 
         h1, h2, h3, h4, .mono { font-family: 'Fira Code', monospace; }
 
+        pre, code, .codigo {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bg-codigo);
+            color: var(--texto-codigo);
+            border-radius: 4px;
+        }
+
+        code {
+            padding: 0.2em 0.4em;
+        }
+
+        pre {
+            padding: 1rem;
+            overflow-x: auto;
+            border: 1px solid var(--borde);
+            border-radius: 6px;
+        }
+
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+
         /* ============================================================
            NAVBAR
         ============================================================ */
@@ -57,9 +111,9 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(15, 20, 25, 0.88);
+            background: var(--bg-principal);
             backdrop-filter: blur(14px);
-            border-bottom: 1px solid rgba(46, 69, 92, 0.4);
+            border-bottom: 1px solid var(--borde);
             padding: 14px 0;
         }
 
@@ -220,8 +274,8 @@
            FOOTER GLOBAL
         ============================================================ */
         footer {
-            background-color: #05070a;
-            border-top: 2px solid var(--border-glow);
+            background-color: var(--bg-section-alt);
+            border-top: 2px solid var(--borde);
             padding: 40px 0;
             text-align: center;
         }
@@ -423,8 +477,7 @@
     <footer>
         <div style="width: 92%; max-width: 1200px; margin: 0 auto;">
             <p class="footer-logo">◆ Com-Org // Proyecto Libre y Soberano ◆</p>
-            <p>Contacto de Desarrollo: <a href="mailto:G.ferre2025@gmail.com">G.ferre2025@gmail.com</a></p>
-            <p>Red X: <a href="https://x.com/Miguel_CCom5" target="_blank" rel="noopener noreferrer">@Miguel_CCom5</a></p>
+            <p>Contacto de Desarrollo: <a href="mailto:CO-arg@proton.me">CO-arg@proton.me</a></p>
             <p><a href="index.html">← Volver a la Landing</a></p>
             <p class="legal">"Esta página no utiliza cookies de rastreo, no guarda tu IP y respeta tu existencia."</p>
         </div>

@@ -17,17 +17,48 @@
            VARIABLES Y CONFIGURACIÓN DE TEMA OSCURO (Com-Org)
            ============================================================ */
             :root {
-                --bg-dark: #0f1419;
-                --bg-card: #13202c;
-                --bg-sidebar: #0b0e12;
-                --border-glow: #2e455c;
-                --accent-terracota: #c97a2b;
-                --accent-glow: rgba(201, 122, 43, 0.25);
-                --text-main: #eef1f5;
-                --text-muted: #8fa3b8;
+                /* Sistema DUAL: Modo Claro (por defecto) */
+                --bg-principal: #f4f6f9;
+                --bg-card: #ffffff;
+                --bg-section-alt: #eef2f6;
+                --texto-main: #1a202c;
+                --texto-secundario: #64748b;
+                --acento: #cc7023;
+                --acento-hover: #b35f1b;
+                --borde: #e2e8f0;
+                --estado-exito: #059669;
+                --bg-codigo: #e2e8f0;
+                --texto-codigo: #cc7023;
+
+                /* Mapeo para retrocompatibilidad con las clases existentes */
+                --bg-dark: var(--bg-principal);
+                --bg-sidebar: var(--bg-section-alt);
+                --border-glow: var(--borde);
+                --accent-terracota: var(--acento);
+                --accent-glow: rgba(204, 112, 35, 0.25);
+                --text-main: var(--texto-main);
+                --text-muted: var(--texto-secundario);
                 --danger: #f43f5e;
                 --sidebar-width: 315px;
             }
+
+            /* @media (prefers-color-scheme: dark) {
+                :root {
+                    --bg-principal: #0b1116;
+                    --bg-card: #121a21;
+                    --bg-section-alt: #0e161c;
+                    --texto-main: #e2e8f0;
+                    --texto-secundario: #94a3b8;
+                    --acento: #f59e0b;
+                    --acento-hover: #d97706;
+                    --borde: #1e293b;
+                    --estado-exito: #10b981;
+                    --bg-codigo: #1a232c;
+                    --texto-codigo: #10b981;
+                    
+                    --accent-glow: rgba(245, 158, 11, 0.25);
+                }
+            } */
 
             * {
                 margin: 0;
@@ -40,12 +71,13 @@
             }
 
             body {
-                background-color: var(--bg-dark);
-                color: var(--text-main);
+                background-color: var(--bg-principal);
+                color: var(--texto-main);
                 font-family: "Inter", sans-serif;
                 line-height: 1.65;
                 display: flex;
                 min-height: 100vh;
+                transition: background-color 0.3s ease, color 0.3s ease;
             }
 
             /* Scrollbar personalizada */
@@ -73,13 +105,28 @@
                 font-weight: 600;
             }
 
-            code {
+            pre, code, .codigo {
                 font-family: "Fira Code", monospace;
-                background-color: rgba(46, 69, 92, 0.3);
-                color: #eef1f5;
-                padding: 2px 6px;
+                background-color: var(--bg-codigo);
+                color: var(--texto-codigo);
                 border-radius: 4px;
+            }
+
+            code {
+                padding: 0.2em 0.4em;
                 font-size: 0.9em;
+            }
+
+            pre {
+                padding: 1rem;
+                overflow-x: auto;
+                border: 1px solid var(--borde);
+                border-radius: 6px;
+            }
+
+            pre code {
+                padding: 0;
+                background-color: transparent;
             }
 @media print {
     /* 1. Mantenemos el contenedor principal adaptado al papel */

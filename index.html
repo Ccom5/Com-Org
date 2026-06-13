@@ -33,16 +33,46 @@
            VARIABLES Y RESET
         ============================================================ */
         :root {
-            --bg-dark: #0F1419;
-            --bg-card: #13202C;
-            --bg-section-alt: #0b0e12;
-            --border-glow: #2E455C;
-            --accent-terracota: #C97A2B;
-            --accent-glow: rgba(201, 122, 43, 0.35);
-            --text-main: #EEF1F5;
-            --text-muted: #8fa3b8;
+            /* Sistema DUAL: Modo Claro (por defecto) */
+            --bg-principal: #f4f6f9;
+            --bg-card: #ffffff;
+            --bg-section-alt: #eef2f6;
+            --texto-main: #1a202c;
+            --texto-secundario: #64748b;
+            --acento: #cc7023;
+            --acento-hover: #b35f1b;
+            --borde: #e2e8f0;
+            --estado-exito: #059669;
+            --bg-codigo: #e2e8f0;
+            --texto-codigo: #cc7023;
+
+            /* Mapeo para retrocompatibilidad con las clases existentes */
+            --bg-dark: var(--bg-principal);
+            --border-glow: var(--borde);
+            --accent-terracota: var(--acento);
+            --accent-glow: rgba(204, 112, 35, 0.25);
+            --text-main: var(--texto-main);
+            --text-muted: var(--texto-secundario);
             --danger: #f43f5e;
         }
+
+        /* @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-principal: #0b1116;
+                --bg-card: #121a21;
+                --bg-section-alt: #0e161c;
+                --texto-main: #e2e8f0;
+                --texto-secundario: #94a3b8;
+                --acento: #f59e0b;
+                --acento-hover: #d97706;
+                --borde: #1e293b;
+                --estado-exito: #10b981;
+                --bg-codigo: #1a232c;
+                --texto-codigo: #10b981;
+                
+                --accent-glow: rgba(245, 158, 11, 0.25);
+            }
+        } */
 
         *,
         *::before,
@@ -57,11 +87,12 @@
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            background-color: var(--bg-principal);
+            color: var(--texto-main);
             font-family: 'Inter', sans-serif;
             line-height: 1.65;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* Scrollbar personalizada */
@@ -95,6 +126,31 @@
             height: auto;
             border-radius: 8px;
             display: block;
+        }
+
+        pre,
+        code,
+        .codigo {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bg-codigo);
+            color: var(--texto-codigo);
+            border-radius: 4px;
+        }
+
+        code {
+            padding: 0.2em 0.4em;
+        }
+
+        pre {
+            padding: 1rem;
+            overflow-x: auto;
+            border: 1px solid var(--borde);
+            border-radius: 6px;
+        }
+
+        pre code {
+            padding: 0;
+            background-color: transparent;
         }
 
         /* ============================================================
@@ -197,7 +253,7 @@
 
         /* Pilares / pequeños */
         .pillar-card {
-            background-color: rgba(19, 32, 44, 0.7);
+            background-color: var(--bg-card);
             border: 1px solid var(--border-glow);
             border-radius: 10px;
             padding: 28px 24px;
@@ -236,7 +292,7 @@
             border-radius: 6px;
             cursor: pointer;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: background-color 0.2s ease, all 0.3s ease;
             letter-spacing: 0.5px;
         }
 
@@ -270,9 +326,9 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(15, 20, 25, 0.88);
+            background: var(--bg-principal);
             backdrop-filter: blur(14px);
-            border-bottom: 1px solid rgba(46, 69, 92, 0.4);
+            border-bottom: 1px solid var(--borde);
             padding: 14px 0;
         }
 
@@ -344,7 +400,7 @@
            HERO
         ============================================================ */
         .hero {
-            background: radial-gradient(ellipse at top, #1a2d3d 0%, var(--bg-dark) 65%);
+            background: radial-gradient(ellipse at top, var(--bg-section-alt) 0%, var(--bg-principal) 65%);
             min-height: 90vh;
             display: flex;
             align-items: center;
@@ -360,8 +416,9 @@
             position: absolute;
             inset: 0;
             background-image:
-                linear-gradient(rgba(46, 69, 92, 0.07) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(46, 69, 92, 0.07) 1px, transparent 1px);
+                linear-gradient(var(--borde) 1px, transparent 1px),
+                linear-gradient(90deg, var(--borde) 1px, transparent 1px);
+            opacity: 0.5;
             background-size: 48px 48px;
             pointer-events: none;
         }
@@ -420,13 +477,13 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(19, 32, 44, 0.8);
-            border: 1px solid var(--border-glow);
+            background: var(--bg-card);
+            border: 1px solid var(--borde);
             border-radius: 999px;
             padding: 6px 16px;
             font-family: 'Fira Code', monospace;
             font-size: 0.78rem;
-            color: var(--text-muted);
+            color: var(--texto-secundario);
             margin-bottom: 28px;
         }
 
@@ -515,7 +572,7 @@
            COOP / LLAMADO
         ============================================================ */
         .coop-section {
-            background: linear-gradient(180deg, var(--bg-dark) 0%, #111820 100%);
+            background: linear-gradient(180deg, var(--bg-principal) 0%, var(--bg-section-alt) 100%);
         }
 
         .coop-quote {
@@ -733,8 +790,8 @@
            FOOTER
         ============================================================ */
         footer {
-            background-color: #05070a;
-            border-top: 2px solid var(--border-glow);
+            background-color: var(--bg-section-alt);
+            border-top: 2px solid var(--borde);
             padding: 48px 0;
             text-align: center;
         }
@@ -808,8 +865,15 @@
                 Com<span>-</span>Org
             </a>
             <ul class="nav-links">
-                <li><a href="manual/manual-usuario.html" target="_blank" rel="noopener noreferrer" style="color: var(--accent-terracota); font-weight: 600; border: 1px solid var(--accent-terracota); padding: 4px 10px; border-radius: 4px; transition: background 0.3s;" onmouseover="this.style.background='rgba(201, 122, 43, 0.1)'" onmouseout="this.style.background='transparent'">📖 Manual</a></li>
-                <li><a href="estatuto.html" style="color: var(--text-muted); font-weight: 500; border: 1px solid rgba(46,69,92,0.5); padding: 4px 10px; border-radius: 4px; transition: background 0.3s, color 0.3s, border-color 0.3s;" onmouseover="this.style.color='var(--accent-terracota)'; this.style.borderColor='var(--accent-terracota)'" onmouseout="this.style.color='var(--text-muted)'; this.style.borderColor='rgba(46,69,92,0.5)'">📜 Estatuto</a></li>
+                <li><a href="manual/manual-usuario.html" target="_blank" rel="noopener noreferrer"
+                        style="color: var(--accent-terracota); font-weight: 600; border: 1px solid var(--accent-terracota); padding: 4px 10px; border-radius: 4px; transition: background 0.3s;"
+                        onmouseover="this.style.background='rgba(201, 122, 43, 0.1)'"
+                        onmouseout="this.style.background='transparent'">📖 Manual</a></li>
+                <li><a href="estatuto.html"
+                        style="color: var(--text-muted); font-weight: 500; border: 1px solid rgba(46,69,92,0.5); padding: 4px 10px; border-radius: 4px; transition: background 0.3s, color 0.3s, border-color 0.3s;"
+                        onmouseover="this.style.color='var(--accent-terracota)'; this.style.borderColor='var(--accent-terracota)'"
+                        onmouseout="this.style.color='var(--text-muted)'; this.style.borderColor='rgba(46,69,92,0.5)'">📜
+                        Estatuto</a></li>
                 <li><a href="#paradigma">El Problema</a></li>
                 <li><a href="#como-funciona">Cómo Funciona</a></li>
                 <li><a href="#cooperativa">Cooperativa</a></li>
@@ -828,9 +892,11 @@
             <div class="status-badge" style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
                 <div>
                     <span class="status-dot"></span>
-                    Nodo Base: Operativo // Fase Android: 40% Implementada
+                    Nodo Base: Operativo // Fase Android: 90% Implementada
                 </div>
-                <a href="manual/manual-usuario.html" target="_blank" rel="noopener noreferrer" style="color: var(--accent-terracota); text-decoration: none; font-weight: bold; border-left: 1px solid var(--border-glow); padding-left: 15px;">📖 Manual de Usuario</a>
+                <a href="manual/manual-usuario.html" target="_blank" rel="noopener noreferrer"
+                    style="color: var(--accent-terracota); text-decoration: none; font-weight: bold; border-left: 1px solid var(--border-glow); padding-left: 15px;">📖
+                    Manual de Usuario</a>
             </div>
 
             <!-- img/1.png: Hero banner — Com Org, Red de Debate Soberano -->
@@ -844,7 +910,9 @@
                 Sin empresas, sin algoritmos adictivos, sostenida por la propia comunidad.
             </p>
             <div class="hero-ctas">
-                <a href="manual/manual-usuario.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="border-color: var(--accent-terracota); color: var(--accent-terracota);" id="cta-manual">📖 Leer Manual de Usuario</a>
+                <a href="manual/manual-usuario.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary"
+                    style="border-color: var(--accent-terracota); color: var(--accent-terracota);" id="cta-manual">📖
+                    Leer Manual de Usuario</a>
                 <a href="#como-funciona" class="btn btn-primary" id="cta-descarga">⬇ Llevar mi muro (Descargar Nodo)</a>
                 <a href="#paradigma" class="btn btn-ghost" id="cta-leer">📄 Entender el problema</a>
             </div>
@@ -1257,7 +1325,7 @@
             <p class="section-lead">
                 Visualizá el funcionamiento de la red soberana Com-Org y el flujo del enjambre P2P.
             </p>
-            
+
             <div class="video-banner">
                 <video controls poster="img/com-org.png">
                     <source src="img/Com-Org.mp4" type="video/mp4">
@@ -1274,11 +1342,13 @@
     <footer id="contacto">
         <div class="container" style="padding-top: 0; padding-bottom: 0;">
             <p class="footer-logo">◆ Com-Org // Proyecto Libre y Soberano ◆</p>
-            <p>Contacto de Desarrollo: <a href="mailto:G.ferre2025@gmail.com">G.ferre2025@gmail.com</a></p>
-            <p>Red X: <a href="https://x.com/Miguel_CCom5" target="_blank" rel="noopener noreferrer">@Miguel_CCom5</a>
-            </p>
+            <p>Contacto de Desarrollo: <a href="mailto:CO-arg@proton.me">CO-arg@proton.me</a></p>
             <p style="margin-top: 20px; font-size: 0.82rem;">
-                <a href="estatuto.html" id="footer-estatuto" style="color: var(--text-muted); border: 1px solid rgba(46,69,92,0.5); padding: 5px 14px; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.78rem; transition: color 0.2s, border-color 0.2s;" onmouseover="this.style.color='var(--accent-terracota)'; this.style.borderColor='var(--accent-terracota)'" onmouseout="this.style.color='var(--text-muted)'; this.style.borderColor='rgba(46,69,92,0.5)'">📜 Estatuto Fundacional</a>
+                <a href="estatuto.html" id="footer-estatuto"
+                    style="color: var(--text-muted); border: 1px solid rgba(46,69,92,0.5); padding: 5px 14px; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.78rem; transition: color 0.2s, border-color 0.2s;"
+                    onmouseover="this.style.color='var(--accent-terracota)'; this.style.borderColor='var(--accent-terracota)'"
+                    onmouseout="this.style.color='var(--text-muted)'; this.style.borderColor='rgba(46,69,92,0.5)'">📜
+                    Estatuto Fundacional</a>
             </p>
             <p class="legal">"Esta página no utiliza cookies de rastreo, no guarda tu IP y respeta tu existencia."</p>
         </div>
