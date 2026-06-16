@@ -80,7 +80,15 @@ heredar directamente:
   servidores locales, teléfonos móviles) incluso si se encuentran detrás de firewalls domésticos estrictos o NATs
   simétricas.
 - **Firewall Interno Basado en Identidad:** El tráfico se valida única y estrictamente por _quién eres_ (tu certificado
-  criptográfico firmado por la CA) y no por dónde estás (tu dirección IP).
+  criptográfico firmado por la CA) y no por dónde estás (tu dirección IP). Firewall Interno Basado en Identidad: El
+  tráfico se valida única y estrictamente por quién eres (tu certificado criptográfico firmado por la CA) y no por dónde
+  estás (tu dirección IP).
+
+- **Nota sobre el desarrollo:** Si bien Com-Org se apoya en el motor de transporte de Nebula para la conectividad de
+  red, la capa lógica que define la arquitectura de faros, la gestión de la CA principal y las reglas de soberanía del
+  usuario son desarrollos propietarios. La integridad de este sistema es fundamental para garantizar la seguridad civil
+  del proyecto, por lo que su modificación o alteración fuera de los canales oficiales está estrictamente prohibida,
+  manteniendo el código bajo un modelo de auditoría pública y desarrollo centralizado."
 
 ---
 
@@ -145,4 +153,3 @@ asíncrona de alta densidad informativa y rendimiento nativo.
 
 ---
 
-## 🤝 Contribuciones e Interés Ide
