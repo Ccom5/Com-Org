@@ -34,9 +34,9 @@
         ============================================================ */
         :root {
             /* Sistema DUAL: Modo Claro (por defecto) */
-            --bg-principal: #f4f6f9;
+            --bg-principal: #cfdaeb;
             --bg-card: #ffffff;
-            --bg-section-alt: #eef2f6;
+            --bg-section-alt: #ffffff;
             --texto-main: #1a202c;
             --texto-secundario: #252a31;
             --acento: #cc7023;
@@ -368,6 +368,15 @@
             transform: rotate(8deg) scale(1.1);
         }
 
+        /* La bandera no rota, solo brilla */
+        .nav-logo img:first-child {
+            border-radius: 4px;
+        }
+
+        .nav-logo:hover img:first-child {
+            transform: scale(1.08);
+        }
+
         .nav-logo span {
             color: var(--accent-terracota);
         }
@@ -390,9 +399,115 @@
             color: var(--accent-terracota);
         }
 
-        @media (max-width: 600px) {
+        /* ============================================================
+           MENÚ HAMBURGUESA / ACORDEÓN MÓVIL
+        ============================================================ */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 1px solid var(--borde);
+            border-radius: 6px;
+            padding: 7px 10px;
+            cursor: pointer;
+            color: var(--texto-main);
+            font-size: 1.25rem;
+            line-height: 1;
+            transition: border-color 0.2s ease, color 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .nav-toggle:hover {
+            border-color: var(--accent-terracota);
+            color: var(--accent-terracota);
+        }
+
+        .nav-toggle[aria-expanded="true"] .hamburger-icon::before {
+            content: '✕';
+        }
+
+        .nav-toggle .hamburger-icon::before {
+            content: '☰';
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
             .nav-links {
+                /* Oculto por defecto en móvil */
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-principal);
+                border-bottom: 2px solid var(--accent-terracota);
+                border-top: 1px solid var(--borde);
+                flex-direction: column;
+                gap: 0;
+                padding: 8px 0;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+                z-index: 99;
+                animation: slideDown 0.22s ease;
+            }
+
+            .nav-links.is-open {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                border-bottom: 1px solid var(--borde);
+            }
+
+            .nav-links li:last-child {
+                border-bottom: none;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 13px 20px !important;
+                font-size: 0.95rem !important;
+                width: 100%;
+            }
+
+            /* Forzar que los enlaces con estilo inline también se vean bien */
+            .nav-links li a[style] {
+                border: none !important;
+                border-radius: 0 !important;
+                padding: 13px 20px !important;
+            }
+
+            /* Excepción: el botón Manual conserva el color acento */
+            .nav-links li:first-child a {
+                color: var(--accent-terracota) !important;
+                font-weight: 600;
+            }
+
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-8px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
+
+        /* En desktop el nav-inner no es relative; en móvil sí */
+        @media (max-width: 768px) {
+            #nav-main {
+                position: sticky;
+                top: 0;
+                z-index: 100;
+            }
+
+            .nav-inner {
+                position: relative;
+                flex-wrap: wrap;
             }
         }
 
@@ -863,8 +978,13 @@
             <a href="#inicio" class="nav-logo">
                 <img src="img/com-org.png" alt="Logo Com Org" />
                 Com<span>-</span>Org
+                <img src="img/malvinas.png" alt="Malvinas Argentinas" />
             </a>
-            <ul class="nav-links">
+            <button class="nav-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="nav-menu" onclick="toggleNav(this)">
+                <span class="hamburger-icon"></span>
+            </button>
+
+            <ul class="nav-links" id="nav-menu">
                 <li><a href="manual/manual-usuario.html" target="_blank" rel="noopener noreferrer"
                         style="color: var(--accent-terracota); font-weight: 600; border: 1px solid var(--accent-terracota); padding: 4px 10px; border-radius: 4px; transition: background 0.3s;"
                         onmouseover="this.style.background='rgba(201, 122, 43, 0.1)'"
@@ -1354,6 +1474,23 @@
         </div>
     </footer>
 
+    <script>
+        function toggleNav(btn) {
+            var menu = document.getElementById('nav-menu');
+            var isOpen = menu.classList.toggle('is-open');
+            btn.setAttribute('aria-expanded', isOpen);
+        }
+
+        // Cerrar el menú al hacer clic en un enlace interno
+        document.getElementById('nav-menu').addEventListener('click', function (e) {
+            if (e.target.tagName === 'A') {
+                var menu = document.getElementById('nav-menu');
+                menu.classList.remove('is-open');
+                var btn = document.querySelector('.nav-toggle');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+            }
+        });
+    </script>
 </body>
 
 </html>
