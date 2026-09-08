@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Com Org — Levantar un Faro Comunitario</title>
+    <meta name="description" content="Guía técnica para poner en marcha un Faro (Lighthouse Nebula) y unirte al enjambre soberano de Com Org." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ============================================================
+           VARIABLES Y RESET — idéntico a index.html
+        ============================================================ */
+        :root {
+            --bg-principal:      rgba(164, 203, 222, 1);
+            --bg-card:           rgb(255, 255, 255);
+            --bg-section-alt:    rgba(255, 255, 255, 0.96);
+            --texto-main:        #1a202c;
+            --texto-secundario:  #21252a;
+            --acento:            #cc7023;
+            --acento-hover:      #b35f1b;
+            --borde:             #e2e8f0;
+            --estado-exito:      #059669;
+            --bg-codigo:         #e2e8f0;
+            --texto-codigo:      #cc7023;
+
+            --bg-dark:           var(--bg-principal);
+            --border-glow:       var(--borde);
+            --accent-terracota:  var(--acento);
+            --accent-glow:       rgba(204, 112, 35, 0.25);
+            --text-main:         var(--texto-main);
+            --text-muted:        var(--texto-secundario);
+            --danger:            #f43f5e;
+        }
+
+        *, *::before, *::after {
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-principal);
+            color: var(--texto-main);
+            font-family: "Inter", sans-serif;
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 7px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--border-glow); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-terracota); }
+
+        h1, h2, h3, h4, .mono { font-family: "Fira Code", monospace; }
+
+        a { color: var(--acento); }
+
+        pre, code, .codigo {
+            font-family: "Fira Code", monospace;
+            background-color: var(--bg-codigo);
+            color: var(--texto-codigo);
+            border-radius: 4px;
+        }
+        code { padding: 0.2em 0.45em; font-size: 0.88em; }
+        pre {
+            padding: 1rem 1.25rem;
+            overflow-x: auto;
+            border: 1px solid var(--borde);
+            border-radius: 8px;
+            line-height: 1.7;
+            margin: 1rem 0;
+        }
+        pre code { padding: 0; background: transparent; font-size: 0.87rem; }
+
+        /* ============================================================
+           LAYOUT
+        ============================================================ */
+        .container {
+            width: 92%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 72px 0;
+        }
+        .container-narrow {
+            width: 92%;
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 72px 0;
+        }
+        .section-alt { background-color: var(--bg-section-alt); }
+
+        .section-kicker {
+            display: block;
+            text-align: center;
+            font-family: "Inter", sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-terracota);
+            margin-bottom: 10px;
+        }
+        .section-title {
+            font-size: clamp(1.4rem, 3vw, 1.9rem);
+            text-align: center;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 56px;
+            height: 3px;
+            background: var(--accent-terracota);
+            margin: 12px auto 0;
+            border-radius: 2px;
+        }
+        .section-lead {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 720px;
+            margin: 0 auto 52px;
+        }
+
+        /* ============================================================
+           NAV
+        ============================================================ */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-principal);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--borde);
+            padding: 14px 0;
+        }
+        .nav-inner {
+            width: 92%;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .nav-logo {
+            font-family: "Fira Code", monospace;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-logo span { color: var(--accent-terracota); }
+
+        /* ============================================================
+           HERO de página (sin video)
+        ============================================================ */
+        .page-hero {
+            background: linear-gradient(160deg, rgba(164,203,222,1) 0%, rgba(255,255,255,0.96) 100%);
+            border-bottom: 1px solid var(--borde);
+            text-align: center;
+            padding: 80px 20px 72px;
+        }
+        .page-hero .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--borde);
+            border-radius: 999px;
+            padding: 6px 16px;
+            font-family: "Fira Code", monospace;
+            font-size: 0.78rem;
+            color: var(--texto-secundario);
+            margin-bottom: 28px;
+        }
+        .status-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 8px #22c55e;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.4; }
+        }
+        .page-hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 18px;
+            line-height: 1.2;
+        }
+        .page-hero h1 .highlight { color: var(--accent-terracota); }
+        .page-hero p.tagline {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* ============================================================
+           CARDS
+        ============================================================ */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+        @media (min-width: 700px) {
+            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 10px;
+            padding: 28px;
+            transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .card:hover {
+            border-color: var(--accent-terracota);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+        }
+        .card .card-icon {
+            font-size: 2rem;
+            line-height: 1;
+        }
+        .card h3 {
+            font-size: 1rem;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+        .card p { color: var(--text-muted); font-size: 0.93rem; }
+
+        /* ============================================================
+           BADGE / TAG
+        ============================================================ */
+        .tag {
+            font-family: "Fira Code", monospace;
+            font-size: 0.72rem;
+            color: var(--accent-terracota);
+            background: rgba(201, 122, 43, 0.1);
+            border: 1px solid rgba(201, 122, 43, 0.25);
+            border-radius: 4px;
+            padding: 2px 6px;
+            vertical-align: middle;
+            margin-left: 6px;
+        }
+        .tag-free {
+            color: var(--estado-exito);
+            background: rgba(5, 150, 105, 0.1);
+            border-color: rgba(5, 150, 105, 0.25);
+        }
+
+        /* ============================================================
+           TABLA
+        ============================================================ */
+        .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--borde); }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; background: var(--bg-card); }
+        th, td {
+            padding: 13px 16px;
+            border-bottom: 1px solid rgba(46, 69, 92, 0.15);
+            text-align: left;
+        }
+        th {
+            font-family: "Fira Code", monospace;
+            color: var(--accent-terracota);
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            background: rgba(164, 203, 222, 0.25);
+        }
+        tr:last-child td { border-bottom: none; }
+        td strong { color: var(--text-main); }
+
+        /* ============================================================
+           STEPS / PASOS
+        ============================================================ */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+        .step {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 10px;
+            padding: 22px 24px;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .step:hover {
+            border-color: var(--accent-terracota);
+            transform: translateX(4px);
+        }
+        .step-num {
+            font-family: "Fira Code", monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-terracota);
+            flex-shrink: 0;
+            min-width: 2rem;
+            line-height: 1.4;
+        }
+        .step-body h4 {
+            font-size: 0.98rem;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+        .step-body p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+        }
+
+        /* ============================================================
+           ALERT BOX
+        ============================================================ */
+        .alert-box {
+            background: rgba(204, 112, 35, 0.06);
+            border: 1px solid rgba(204, 112, 35, 0.3);
+            border-left: 4px solid var(--acento);
+            border-radius: 8px;
+            padding: 24px 28px;
+            max-width: 820px;
+            margin: 0 auto;
+        }
+        .alert-box h3 {
+            color: var(--acento);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        .alert-box p { color: var(--text-muted); font-size: 0.95rem; }
+        .alert-box ul {
+            margin: 12px 0 0 20px;
+            color: var(--text-muted);
+            font-size: 0.93rem;
+        }
+        .alert-box li { margin-bottom: 8px; }
+
+        /* ============================================================
+           COOP QUOTE
+        ============================================================ */
+        .coop-quote {
+            text-align: center;
+            font-family: "Fira Code", monospace;
+            font-size: clamp(0.95rem, 2.2vw, 1.2rem);
+            color: var(--accent-terracota);
+            border: 1px solid rgba(201, 122, 43, 0.25);
+            border-radius: 8px;
+            padding: 20px 28px;
+            margin-bottom: 48px;
+            background: rgba(201, 122, 43, 0.06);
+            max-width: 820px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ============================================================
+           DIVIDER
+        ============================================================ */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 0 auto 48px;
+            max-width: 420px;
+            color: var(--border-glow);
+            font-family: "Fira Code", monospace;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+        }
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--border-glow);
+            opacity: 0.6;
+        }
+
+        /* ============================================================
+           BOTONES
+        ============================================================ */
+        .btn-row {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 48px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 13px 32px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            font-family: "Fira Code", monospace;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            letter-spacing: 0.5px;
+        }
+        .btn-primary {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 0 12px rgba(46, 69, 92, 0.1);
+        }
+        .btn-primary:hover {
+            border-color: var(--accent-terracota);
+            box-shadow: 0 0 20px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--borde);
+        }
+        .btn-ghost:hover {
+            color: var(--accent-terracota);
+            border-color: var(--accent-terracota);
+        }
+
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        footer {
+            background-color: var(--bg-section-alt);
+            border-top: 2px solid var(--borde);
+            padding: 48px 0;
+            text-align: center;
+        }
+        .footer-logo {
+            font-family: "Fira Code", monospace;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            margin-bottom: 8px;
+        }
+        footer a {
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        footer a:hover { color: var(--accent-terracota); }
+        .legal {
+            font-size: 0.78rem;
+            font-style: italic;
+            color: #4a6070;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================================================
+         NAV
+    ================================================ -->
+    <nav>
+        <div class="nav-inner">
+            <a href="https://com-org.pages.dev/#com-org" class="nav-logo">◆ Com<span>-</span>Org</a>
+            <span style="font-family:'Fira Code',monospace; font-size:0.82rem; color:var(--text-muted);">
+                // Faros Comunitarios
+            </span>
+        </div>
+    </nav>
+
+    <!-- ================================================
+         HERO
+    ================================================ -->
+    <header class="page-hero">
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            Infraestructura Soberana — Nebula Network
+        </div>
+        <h1>Faros Comunitarios:<br /><span class="highlight">Anclas de Soberanía</span></h1>
+        <p class="tagline">
+            Para que el debate soberano sea real, la infraestructura de comunicación debe pertenecer a la propia comunidad organizada. Levantá tu Faro y fortalecé el enjambre.
+        </p>
+    </header>
+
+    <!-- ================================================
+         ¿QUÉ ES UN FARO?
+    ================================================ -->
+    <section class="section-alt">
+        <div class="container-narrow">
+            <span class="section-kicker">Concepto Base</span>
+            <h2 class="section-title">¿Qué es un Faro?</h2>
+            <p class="section-lead">Más simple, imposible.</p>
+
+            <div class="coop-quote">
+                "Imaginá un poste de luz en una plaza. Su única función es iluminar el espacio para que quienes asisten puedan verse y encontrarse de forma segura. Una vez que se encuentran, conversan de manera directa."
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon">🏛️</div>
+                    <h3>No es un servidor central</h3>
+                    <p>No almacena tus mensajes, no guarda logs de tus audios y jamás ve tu tráfico de datos.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔗</div>
+                    <h3>Conexión Directa (P2P)</h3>
+                    <p>Facilita el intercambio de IPs y el encuentro inicial (NAT Traversal), luego se retira. El tráfico viaja encriptado de dispositivo a dispositivo.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🌐</div>
+                    <h3>Red Blindada y Resiliente</h3>
+                    <p>Si tu Faro sufre una desconexión, el enjambre sigue vivo apoyándose de manera cooperativa en los Faros de las otras comunidades.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================
+         HARDWARE
+    ================================================ -->
+    <section>
+        <div class="container">
+            <span class="section-kicker">Hardware</span>
+            <h2 class="section-title">Opciones para tu Faro</h2>
+            <p class="section-lead">La filosofía de Com Org se basa en el reaprovechamiento técnico y la economía popular. Podés levantar un nodo con infraestructura cotidiana que ya tenés a mano.</p>
+
+            <div class="grid-3" style="margin-bottom: 48px;">
+                <div class="card">
+                    <div class="card-icon">💻</div>
+                    <h3>Hardware en desuso <span class="tag tag-free">$0</span></h3>
+                    <p>Cualquier PC vieja, notebook en desuso o Raspberry Pi. Si tenés IP pública o podés abrir un puerto en tu router, el costo de mantenerlo activo es cero.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📡</div>
+                    <h3>Routers Económicos <span class="tag tag-free">Bajo consumo</span></h3>
+                    <p>Equipos pequeños y portátiles (estilo router Mango / GL-iNet) son perfectos para actuar como Faros domésticos de bajo consumo eléctrico y alta eficiencia.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">☁️</div>
+                    <h3>VPS en la Nube <span class="tag">Recomendado</span></h3>
+                    <p>Si preferís no lidiar con cables ni aperturas de puertos, alquilá un VPS básico por el valor de un café al mes. Estará online 24/7 sin mantenimiento físico.</p>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Infraestructura</th>
+                            <th>Dificultad Técnica</th>
+                            <th>Costo Mensual</th>
+                            <th>Disponibilidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Hardware Viejo / PC</strong></td>
+                            <td>Media — abrir puertos en router</td>
+                            <td><code>$0</code></td>
+                            <td>Depende de tu conexión</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Router Mango / IoT</strong></td>
+                            <td>Media</td>
+                            <td><code>$0</code> — consumo mínimo</td>
+                            <td>Alta</td>
+                        </tr>
+                        <tr>
+                            <td><strong>VPS en la Nube</strong></td>
+                            <td>Baja — panel web</td>
+                            <td>Mínimo (≈ un café)</td>
+                            <td>Garantizada 99.9 %</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================
+         SOBERANÍA
+    ================================================ -->
+    <section class="section-alt">
+        <div class="container-narrow">
+            <span class="section-kicker">Cooperativa Digital</span>
+            <h2 class="section-title">Tu Comunidad, Tus Reglas</h2>
+            <p class="section-lead">Bajo el modelo de una Cooperativa Digital, el control vuelve a tus manos.</p>
+
+            <div class="alert-box" style="margin-bottom: 28px;">
+                <h3>🔑 Identidad Soberana</h3>
+                <p>Al gestionar tu Faro Regional, tu organización se convierte en la <strong>Autoridad de Certificación (CA)</strong>. Sos vos quien firma digitalmente las llaves criptográficas <code>Ed25519</code> que permiten el acceso al enjambre de debate.</p>
+            </div>
+
+            <div class="alert-box">
+                <h3>🛡️ Sin Censura Externa</h3>
+                <p>Nadie ajeno a la comunidad organizada puede decidir qué se habla, qué se comparte o apagar los hilos de comunicación. El enjambre es tuyo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================
+         PASOS
+    ================================================ -->
+    <section>
+        <div class="container-narrow">
+            <span class="section-kicker">Guía Técnica</span>
+            <h2 class="section-title">Pasos para Unirse</h2>
+            <p class="section-lead">Cuatro pasos concretos para que tu Faro esté operativo y tu comunidad forme parte del enjambre soberano.</p>
+
+            <div class="steps">
+                <div class="step">
+                    <span class="step-num">01</span>
+                    <div class="step-body">
+                        <h4>Disponer del entorno</h4>
+                        <p>Prepará tu PC vieja, router dedicado o iniciá tu VPS. Necesitás acceso root/admin y una IP pública (o la posibilidad de abrir un puerto UDP en tu router, recomendado el <code>4242/UDP</code>).</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <span class="step-num">02</span>
+                    <div class="step-body">
+                        <h4>Instalar Nebula</h4>
+                        <p>Descargá el binario liviano de Nebula correspondiente a tu sistema operativo 
+                            <p>desde <a href="https://github.com/slackhq/nebula/releases" target="_blank" rel="noopener">github.com/slackhq/nebula</a>. Disponible para Linux (x86, ARM), macOS y Windows.</p>
+                        <pre><code># Ejemplo:
+ descargas el paquete de instalacion muy liviano que preparé,
+ para varios sistemas operativos, es automatico y listo</code></pre> 
+                    </div>
+                </div>
+                <div class="step">
+                    <span class="step-num">03</span>
+                    <div class="step-body">
+                        <h4>Configurar el Lighthouse</h4>
+                        <p>Vinculá tu IP pública fija (o dinámica con DynDNS) y el puerto para que el Faro sirva como directorio de encuentro de la red. En el archivo <code>config.yaml</code> del Faro, declarás que es un lighthouse:</p>
+                        <pre><code>lighthouse:
+  am_lighthouse: true
+  interval: 60
+
+listen:
+  host: 0.0.0.0
+  port: 4242</code></pre>
+                    </div>
+                </div>
+                <div class="step">
+                    <span class="step-num">04</span>
+                    <div class="step-body">
+                        <h4>Certificar y Conectar</h4>
+                        <p>Firmá las llaves de tu comunidad con la CA de Com Org (o generá la tuya propia) y poné en marcha el enjambre soberano. Cada nodo que se una recibirá un certificado firmado <code>Ed25519</code>.</p>
+                        <pre><code># Generar CA propia de la comunidad
+nebula-cert ca -name "Com Org — MiComunidad"
+
+# Emitir certificado para un nodo
+nebula-cert sign -name "nodo-01" \
+  -ip "10.42.0.1/24" \
+  -ca-crt ca.crt -ca-key ca.key</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider" style="margin-top: 56px;">◆ ◆ ◆</div>
+
+            <div class="alert-box" style="margin-bottom: 0;">
+                <h3>💡 Tip rápido para VPS</h3>
+                <p>En un servidor Ubuntu/Debian limpio, con solo abrir el puerto <code>4242/UDP</code> en el firewall (<code>ufw allow 4242/udp</code>) y ejecutar el binario de Nebula con la config de Lighthouse, el Faro queda operativo en menos de 10 minutos. Podés convertirlo en servicio de sistema con <code>systemd</code> para que arranque automáticamente tras cada reinicio.</p>
+                <ul>
+                    <li>Proveedores económicos recomendados: <strong>Hetzner, Linode, Vultr, DigitalOcean</strong></li>
+                    <li>Especificaciones mínimas: <strong>1 vCPU / 512 MB RAM / 10 GB disco</strong></li>
+                    <li>Consumo de ancho de banda: <strong>extremadamente bajo</strong> — solo intercambia codigos encriptados de IP, no tráfico de datos</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================
+         BOTONES
+    ================================================ -->
+    <section class="section-alt">
+        <div class="container" style="padding-top: 52px; padding-bottom: 52px; text-align: center;">
+            <p style="font-family:'Fira Code',monospace; color:var(--accent-terracota); font-size:0.9rem; margin-bottom: 28px;">
+                ◆ ¿Listo para levantar tu Faro? ◆
+                <p>Consulta a — Com Org: <a href="mailto:CO-arg@proton.me">CO-arg@proton.me</a>
+            </p>
+            <div class="btn-row" style="margin-top: 0;">
+                <a href="https://com-org.pages.dev/#com-org" class="btn btn-ghost">← Volver a Com Org</a>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================
+         FOOTER
+    ================================================ -->
+    <footer>
+        <div class="container" style="padding-top: 0; padding-bottom: 0;">
+            <p class="footer-logo">◆ Ecosistema Soberano // Tercera Posición ◆</p>
+            <p>Contacto de Desarrollo — Com Org: <a href="mailto:CO-arg@proton.me">CO-arg@proton.me</a></p>
+            <p class="legal">
+                Com Org — Red Descentralizada y Soberana. Esta página no utiliza cookies de rastreo, no guarda tu IP y respeta tu existencia.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
