@@ -1,936 +1,1151 @@
 <!doctype html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Manual de Usuario — Com Org</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap"
-            rel="stylesheet" />
-
-        <style>
-            /* ============================================================
-           VARIABLES Y CONFIGURACIÓN DE TEMA OSCURO (Com-Org)
-           ============================================================ */
-            :root {
-                /* Sistema DUAL: Modo Claro (por defecto) */
-                --bg-principal: #f4f6f9;
-                --bg-card: #ffffff;
-                --bg-section-alt: #eef2f6;
-                --texto-main: #1a202c;
-                --texto-secundario: #64748b;
-                --acento: #cc7023;
-                --acento-hover: #b35f1b;
-                --borde: #e2e8f0;
-                --estado-exito: #059669;
-                --bg-codigo: #e2e8f0;
-                --texto-codigo: #cc7023;
-
-                /* Mapeo para retrocompatibilidad con las clases existentes */
-                --bg-dark: var(--bg-principal);
-                --bg-sidebar: var(--bg-section-alt);
-                --border-glow: var(--borde);
-                --accent-terracota: var(--acento);
-                --accent-glow: rgba(204, 112, 35, 0.25);
-                --text-main: var(--texto-main);
-                --text-muted: var(--texto-secundario);
-                --danger: #f43f5e;
-                --sidebar-width: 315px;
-            }
-
-            /* @media (prefers-color-scheme: dark) {
-                :root {
-                    --bg-principal: #0b1116;
-                    --bg-card: #121a21;
-                    --bg-section-alt: #0e161c;
-                    --texto-main: #e2e8f0;
-                    --texto-secundario: #94a3b8;
-                    --acento: #f59e0b;
-                    --acento-hover: #d97706;
-                    --borde: #1e293b;
-                    --estado-exito: #10b981;
-                    --bg-codigo: #1a232c;
-                    --texto-codigo: #10b981;
-                    
-                    --accent-glow: rgba(245, 158, 11, 0.25);
-                }
-            } */
-
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-
-            html {
-                scroll-behavior: smooth;
-            }
-
-            body {
-                background-color: var(--bg-principal);
-                color: var(--texto-main);
-                font-family: "Inter", sans-serif;
-                line-height: 1.65;
-                display: flex;
-                min-height: 100vh;
-                transition: background-color 0.3s ease, color 0.3s ease;
-            }
-
-            /* Scrollbar personalizada */
-            ::-webkit-scrollbar {
-                width: 8px;
-                height: 8px;
-            }
-            ::-webkit-scrollbar-track {
-                background: var(--bg-dark);
-            }
-            ::-webkit-scrollbar-thumb {
-                background: var(--border-glow);
-                border-radius: 4px;
-            }
-            ::-webkit-scrollbar-thumb:hover {
-                background: var(--accent-terracota);
-            }
-
-            h1,
-            h2,
-            h3,
-            h4,
-            .mono {
-                font-family: "Fira Code", monospace;
-                font-weight: 600;
-            }
-
-            pre, code, .codigo {
-                font-family: "Fira Code", monospace;
-                background-color: var(--bg-codigo);
-                color: var(--texto-codigo);
-                border-radius: 4px;
-            }
-
-            code {
-                padding: 0.2em 0.4em;
-                font-size: 0.9em;
-            }
-
-            pre {
-                padding: 1rem;
-                overflow-x: auto;
-                border: 1px solid var(--borde);
-                border-radius: 6px;
-            }
-
-            pre code {
-                padding: 0;
-                background-color: transparent;
-            }
-@media print {
-    /* 1. Mantenemos el contenedor principal adaptado al papel */
-    .app-container {
-        display: flex !important;
-        flex-direction: row !important;
-        width: 100% !important;
-        background-color: var(--bg-dark) !important;
-    }
-
-    /* 2. Fijamos el índice lateral para que no se mueva ni se rompa */
-    .sidebar {
-        display: block !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: var(--sidebar-width) !important;
-        height: 100% !important;
-        background-color: var(--bg-sidebar) !important;
-        border-right: 1px solid var(--border-glow) !important;
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-    }
-
-    /* 3. Ajustamos el contenido principal para que respete el margen del índice */
-    .main-content {
-        width: calc(100% - var(--sidebar-width)) !important;
-        margin-left: var(--sidebar-width) !important;
-        padding: 20px !important;
-        box-sizing: border-box !important;
-    }
-
-    /* 4. Control estricto de las secciones para que no corten el margen derecho */
-    section {
-        width: 100% !important;
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-    }
-
-    /* 5. Tarjetas e imágenes alineadas y controladas */
-    .image-frame {
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-        max-width: 100% !important;
-        width: fit-content !important;
-        margin: 20px auto !important;
-    }
-
-    .image-frame img {
-        max-width: 100% !important;
-        max-height: 52vh !important; /* Evita que las imágenes empujen el texto fuera de la hoja */
-        width: auto !important;
-        height: auto !important;
-        display: block !important;
-        margin: 0 auto !important;
-    }
-
-    .image-caption {
-        max-width: 100% !important;
-        width: fit-content !important;
-        margin: 8px auto 0 auto !important;
-        text-align: center !important;
-    }
-}
-            /* ============================================================
-           SIDEBAR DE NAVEGACIÓN
-           ============================================================ */
-            .sidebar {
-                width: var(--sidebar-width);
-                background-color: var(--bg-sidebar);
-                border-right: 1px solid rgba(46, 69, 92, 0.4);
-                position: fixed;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                z-index: 10;
-                display: flex;
-                flex-direction: column;
-                padding: 24px;
-                overflow-y: auto;
-            }
-
-            .sidebar-logo {
-                font-family: "Fira Code", monospace;
-                font-size: 1.2rem;
-                font-weight: bold;
-                color: var(--text-main);
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                margin-bottom: 32px;
-                padding-bottom: 16px;
-                border-bottom: 1px solid rgba(46, 69, 92, 0.3);
-            }
-
-            .sidebar-logo span {
-                color: var(--accent-terracota);
-            }
-
-            .sidebar-logo img {
-                width: 28px;
-                height: 28px;
-                border-radius: 50%;
-                object-fit: contain;
-                filter: drop-shadow(0 0 6px rgba(201, 122, 43, 0.35));
-                transition:
-                    filter 0.3s ease,
-                    transform 0.3s ease;
-            }
-
-            .sidebar-logo:hover img {
-                filter: drop-shadow(0 0 10px rgba(201, 122, 43, 0.6));
-                transform: rotate(8deg) scale(1.1);
-            }
-
-            .nav-menu {
-                list-style: none;
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-            }
-
-            .nav-item a {
-                display: flex;
-                align-items: center;
-                padding: 10px 14px;
-                color: var(--text-muted);
-                text-decoration: none;
-                border-radius: 6px;
-                font-size: 0.9rem;
-                font-weight: 500;
-                transition: all 0.2s ease;
-            }
-
-            .nav-item a:hover {
-                color: var(--accent-terracota);
-                background-color: rgba(201, 122, 43, 0.08);
-                transform: translateX(4px);
-            }
-
-            .nav-item.active a {
-                color: var(--text-main);
-                background-color: var(--accent-terracota);
-                font-weight: 600;
-            }
-
-            /* ============================================================
-           CONTENIDOR PRINCIPAL (CENTRADOR)
-           ============================================================ */
-            .main-content {
-                margin-left: var(--sidebar-width);
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                padding: 48px 24px;
-                overflow-x: hidden;
-            }
-
-            .content-container {
-                width: 100%;
-                max-width: 820px; /* Centrado y acotado para lectura profesional */
-            }
-
-            /* ============================================================
-           ESTILADO DE SECCIONES Y CONTENIDO
-           ============================================================ */
-            section {
-                padding-top: 48px;
-                margin-bottom: 64px;
-                border-bottom: 1px solid rgba(46, 69, 92, 0.2);
-                padding-bottom: 48px;
-            }
-
-            section:last-of-type {
-                border-bottom: none;
-                margin-bottom: 0;
-            }
-
-            .welcome-badge {
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-                background: rgba(201, 122, 43, 0.08);
-                border: 1px solid rgba(201, 122, 43, 0.3);
-                border-radius: 999px;
-                padding: 6px 16px;
-                font-family: "Fira Code", monospace;
-                font-size: 0.8rem;
-                color: var(--accent-terracota);
-                margin-bottom: 20px;
-            }
-
-            h1 {
-                font-size: clamp(2rem, 4vw, 2.5rem);
-                color: var(--text-main);
-                margin-bottom: 16px;
-                letter-spacing: -1px;
-                line-height: 1.2;
-            }
-
-            h2 {
-                font-size: clamp(1.4rem, 3vw, 1.8rem);
-                color: var(--text-main);
-                margin-top: 24px;
-                margin-bottom: 20px;
-                display: flex;
-                align-items: center;
-                gap: 12px;
-            }
-
-            h3 {
-                font-size: 1.15rem;
-                color: var(--text-main);
-                margin-top: 24px;
-                margin-bottom: 12px;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-            }
-
-            p {
-                color: var(--text-muted);
-                margin-bottom: 16px;
-                font-size: 1.02rem;
-            }
-
-            ul,
-            ol {
-                margin-bottom: 20px;
-                padding-left: 24px;
-                color: var(--text-muted);
-            }
-
-            li {
-                margin-bottom: 8px;
-                font-size: 1rem;
-            }
-
-            /* Tarjetas de información y pilares */
-            .pillar-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 20px;
-                margin: 24px 0;
-            }
-
-            @media (max-width: 600px) {
-                .pillar-grid {
-                    grid-template-columns: 1fr;
-                }
-            }
-
-            .card {
-                background-color: var(--bg-card);
-                border: 1px solid var(--border-glow);
-                border-radius: 8px;
-                padding: 24px;
-                transition: all 0.3s ease;
-            }
-
-            .card:hover {
-                border-color: var(--accent-terracota);
-                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-            }
-
-            .card h4 {
-                color: var(--accent-terracota);
-                margin-bottom: 8px;
-                font-size: 1rem;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-            }
-
-            .card p {
-                margin-bottom: 0;
-                font-size: 0.93rem;
-            }
-
-            /* Atajos de teclado */
-            kbd {
-                background-color: var(--bg-dark);
-                border: 1px solid var(--border-glow);
-                border-radius: 4px;
-                padding: 2px 6px;
-                font-size: 0.85em;
-                font-family: inherit;
-                color: var(--text-main);
-                box-shadow: 0 2px 0 var(--border-glow);
-            }
-
-            /* ============================================================
-           ENMARCADO DE IMÁGENES
-           ============================================================ */
-           .image-frame {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-glow);
-    border-radius: 10px;
-    padding: 12px;
-    margin: 28px auto; /* 💡 CAMBIO: El 'auto' la centra horizontalmente si se achica */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    transition:
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
-
-    /* 🛠️ EL TRUCO CLAVE PARA LA TARJETA SOBERANA: */
-    width: fit-content;      /* 💡 Hace que la tarjeta mida EXACTAMENTE lo mismo que la imagen interna */
-    max-width: 100%;         /* 💡 Evita que se desborde si la imagen es muy ancha */
-    box-sizing: border-box;  /* 💡 Asegura que el padding no rompa los límites */
-}
-
-.image-frame img {
-    width: auto;             /* Que use su ancho natural si es chica */
-    max-width: 100%;         /* Pero que nunca se desborde del contenedor horizontalmente */
-    
-    /* El truco clave para capturas muy verticales: */
-    max-height: 65vh;        /* Que nunca ocupe más del 65% de la altura de la pantalla */
-    object-fit: contain;     /* Escala la imagen perfectamente sin deformarla */
-    
-    border-radius: 6px;
-    display: block;
-    margin: 0 auto;          /* Centra la imagen si es más angosta que el contenedor */
-    border: 1px solid rgba(46, 69, 92, 0.3);
-}
-
-            .image-caption {
-                text-align: center;
-                font-size: 0.85rem;
-                color: var(--text-muted);
-                margin-top: 10px;
-                font-family: "Fira Code", monospace;
-            }
-
-            .double-image-grid {
-                display: grid;
-                grid-template-columns: 1.2fr 0.8fr;
-                gap: 16px;
-                margin: 28px 0;
-            }
-
-            @media (max-width: 600px) {
-                .double-image-grid {
-                    grid-template-columns: 1fr;
-                }
-            }
-
-            /* ============================================================
-           FAQ ACORDEÓN / ÍTEMS
-           ============================================================ */
-            .faq-item {
-                border-bottom: 1px solid rgba(46, 69, 92, 0.2);
-                padding: 18px 0;
-            }
-
-            .faq-item:last-child {
-                border-bottom: none;
-            }
-
-            .faq-question {
-                font-weight: 600;
-                color: var(--text-main);
-                margin-bottom: 6px;
-                display: flex;
-                align-items: flex-start;
-                gap: 8px;
-                font-size: 1rem;
-            }
-
-            .faq-question::before {
-                content: "›";
-                color: var(--accent-terracota);
-                font-size: 1.3rem;
-                line-height: 1;
-            }
-
-            .faq-answer {
-                color: var(--text-muted);
-                font-size: 0.95rem;
-                padding-left: 20px;
-            }
-
-            /* ============================================================
-           RESPONSIVIDAD MÓVIL
-           ============================================================ */
-            @media screen and (max-width: 900px) {
-                body {
-                    flex-direction: column;
-                }
-                .sidebar {
-                    position: relative;
-                    width: 100%;
-                    height: auto;
-                    border-right: none;
-                    border-bottom: 1px solid rgba(46, 69, 92, 0.4);
-                    padding: 16px 24px;
-                }
-                .sidebar-logo {
-                    margin-bottom: 16px;
-                }
-                .nav-menu {
-                    flex-direction: row;
-                    flex-wrap: wrap;
-                    gap: 8px;
-                }
-                .main-content {
-                    margin-left: 0;
-                    padding: 24px 16px;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <!-- SIDEBAR INDEX -->
-        <nav class="sidebar">
-            <a href="#bienvenida" class="sidebar-logo">
-                <img src="com-org.png" alt="Logo Com Org" />
-                Com<span>-</span>Org
-            </a>
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="#bienvenida">Inicio</a></li>
-                <li class="nav-item"><a href="#filosofia">1. Filosofía</a></li>
-                <li class="nav-item"><a href="#primer-inicio">2. Primer Inicio</a></li>
-                <li class="nav-item"><a href="#interfaz">3. Interfaz Principal</a></li>
-                <li class="nav-item"><a href="#perfil">4. Perfil y Apariencia</a></li>
-                <li class="nav-item"><a href="#publicar">5. Crear Publicación</a></li>
-                <li class="nav-item"><a href="#interaccion">6. Respuestas y Búsqueda</a></li>
-                <li class="nav-item"><a href="#moderacion">7. Borrado y Moderación</a></li>
-                <li class="nav-item"><a href="#mudar">8. Copias de Seguridad</a></li>
-                <li class="nav-item"><a href="#asamblea">9. Asamblea en Vivo</a></li>
-                <li class="nav-item"><a href="#faq">FAQ / Dudas</a></li>
-            </ul>
-        </nav>
-
-        <!-- MAIN CONTENT CONTAINER -->
-        <main class="main-content">
-            <div class="content-container">
-                <!-- BIENVENIDA -->
-                <section id="bienvenida">
-                    <div class="welcome-badge">◆ GUÍA DE USUARIO SOBERANA</div>
-                    <h1>¡Te damos la bienvenida a tu espacio de comunicación soberano!</h1>
-                    <p>
-                        <strong>Com Org</strong> no es una red social común. Es un espacio diseñado para devolverte el
-                        control absoluto sobre tus datos, libre de algoritmos de adicción, publicidad invasiva o
-                        intermediarios corporativos. Aquí, tú eres el dueño absoluto de tu información. Todo lo que
-                        creas, compartes y ves reside única y exclusivamente en tu propio dispositivo.
-                    </p>
-                    <p>
-                        Esta guía está diseñada especialmente para personas <strong>no técnicas</strong>, explicándote
-                        de manera sencilla cómo está organizada la aplicación, qué hace cada botón y cómo sacarle el
-                        máximo provecho.
-                    </p>
-                </section>
-
-                <!-- FILOSOFIA -->
-                <section id="filosofia">
-                    <h2>🧭 1. Nuestra Filosofía</h2>
-                    <p>
-                        Antes de empezar, es importante que conozcas los cuatro pilares fundamentales que hacen de
-                        <strong>Com Org</strong> un sistema completamente diferente:
-                    </p>
-
-                    <div class="pillar-grid">
-                        <div class="card">
-                            <h4>💾 Soberanía del Dato</h4>
-                            <p>
-                                No hay servidores centrales en la nube. Tus fotos, publicaciones y perfil están
-                                guardados localmente. Si decides borrar algo, desaparece de verdad.
-                            </p>
-                        </div>
-                        <div class="card">
-                            <h4>🚫 Sin Mecánicas Adictivas</h4>
-                            <p>
-                                Sin "Me gusta" ni algoritmos de enganche. Incluye un contador simple de vistas para dar certeza de que tus publicaciones circulan y son leídas en los nodos de la red.
-                            </p>
-                        </div>
-                        <div class="card">
-                            <h4>🔑 Seguridad Criptográfica</h4>
-                            <p>
-                                Tu identidad está vinculada a tu dispositivo con llaves privadas por hardware. Cada post
-                                se firma automáticamente con una huella criptográfica infalsificable.
-                            </p>
-                        </div>
-                        <div class="card">
-                            <h4>🔒 VPN Nebula Automática</h4>
-                            <p>
-                                La aplicación se conecta en menos de un segundo a una red de seguridad privada y
-                                descentralizada de forma totalmente silenciosa.
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- PRIMER INICIO Y PARÁMETROS -->
-                <section id="primer-inicio">
-                    <h2>🚀 2. Primer Inicio y Conexión a la Red</h2>
-                    <p>
-                        La primera vez que abras <strong>Com Org</strong>, la aplicación te solicitará los parámetros de conexión inicial para integrarte a la red segura y descentralizada de tu comunidad:
-                    </p>
-
-                    <div class="image-frame">
-                        <img src="inicio.png" alt="Pantalla de Primer Inicio y Parámetros de Red" />
-                        <div class="image-caption">Panel de configuración de parámetros de red en el primer arranque</div>
-                    </div>
-
-                    <div class="card" style="margin-top: 20px;">
-                        <h4>⚙️ Configuración Inicial de tu Nodo</h4>
-                        <p>
-                            En este panel deberás ingresar los datos suministrados por el administrador o coordinador de tu red (como la dirección del faro/faro de descubrimiento y certificados de red). Una vez guardados, tu dispositivo creará sus claves criptográficas locales y se conectará automáticamente en los siguientes inicios.
-                        </p>
-                    </div>
-                </section>
-
-                <!-- RECORRIDO INTERFAZ -->
-                <section id="interfaz">
-                    <h2>🖥️ 3. Recorrido por la Interfaz</h2>
-                    <p>
-                        Al abrir la aplicación por primera vez, verás un diseño organizado en tres columnas principales,
-                        estructurado para un acceso cómodo y veloz:
-                    </p>
-
-                    <div class="image-frame">
-                        <img src="1-interfaz-claro.png" alt="Interfaz Principal Claro" />
-                        <div class="image-caption">Mapa conceptual de la pantalla principal (Modo Claro)</div>
-                    </div>
-
-                    <h3>A. La Barra Superior (Topbar)</h3>
-                    <ul>
-                        <li>
-                            <strong>Logo (<code>◆ Com Org</code>):</strong> Identificador de tu nodo local.
-                        </li>
-                        <li>
-                            <strong>Buscador Central:</strong> Localización inmediata de perfiles y textos en la red.
-                        </li>
-                        <li>
-                            <strong>Botón <code>◈ Perfil</code>:</strong> Configuración rápida de tu identidad visual
-                            (también accesible vía <kbd>Ctrl</kbd> + <kbd>P</kbd>).
-                        </li>
-                    </ul>
-
-                    <h3>B. Columna Izquierda (Identidad y Controles Rápidos)</h3>
-                    <ul>
-                        <li>
-                            <strong>Tu Tarjeta de Identidad:</strong> Visualiza tu avatar y tu
-                            <strong>Firma Criptográfica (ID)</strong> (una serie de caracteres únicos y seguros).
-                        </li>
-                        <li>
-                            <strong>Límite Extendido de Caracteres:</strong> Selector o indicador para redactar textos extensos y profundos (entre 12.000 y 15.000 caracteres).
-                        </li>
-                        <li>
-                            <strong>Botón <code>🔊 Asamblea en Vivo</code>:</strong> Acceso rápido a las salas de voz y
-                            debate en directo.
-                        </li>
-                        <li>
-                            <strong>Botón <code>⊘ Nodo Bloqueado</code>:</strong> Panel rápido para gestionar los
-                            usuarios bloqueados o silenciados.
-                        </li>
-                    </ul>
-
-                    <h3>C. Columna Central (El Corazón de la Conversación)</h3>
-                    <ul>
-                        <li>
-                            <strong>Mi Muro:</strong> Tus publicaciones (con contador de visualizaciones en la red) y las respuestas directas que otros usuarios te
-                            han enviado.
-                        </li>
-                        <li>
-                            <strong>Explorar:</strong> Feed global descentralizado de publicaciones recientes en
-                            estricto orden cronológico.
-                        </li>
-                    </ul>
-<br>
-                    <h3>D. Columna Derecha (Filtros y Estadísticas)</h3>
-                    <ul>
-                        <li><strong>Buscador en Vivo por Nombre:</strong> Filtro de contenidos instantáneo.</li>
-                        <li><strong>Tendencias Locales:</strong> Temas recurrentes de debate en tu red.</li>
-                        <li>
-                            <strong>Estadísticas:</strong> Monitoreo técnico del uso de espacio local y estado de la
-                            sincronización.
-                        </li>
-                    </ul>
-                </section>
-
-                <!-- PERFIL Y APARIENCIA -->
-                <section id="perfil">
-                    <h2>👤 4. Gestión de tu Perfil y Apariencia</h2>
-                    <p>
-                        Haz clic en <strong><code>◈ Perfil</code></strong> en la esquina superior derecha o usa el atajo
-                        de teclado <kbd>Ctrl</kbd> + <kbd>P</kbd> para abrir el panel flotante. Aquí podrás cambiar tu
-                        Nombre de Fantasía, biografía, subir un banner de fondo y modificar tu avatar.
-                    </p>
-
-                    <div class="image-frame">
-                        <img src="2-perfil-claro.png" alt="Gestión de Perfil Claro" />
-                        
-                        <div class="image-caption">Configuracion de perfil, tema, Nombre etc</div>
-                    </div>
-
-                    <p>
-                        <strong>Alternar entre Modo Claro y Oscuro:</strong> Desde la configuración de Perfil puedes
-                        definir si prefieres la visualización clara y de alto contraste o el tema oscuro de azul
-                        petróleo que descansa tu vista. La aplicación recordará tu elección automáticamente en cada
-                        inicio.
-                    </p>
-                </section>
-
-                <!-- CREAR PUBLICACION -->
-                <section id="publicar">
-                    <h2>📝 5. Cómo Crear una Publicación</h2>
-                    <p>
-                        Diseñado para permitir ensayos, propuestas y debates argumentados en profundidad:
-                    </p>
-                    <ol>
-                        <li>
-                            Haz clic en el botón naranja <strong><code>► Publicar</code></strong> (columna izquierda o
-                            central).
-                        </li>
-                        <li>Se desplegará la <strong>Caja de Publicación</strong> en primer plano.</li>
-                        <li>Escribe tu contenido (con amplio espacio de entre 12.000 y 15.000 caracteres para desarrollar tus ideas completas).</li>
-                        <li>
-                            <strong>Adjuntar Imagen (Opcional):</strong> Utiliza el botón
-                            <strong><code>▣ Imagen</code></strong
-                            >. La aplicación copiará la foto a tus carpetas internas locales para asegurar que esté
-                            disponible sin conexión.
-                        </li>
-                        <li>
-                            Presiona <strong><code>► Publicar</code></strong
-                            >. El post se firmará criptográficamente de inmediato y se guardará localmente. Incluye un contador de visualizaciones para que sepas el alcance que tiene tu nodo en la red.
-                        </li>
-                    </ol>
-
-                    <div class="image-frame">
-                        <img src="3-publicacion-abierta.png" alt="Caja de Publicación" />
-                        <div class="image-caption">Redacción de una publicación con imagen adjunta</div>
-                    </div>
-                </section>
-
-                <!-- RESPUESTAS Y BUSQUEDA -->
-                <section id="interaccion">
-                    <h2>↩️ 6. Responder a Publicaciones y Búsqueda Reactiva</h2>
-                    <p>El motor de Com Org es el debate respetuoso y la búsqueda veloz de contenidos:</p>
-                    <h3>Conversaciones Anidadas</h3>
-                    <p>
-                        Al presionar <strong><code>↩ Responder</code></strong> en cualquier publicación en tu feed, se
-                        abrirá el editor para que envíes tu punto de vista. En el muro, las respuestas aparecerán de
-                        forma indentada (desplazadas hacia la derecha) debajo del mensaje original, facilitando
-                        enormemente el seguimiento de discusiones largas.
-                    </p>
-
-                    <h3>Búsqueda Reactiva en Vivo</h3>
-                    <p>
-                        Escribe directamente en el buscador de la <strong>columna derecha</strong>. De forma inmediata y
-                        reactiva (sin presionar Enter), la interfaz cambiará al feed de <strong>Explorar</strong> y
-                        filtrará los posts que coincidan con tu término en tiempo real.
-                    </p>
-
-                    <div class="double-image-grid">
-                        <div class="image-frame" style="margin: 0">
-                            <img src="4-general-oscuro.png" alt="Interfaz Principal Oscuro" />
-                            <div class="image-caption">Feed en Modo Oscuro con respuestas hiladas</div>
-                        </div>
-                        <div class="image-frame" style="margin: 0">
-                            <img src="5-Cuadro-busqueda.png" alt="Cuadro Búsqueda" />
-                            <div class="image-caption">Filtrado en vivo en columna derecha</div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- BORRADO Y MODERACION -->
-                <section id="moderacion">
-                    <h2>⊘ 7. Borrado y Moderación Soberana</h2>
-                    <h3>🗑️ Borrado Definitivo</h3>
-                    <p>
-                        A diferencia de las redes sociales convencionales, cuando haces clic en el botón rojo
-                        <strong><code>🗑 Borrar</code></strong> en uno de tus posts y confirmas la acción, este y todas
-                        sus respuestas asociadas se eliminan físicamente de la base de datos de tu disco duro de forma
-                        inmediata.
-                    </p>
-
-                    <h3>⊘ Bloqueo de Nodos</h3>
-                    <p>
-                        Si consideras que algún usuario es molesto o no deseas leer sus aportaciones, presiona
-                        <strong><code>⊘ Bloquear</code></strong> a un costado de su nombre. Automáticamente, sus
-                        publicaciones desaparecerán de tus feeds. Puedes revertir esta acción ingresando a
-                        <strong><code>⊘ Nodo Bloqueado</code></strong> en el menú de la izquierda y quitándolo de la
-                        lista.
-                    </p>
-                </section>
-
-                <!-- COPIAS DE SEGURIDAD -->
-                <section id="mudar">
-                    <h2>⬇️ 8. Mudar y Llevar tu Muro</h2>
-                    <p>
-                        Puesto que no hay almacenamiento central, eres el absoluto custodio de tus publicaciones. En la
-                        columna izquierda encontrarás las herramientas portátiles de migración:
-                    </p>
-                    <ul>
-                        <li>
-                            <strong><code>⬇ Llevar mi muro</code> (Exportar):</strong> Guarda todo tu historial en un
-                            único archivo portátil con extensión <code>.comorg</code>.
-                        </li>
-                        <li>
-                            <strong><code>⬆ Mudar mi muro</code> (Importar):</strong> Recupera tu historial a partir de
-                            un archivo <code>.comorg</code> existente. El sistema ignorará registros duplicados de forma
-                            inteligente para no alterar tu muro actual.
-                        </li>
-                    </ul>
-                </section>
-
-                <!-- ASAMBLEA EN VIVO -->
-                <section id="asamblea">
-                    <h2>🔊 9. Asamblea en Vivo (Módulo de Voz)</h2>
-                    <p>Participa en debates y asambleas grupales de audio directo y descentralizado:</p>
-                    <ul>
-                        <li>
-                            Haz clic en <strong><code>🔊 Asamblea en Vivo</code></strong> en el menú de la izquierda
-                            para abrir la interfaz interactiva.
-                        </li>
-                        <li>
-                            <strong>Si eres el fundador de la sala:</strong> Verás una insignia de
-                            <code>👑 CREADOR</code> junto a tu perfil. Tendrás la facultad de silenciar selectivamente a
-                            los participantes o presionar <strong><code>Silenciar a Todos</code></strong> para coordinar
-                            la palabra en debates amplios.
-                        </li>
-                        <li>
-                            <strong>Si eres participante:</strong> Verás la lista de nodos activos y podrás alternar el
-                            estado de tu micrófono para solicitar intervención.
-                        </li>
-                    </ul>
-
-                    <div class="image-frame">
-                        <img src="6-asamblea-audio.png" alt="Asamblea de Audio" />
-                        <div class="image-caption">Interfaz del panel flotante de Asamblea por voz en vivo</div>
-                    </div>
-                </section>
-
-                <!-- PREGUNTAS FRECUENTES -->
-                <section id="faq">
-                    <h2>❓ Preguntas Frecuentes (FAQ)</h2>
-
-                    <div class="faq-item">
-                        <div class="faq-question">¿Dónde se guardan mis fotos y datos exactamente?</div>
-                        <div class="faq-answer">
-                            Todo se almacena en la carpeta local <code>personal/</code> del directorio de la aplicación.
-                            Encontrarás subcarpetas para <code>avatares/</code> y <code>imagenes/</code> de
-                            publicaciones. Los datos lógicos y relaciones de red se guardan en el archivo SQLite único
-                            <code>comorg_local.db</code>.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-question">¿Qué sucede si elimino la aplicación por error?</div>
-                        <div class="faq-answer">
-                            Si borras la aplicación junto a la carpeta <code>personal/</code> sin respaldos, toda la
-                            información se perderá irremediablemente, ya que no hay copias en la nube. ¡Se aconseja usar
-                            la opción <strong>Llevar mi muro</strong> de forma regular!
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-question">¿Por qué no hay contadores de "Me Gusta"?</div>
-                        <div class="faq-answer">
-                            Com Org prioriza el diálogo reflexivo. Quitar las métricas de popularidad y reacciones
-                            previene la búsqueda constante de aprobación social y fomenta el intercambio franco y
-                            constructivo. No obstante, sí cuentas con un <strong>contador simple de vistas</strong> en tus publicaciones para verificar de forma transparente que tus textos son recibidos y leídos por otros nodos en la red mesh.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-question">¿Necesito internet constante para interactuar con Com Org?</div>
-                        <div class="faq-answer">
-                            No. Puedes arrancar la app offline, revisar tus posts archivados, redactar nuevos borradores
-                            y editar la apariencia de tu perfil. La conexión (VPN Nebula integrada) solo es requerida
-                            para sincronizar las novedades de tus contactos y dialogar en la Asamblea en Vivo.
-                        </div>
-                    </div>
-                </section>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Com-Org &middot; Manual de Usuario &mdash; Tu Nodo en la Red</title>
+    <meta
+      name="description"
+      content="Manual de usuario de Com-Org. Aprende como conectarte a la red, que puedes hacer y como funciona tu nodo." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #0f1419;
+        --bg2: #161d26;
+        --card: #1c2530;
+        --line: #2b3645;
+        --txt: #e6edf3;
+        --muted: #9aa7b4;
+        --accent: #3fb6ff;
+        --accent2: #7ee787;
+        --warn: #ffb454;
+        --pink: #ff7eb6;
+        --sw: 260px;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--txt);
+        font-family: "Inter", system-ui, sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* Sidebar */
+      #sb {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: var(--sw);
+        height: 100vh;
+        background: var(--bg2);
+        border-right: 1px solid var(--line);
+        display: flex;
+        flex-direction: column;
+        z-index: 100;
+        overflow-y: auto;
+        transition: transform 0.3s;
+      }
+      .sb-logo {
+        padding: 18px 20px 14px;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .sb-logo .logo-img {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        object-fit: contain;
+        background: #0c1219;
+        padding: 2px;
+        border: 1px solid var(--line);
+        flex-shrink: 0;
+      }
+      .sb-logo .brand {
+        font-size: 18px;
+        font-weight: 800;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .sb-logo .sub {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 1px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .hero-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 16px;
+      }
+      .hero-logo {
+        width: 52px;
+        height: 52px;
+        border-radius: 12px;
+        object-fit: contain;
+        background: #0c1219;
+        padding: 4px;
+        border: 1px solid var(--line);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      }
+      #nav {
+        list-style: none;
+        padding: 12px 0;
+        flex: 1;
+      }
+      #nav li {
+        display: block;
+      }
+      #nav a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 20px;
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 13.5px;
+        font-weight: 500;
+        border-left: 3px solid transparent;
+        transition: all 0.2s;
+      }
+      #nav a .n {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--line);
+        font-size: 11px;
+        font-weight: 700;
+        flex-shrink: 0;
+        color: var(--muted);
+        transition: all 0.2s;
+      }
+      #nav a:hover,
+      #nav a.active {
+        color: var(--accent);
+        border-left-color: var(--accent);
+        background: rgba(63, 182, 255, 0.08);
+      }
+      #nav a:hover .n,
+      #nav a.active .n {
+        background: var(--accent);
+        color: #04121d;
+      }
+
+      /* Main */
+      #main {
+        margin-left: var(--sw);
+        flex: 1;
+        padding: 48px 56px 80px;
+        max-width: 920px;
+      }
+
+      /* Progress */
+      #pb {
+        position: fixed;
+        top: 0;
+        left: var(--sw);
+        right: 0;
+        height: 3px;
+        background: var(--line);
+        z-index: 200;
+      }
+      #pf {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        transition: width 0.2s;
+      }
+
+      /* Hero */
+      .hero {
+        margin-bottom: 56px;
+      }
+      .hero .ey {
+        color: var(--accent);
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-size: 12px;
+        margin-bottom: 16px;
+      }
+      .hero h1 {
+        font-size: clamp(30px, 4vw, 52px);
+        font-weight: 800;
+        line-height: 1.05;
+        background: linear-gradient(90deg, #3fb6ff, #7ee787);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 16px;
+      }
+      .hero .lead {
+        font-size: 17px;
+        color: var(--muted);
+        max-width: 680px;
+        line-height: 1.65;
+      }
+
+      /* Section */
+      .sec {
+        margin-bottom: 72px;
+        scroll-margin-top: 24px;
+      }
+      .sec-hd {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+      .sec-n {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), #1a7db5);
+        color: #04121d;
+        font-weight: 800;
+        font-size: 15px;
+        flex-shrink: 0;
+        margin-top: 4px;
+      }
+      .sec h2 {
+        font-size: clamp(20px, 2.8vw, 30px);
+        font-weight: 800;
+        color: var(--txt);
+        line-height: 1.15;
+      }
+      .ey-sm {
+        color: var(--accent);
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-size: 11px;
+        margin-bottom: 4px;
+      }
+      p {
+        color: var(--muted);
+        margin-bottom: 14px;
+      }
+      p strong {
+        color: var(--txt);
+      }
+
+      /* Cards */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-top: 20px;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 20px;
+      }
+      .card .ico {
+        font-size: 28px;
+        margin-bottom: 10px;
+        display: block;
+      }
+      .card h3 {
+        font-size: 16px;
+        margin-bottom: 6px;
+        color: var(--txt);
+      }
+      .card p {
+        font-size: 13.5px;
+        margin: 0;
+      }
+
+      /* Steps */
+      .steps {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 20px;
+      }
+      .step {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 14px 16px;
+      }
+      .step-n {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: var(--accent);
+        color: #04121d;
+        font-weight: 800;
+        font-size: 15px;
+        flex-shrink: 0;
+      }
+      .step-b b {
+        display: block;
+        color: var(--txt);
+        font-size: 15px;
+        margin-bottom: 2px;
+      }
+      .step-b span {
+        color: var(--muted);
+        font-size: 13.5px;
+      }
+
+      /* Tags */
+      .tag {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        margin: 3px 4px 3px 0;
+      }
+      .tag.b {
+        background: #103040;
+        color: var(--accent);
+      }
+      .tag.g {
+        background: #0f3018;
+        color: var(--accent2);
+      }
+      .tag.w {
+        background: #33270f;
+        color: var(--warn);
+      }
+
+      /* Panel */
+      .panel {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 20px 24px;
+        margin-top: 18px;
+      }
+      .panel h3 {
+        font-size: 16px;
+        color: var(--accent2);
+        margin-bottom: 12px;
+      }
+      .panel ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .panel li {
+        padding-left: 20px;
+        position: relative;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .panel li::before {
+        content: "▸ ";
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+      }
+      .panel li strong {
+        color: var(--txt);
+      }
+
+      /* Quote */
+      .quote {
+        border-left: 3px solid var(--accent);
+        padding: 12px 16px;
+        background: var(--card);
+        border-radius: 0 10px 10px 0;
+        margin: 18px 0;
+        color: var(--muted);
+        font-size: 14.5px;
+      }
+      .quote strong {
+        color: var(--txt);
+      }
+
+      /* Sub-section title */
+      .sub-h {
+        font-size: 18px;
+        margin: 28px 0 10px;
+        color: var(--accent2);
+        font-weight: 700;
+      }
+
+      /* Screenshots */
+      .shot {
+        margin: 20px 0;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: var(--card);
+      }
+      .shot img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .shot figcaption {
+        padding: 10px 16px;
+        font-size: 13px;
+        color: var(--accent);
+        background: rgba(63, 182, 255, 0.07);
+        border-top: 1px solid var(--line);
+        line-height: 1.5;
+      }
+      .shot-pair {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin: 20px 0;
+      }
+      .shot-pair figure {
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: var(--card);
+      }
+      .shot-pair img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .shot-pair figcaption {
+        padding: 8px 12px;
+        font-size: 12px;
+        color: var(--accent);
+        background: rgba(63, 182, 255, 0.07);
+        border-top: 1px solid var(--line);
+      }
+
+      /* Glossary */
+      .glos {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+      }
+      .gl {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 12px 14px;
+      }
+      .gl .term {
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .gl .def {
+        color: var(--muted);
+        font-size: 13px;
+        margin-top: 4px;
+      }
+
+      /* Divider */
+      hr.div {
+        border: none;
+        border-top: 1px solid var(--line);
+        margin: 56px 0;
+      }
+
+      /* Mobile */
+      #mtog {
+        display: none;
+        position: fixed;
+        top: 14px;
+        left: 14px;
+        z-index: 300;
+        background: var(--card);
+        border: 1px solid var(--line);
+        color: var(--txt);
+        padding: 8px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+        line-height: 1;
+      }
+      @media (max-width: 768px) {
+        #mtog {
+          display: block;
+        }
+        #sb {
+          transform: translateX(-100%);
+        }
+        #sb.open {
+          transform: translateX(0);
+        }
+        #main {
+          margin-left: 0;
+          padding: 24px 20px 60px;
+        }
+        #pb {
+          left: 0;
+        }
+        .shot-pair {
+          grid-template-columns: 1fr;
+        }
+        .cards {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button id="mtog" aria-label="Abrir menu" onclick="toggleSB()">&#9776;</button>
+    <div id="pb"><div id="pf"></div></div>
+
+    <aside id="sb" role="navigation" aria-label="Menu del manual">
+      <div class="sb-logo">
+        <img src="img/com-org.png" alt="Logo Com-Org" class="logo-img" />
+        <div>
+          <div class="brand">Com-Org</div>
+          <div class="sub">Manual de usuario</div>
+        </div>
+      </div>
+      <ul id="nav">
+        <li>
+          <a href="#intro" class="active"><span class="n">0</span> Introduccion</a>
+        </li>
+        <li>
+          <a href="#s1"><span class="n">1</span> Que es un nodo</a>
+        </li>
+        <li>
+          <a href="#s2"><span class="n">2</span> Para que sirve la red</a>
+        </li>
+        <li>
+          <a href="#s3"><span class="n">3</span> Los tres componentes</a>
+        </li>
+        <li>
+          <a href="#s4"><span class="n">4</span> Tu identidad</a>
+        </li>
+        <li>
+          <a href="#s5"><span class="n">5</span> La primera vez</a>
+        </li>
+        <li>
+          <a href="#s6"><span class="n">6</span> Unirse a la red</a>
+        </li>
+        <li>
+          <a href="#s7"><span class="n">7</span> Que puedes hacer</a>
+        </li>
+        <li>
+          <a href="#s8"><span class="n">8</span> Buffer Ciego</a>
+        </li>
+        <li>
+          <a href="#s9"><span class="n">9</span> Si la red falla</a>
+        </li>
+        <li>
+          <a href="#s10"><span class="n">10</span> Privacidad</a>
+        </li>
+        <li>
+          <a href="#s11"><span class="n">11</span> Glosario</a>
+        </li>
+      </ul>
+    </aside>
+
+    <main id="main">
+      <!-- HERO -->
+      <header class="hero" id="intro">
+        <div class="hero-brand">
+          <img src="img/com-org.png" alt="Logo Com-Org" class="hero-logo" />
+          <div>
+            <div class="ey" style="margin-bottom: 2px">Com-Org &middot; Manual de usuario</div>
+            <div style="font-size: 14px; color: var(--muted); font-weight: 600">Tu Nodo en la Red</div>
+          </div>
+        </div>
+        <h1>Tu Nodo en la Red</h1>
+        <p class="lead">
+          Este manual te explica, paso a paso y sin tecnicismos, como funciona la aplicacion Com-Org, que puedes hacer
+          con ella y como esta protegida tu privacidad.
+        </p>
+        <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap">
+          <span class="tag b">Para usuarios no tecnicos</span>
+          <span class="tag g">Comunicacion segura</span>
+          <span class="tag w">Red descentralizada</span>
+        </div>
+        <figure class="shot" style="margin-top: 28px">
+          <img src="img/0-bienvenida.png" alt="Pantalla de bienvenida de Com-Org" loading="lazy" />
+          <figcaption>Pantalla de bienvenida &mdash; lo primero que ves al abrir Com-Org.</figcaption>
+        </figure>
+      </header>
+
+      <hr class="div" />
+
+      <!-- S1 -->
+      <section class="sec" id="s1">
+        <div class="sec-hd">
+          <span class="sec-n">1</span>
+          <div>
+            <div class="ey-sm">El concepto clave</div>
+            <h2>Que es un nodo?</h2>
+          </div>
+        </div>
+        <p>
+          Imagina una <strong>red de luces de Navidad</strong>: cada bombillita es un nodo. Si una se apaga, el resto
+          sigue brillando porque no dependen de una sola fuente central.
+        </p>
+        <p>
+          En Com-Org, <strong>tu dispositivo (telefono, tablet o PC) es un nodo</strong>. Participa directamente en la
+          red junto con los dispositivos de otras personas de tu organizacion, sin necesitar un servidor central que lo
+          controle todo.
+        </p>
+        <div class="cards">
+          <div class="card">
+            <span class="ico">&#128241;</span>
+            <h3>Tu dispositivo</h3>
+            <p>Es tu nodo personal. Envia y recibe mensajes directamente.</p>
+          </div>
+          <div class="card">
+            <span class="ico">&#128279;</span>
+            <h3>Conectado con otros</h3>
+            <p>Cada nodo se conecta con los demas de forma directa, como una malla.</p>
+          </div>
+          <div class="card">
+            <span class="ico">&#128737;</span>
+            <h3>Sin punto unico de fallo</h3>
+            <p>Si un nodo cae, la red sigue funcionando por otros caminos.</p>
+          </div>
+        </div>
+        <div class="quote">
+          <strong>En pocas palabras:</strong> tu dispositivo es una pieza activa de la red, no solo un cliente que
+          depende de un servidor centralizado.
+        </div>
+      </section>
+
+      <!-- S2 -->
+      <section class="sec" id="s2">
+        <div class="sec-hd">
+          <span class="sec-n">2</span>
+          <div>
+            <div class="ey-sm">El proposito</div>
+            <h2>Para que sirve la red?</h2>
+          </div>
+        </div>
+        <p>
+          Com-Org es una red de comunicacion disenada para que los miembros de una organizacion puedan
+          <strong>hablar, coordinar y colaborar</strong> de forma segura, incluso en condiciones adversas (cortes de
+          internet, censura, emergencias).
+        </p>
+        <div class="panel">
+          <h3>Lo que la red te permite</h3>
+          <ul>
+            <li><strong>Mensajes cifrados</strong> &mdash; nadie fuera de la red puede leerlos.</li>
+            <li><strong>Voz y texto</strong> &mdash; comunicacion en tiempo real o asincrona.</li>
+            <li><strong>Grupos y roles</strong> &mdash; organizar equipos dentro de la aplicacion.</li>
+            <li><strong>Trabajo sin internet centralizado</strong> &mdash; la red se auto-organiza.</li>
+            <li><strong>Historial protegido</strong> &mdash; tus conversaciones no se guardan en servidores ajenos.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- S3 -->
+      <section class="sec" id="s3">
+        <div class="sec-hd">
+          <span class="sec-n">3</span>
+          <div>
+            <div class="ey-sm">Como se organiza</div>
+            <h2>Los tres componentes de la red</h2>
+          </div>
+        </div>
+        <p>Dentro del ecosistema de Com-Org interactuan tres piezas clave para mantener la comunicacion segura:</p>
+        <div class="cards">
+          <div class="card">
+            <span class="ico">&#128100;</span>
+            <h3>Tu Nodo</h3>
+            <p>
+              Eres tu, con tu dispositivo y tu identidad local. Decides en que salas y mesas participar, o usar la app
+              en modo aislado.
+            </p>
+          </div>
+          <div class="card">
+            <span class="ico">&#128506;</span>
+            <h3>El Faro Cero</h3>
+            <p>
+              Servidor de descubrimiento y registro automatico. Actua como guia telefonica cifrada para que los nodos se
+              encuentren; no lee ni guarda mensajes.
+            </p>
+          </div>
+          <div class="card">
+            <span class="ico">&#127760;</span>
+            <h3>La Malla (Mesh)</h3>
+            <p>
+              El camino privado y cifrado (tunel Nebula) que une a todos los nodos conectados directamente entre si.
+            </p>
+          </div>
+        </div>
+        <figure class="shot" style="margin-top: 20px">
+          <img src="img/3-contactos-red.png" alt="Pantalla de contactos de la red en Com-Org" loading="lazy" />
+          <figcaption>
+            Vista de <strong>Contactos de la red</strong> &mdash; aqui ves los nodos y miembros conectados en la malla.
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- S4 -->
+      <section class="sec" id="s4">
+        <div class="sec-hd">
+          <span class="sec-n">4</span>
+          <div>
+            <div class="ey-sm">Tu llave maestra</div>
+            <h2>Tu identidad y tu huella</h2>
+          </div>
+        </div>
+        <p>
+          Al abrir Com-Org por primera vez, el programa genera automaticamente una
+          <strong>identidad cifrada unica</strong> en tu dispositivo. De ella nace tu <strong>huella</strong>: un codigo
+          que te identifica ante los demas como una firma digital.
+        </p>
+        <div class="steps">
+          <div class="step">
+            <span class="step-n">1</span>
+            <div class="step-b">
+              <b>Vive exclusivamente en tu dispositivo</b
+              ><span>Tu identidad reside de forma local y segura. Nunca se envia a servidores publicos.</span>
             </div>
-        </main>
+          </div>
+          <div class="step">
+            <span class="step-n">2</span>
+            <div class="step-b">
+              <b>Firma digital automatica</b
+              ><span
+                >Todo lo que envias queda firmado digitalmente con tu huella para que los demas verifiquen su
+                autenticidad.</span
+              >
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-n">3</span>
+            <div class="step-b">
+              <b>Privacidad de extremo a extremo</b
+              ><span>Solo los participantes que conozcan tu huella pueden descifrar los mensajes que te envian.</span>
+            </div>
+          </div>
+        </div>
+        <div class="quote">
+          <strong>Consejo:</strong> En modo aislado ("Usar sin conectarme"), se crea tu identidad local pero no te
+          comunicas con la red, ideal para explorar la app sin vincularte.
+        </div>
+        <div class="shot-pair">
+          <figure>
+            <img src="img/4-ajustes-perfil.png" alt="Ajustes y perfil modo oscuro" loading="lazy" />
+            <figcaption>Ajustes de perfil &mdash; modo oscuro</figcaption>
+          </figure>
+          <figure>
+            <img src="img/4-ajustes-perfil-claro.png" alt="Ajustes y perfil modo claro" loading="lazy" />
+            <figcaption>Ajustes de perfil &mdash; modo claro</figcaption>
+          </figure>
+        </div>
+      </section>
 
-        <script>
-            // Script simple de navegación activa en el sidebar
-            const sections = document.querySelectorAll("section");
-            const navLi = document.querySelectorAll(".nav-item");
+      <!-- S5 -->
+      <section class="sec" id="s5">
+        <div class="sec-hd">
+          <span class="sec-n">5</span>
+          <div>
+            <div class="ey-sm">Primeros pasos</div>
+            <h2>La primera vez que abres la app</h2>
+          </div>
+        </div>
+        <p>Al iniciar Com-Org por primera vez, veras un saludo inicial con dos opciones segun lo que necesites:</p>
+        <div class="cards">
+          <div class="card">
+            <span class="ico">&#128682;</span>
+            <h3>Usar sin conectarme</h3>
+            <p>
+              Crea tu identidad local y te permite usar la app solo en tu dispositivo, sin unirte a ninguna red. Ideal
+              para empezar tranquilo.
+            </p>
+          </div>
+          <div class="card">
+            <span class="ico">&#127760;</span>
+            <h3>Conectarme a la red</h3>
+            <p>
+              Te unes a la malla de tu grupo. Solo necesitas la direccion del Faro y, si aplica, un codigo de invitacion
+              (token).
+            </p>
+          </div>
+        </div>
+        <div class="quote">
+          La persona responsable de tu grupo te facilitara la <strong>direccion del Faro</strong> y, si corresponde, el
+          <strong>codigo de invitacion</strong>.
+        </div>
+      </section>
 
-            window.addEventListener("scroll", () => {
-                let current = "";
-                sections.forEach((section) => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (pageYOffset >= sectionTop - 120) {
-                        current = section.getAttribute("id");
-                    }
-                });
+      <!-- S6 -->
+      <section class="sec" id="s6">
+        <div class="sec-hd">
+          <span class="sec-n">6</span>
+          <div>
+            <div class="ey-sm">Como entras a la red</div>
+            <h2>El proceso de unirse (aprovisionamiento)</h2>
+          </div>
+        </div>
+        <p>
+          No tienes que configurar parametros complejos. Com-Org realiza el proceso de conexion de forma automatica:
+        </p>
+        <div class="steps">
+          <div class="step">
+            <span class="step-n">1</span>
+            <div class="step-b">
+              <b>Ingresas la direccion del Faro</b
+              ><span>Escribes la direccion del Faro facilitada para tu grupo (y el token si aplica).</span>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-n">2</span>
+            <div class="step-b">
+              <b>El Faro te reconoce automaticamente</b
+              ><span>Verifica la invitacion y emite tus credenciales seguras (certificado de nodo).</span>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-n">3</span>
+            <div class="step-b">
+              <b>Se establece tu tunel privado</b
+              ><span>Com-Org levanta el camino cifrado (Nebula) entre tu nodo y la malla de forma transparente.</span>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-n">4</span>
+            <div class="step-b">
+              <b>Listo para colaborar</b
+              ><span>Comienzas a ver los nodos, salas y mesas disponibles para tu grupo.</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
-                navLi.forEach((li) => {
-                    li.classList.remove("active");
-                    if (li.querySelector("a").getAttribute("href") === `#${current}`) {
-                        li.classList.add("active");
-                    }
-                });
-            });
-        </script>
-    </body>
+      <!-- S7 -->
+      <section class="sec" id="s7">
+        <div class="sec-hd">
+          <span class="sec-n">7</span>
+          <div>
+            <div class="ey-sm">Tu dia a dia en la red</div>
+            <h2>Que puedes hacer una vez conectado</h2>
+          </div>
+        </div>
+        <p>
+          Una vez dentro de la red, la interfaz de Com-Org te presenta varias secciones principales. Aqui te explicamos
+          cada una:
+        </p>
+
+        <p class="sub-h">&#128506; Explorar</p>
+        <p>Muestra el estado de la red, los nodos activos en la malla y la calidad de conexion.</p>
+        <div class="shot-pair">
+          <figure>
+            <img src="img/1-explorar.png" alt="Pantalla Explorar la red modo oscuro" loading="lazy" />
+            <figcaption>Explorar &mdash; modo oscuro</figcaption>
+          </figure>
+          <figure>
+            <img src="img/1-explorar-claro.png" alt="Pantalla Explorar la red modo claro" loading="lazy" />
+            <figcaption>Explorar &mdash; modo claro</figcaption>
+          </figure>
+        </div>
+
+        <p class="sub-h">&#128188; Mesa de Trabajo</p>
+        <p>
+          Tableros y espacios de mensajes escritos organizados por tema. Cifrados de extremo a extremo y firmados por tu
+          huella.
+        </p>
+        <div class="shot-pair">
+          <figure>
+            <img src="img/2-mesa-trabajo.png" alt="Mesa de trabajo modo oscuro" loading="lazy" />
+            <figcaption>Mesa de trabajo &mdash; modo oscuro</figcaption>
+          </figure>
+          <figure>
+            <img src="img/2-mesa-trabajo-claro.png" alt="Mesa de trabajo modo claro" loading="lazy" />
+            <figcaption>Mesa de trabajo &mdash; modo claro</figcaption>
+          </figure>
+        </div>
+
+        <p class="sub-h">&#128266; Sala de Audio</p>
+        <p>
+          Conversaciones de voz en vivo y en tiempo real. Quien crea la sala actua como moderador (control de microfono,
+          orden de palabra) y la voz viaja cifrada.
+        </p>
+        <div class="shot-pair">
+          <figure>
+            <img src="img/5-sala-audio.png" alt="Sala de audio modo oscuro" loading="lazy" />
+            <figcaption>Sala de audio &mdash; modo oscuro</figcaption>
+          </figure>
+          <figure>
+            <img src="img/5-sala-audio-claro.png" alt="Sala de audio modo claro" loading="lazy" />
+            <figcaption>Sala de audio &mdash; modo claro</figcaption>
+          </figure>
+        </div>
+
+        <div class="cards" style="margin-top: 8px">
+          <div class="card">
+            <span class="ico">&#128172;</span>
+            <h3>Mensajeria cifrada</h3>
+            <p>Intercambio de mensajes protegidos con cifrado de extremo a extremo.</p>
+          </div>
+          <div class="card">
+            <span class="ico">&#128193;</span>
+            <h3>Documentos y tareas</h3>
+            <p>Coordina avisos y actividades de forma segura en las mesas.</p>
+          </div>
+          <div class="card">
+            <span class="ico">&#129309;</span>
+            <h3>Contactos cercanos</h3>
+            <p>Observa que miembros estan conectados y activos en tu entorno.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- S8 -->
+      <section class="sec" id="s8">
+        <div class="sec-hd">
+          <span class="sec-n">8</span>
+          <div>
+            <div class="ey-sm">Nunca se pierde un mensaje</div>
+            <h2>El Buffer Ciego: mensajes que siempre llegan</h2>
+          </div>
+        </div>
+        <p>
+          Que pasa si la persona a quien escribes <strong>esta desconectada o temporalmente fuera de linea</strong>?
+          Aqui entra en accion el <strong>Buffer Ciego</strong>.
+        </p>
+        <div class="cards">
+          <div class="card">
+            <span class="ico">&#128230;</span>
+            <h3>Guardado temporal</h3>
+            <p>
+              El mensaje se conserva de forma cifrada solo el tiempo necesario (TTL) y luego se elimina automaticamente.
+            </p>
+          </div>
+          <div class="card">
+            <span class="ico">&#128257;</span>
+            <h3>Reenvio por vecino</h3>
+            <p>Un nodo cercano ayuda a almacenar y entregar el paquete en cuanto el destinatario regresa a la red.</p>
+          </div>
+          <div class="card">
+            <span class="ico">&#128083;</span>
+            <h3>Ciego por diseno</h3>
+            <p>
+              El nodo que retransmite <strong>no puede leer</strong> el contenido: viaja totalmente cifrado de extremo a
+              extremo.
+            </p>
+          </div>
+        </div>
+        <div class="quote">
+          <strong>Para el usuario:</strong> Tu escribes normalmente. El sistema se encarga de que el mensaje llegue,
+          aunque el otro tarde en conectarse.
+        </div>
+      </section>
+
+      <!-- S9 -->
+      <section class="sec" id="s9">
+        <div class="sec-hd">
+          <span class="sec-n">9</span>
+          <div>
+            <div class="ey-sm">Plan de respaldo</div>
+            <h2>Si la red falla: la VPN de contingencia</h2>
+          </div>
+        </div>
+        <p>
+          En situaciones excepcionales donde la malla principal se ve interrumpida, Com-Org dispone de un
+          <strong>canal de respaldo cifrado</strong> directo entre nodos que ya se conocen.
+        </p>
+        <div class="cards">
+          <div class="card">
+            <span class="ico">&#128735;</span>
+            <h3>Medida de emergencia</h3>
+            <p>Disenada para contingencias puntuales, no es la via habitual de comunicacion.</p>
+          </div>
+          <div class="card">
+            <span class="ico">&#128274;</span>
+            <h3>Canal seguro</h3>
+            <p>El enlace se cifra con una clave compartida unicamente entre ambos nodos.</p>
+          </div>
+          <div class="card">
+            <span class="ico">&#128678;</span>
+            <h3>Apagada por defecto</h3>
+            <p>
+              Por seguridad viene <strong>desactivada</strong> por defecto y se habilita solo cuando sea estrictamente
+              necesario.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- S10 -->
+      <section class="sec" id="s10">
+        <div class="sec-hd">
+          <span class="sec-n">10</span>
+          <div>
+            <div class="ey-sm">Tu tranquilidad</div>
+            <h2>Tu privacidad y seguridad, resumidas</h2>
+          </div>
+        </div>
+        <p>
+          Com-Org fue disenado con la privacidad como principio fundamental. Aqui tienes las garantias centrales de la
+          aplicacion:
+        </p>
+        <div class="cards">
+          <div class="card">
+            <span class="ico">&#128274;</span>
+            <h3>Cifrado de extremo a extremo</h3>
+            <p>Lo que envias solo lo pueden leer tu y tu destinatario autenticado.</p>
+          </div>
+          <div class="card">
+            <span class="ico">&#128508;</span>
+            <h3>El Faro no espia</h3>
+            <p>El Faro solo facilita el descubrimiento y acceso; nunca lee, guarda ni intercepta mensajes.</p>
+          </div>
+          <div class="card">
+            <span class="ico">&#128100;</span>
+            <h3>Tu identidad es tuya</h3>
+            <p>Vive unicamente en tu dispositivo; tu decides cuando y como conectarte.</p>
+          </div>
+          <div class="card">
+            <span class="ico">&#129529;</span>
+            <h3>Sin rastros innecesarios</h3>
+            <p>Los mensajes temporales en transito se eliminan al cumplir su tiempo de vida.</p>
+          </div>
+        </div>
+        <div class="quote">
+          <strong>Recuerda:</strong> Manten tu dispositivo protegido con contrasena o bloqueo de pantalla. Tu identidad
+          de nodo vive en el, y cuidarla es cuidar tu privacidad.
+        </div>
+      </section>
+
+      <!-- S11 -->
+      <section class="sec" id="s11">
+        <div class="sec-hd">
+          <span class="sec-n">11</span>
+          <div>
+            <div class="ey-sm">Para el manual</div>
+            <h2>Glosario rapido</h2>
+          </div>
+        </div>
+        <p>Terminos clave de Com-Org explicados en lenguaje directo y sencillo:</p>
+        <div class="glos">
+          <div class="gl">
+            <div class="term">Nodo</div>
+            <div class="def">Tu instalacion de Com-Org en un dispositivo (PC o movil).</div>
+          </div>
+          <div class="gl">
+            <div class="term">Malla / Mesh</div>
+            <div class="def">La red privada formada por todos los nodos conectados directamente.</div>
+          </div>
+          <div class="gl">
+            <div class="term">Faro Cero</div>
+            <div class="def">
+              Servidor de conexion automatica que ayuda a encontrarse; no lee ni almacena conversaciones.
+            </div>
+          </div>
+          <div class="gl">
+            <div class="term">Nebula</div>
+            <div class="def">El tunel privado y cifrado que une a los nodos entre si.</div>
+          </div>
+          <div class="gl">
+            <div class="term">Huella digital</div>
+            <div class="def">Codigo unico derivado de tu clave que identifica tu nodo ante los demas.</div>
+          </div>
+          <div class="gl">
+            <div class="term">Salas de audio</div>
+            <div class="def">Espacios de conversacion de voz en vivo y tiempo real.</div>
+          </div>
+          <div class="gl">
+            <div class="term">Mesas de trabajo</div>
+            <div class="def">Tableros cifrados de mensajes escritos por temas y tareas.</div>
+          </div>
+          <div class="gl">
+            <div class="term">Buffer Ciego</div>
+            <div class="def">Deposito temporal cifrado que retransmite mensajes a destinatarios desconectados.</div>
+          </div>
+          <div class="gl">
+            <div class="term">Modo aislado</div>
+            <div class="def">Usar la app de forma local en tu equipo sin conectarte a la red.</div>
+          </div>
+          <div class="gl">
+            <div class="term">Token / invitacion</div>
+            <div class="def">Codigo que el Faro valida automaticamente para darte acceso a la malla.</div>
+          </div>
+          <div class="gl">
+            <div class="term">Moderador</div>
+            <div class="def">Creador de una sala de audio que administra turnos y microfonos.</div>
+          </div>
+          <div class="gl">
+            <div class="term">VPN de contingencia</div>
+            <div class="def">Canal de respaldo cifrado entre nodos, desactivado por defecto.</div>
+          </div>
+        </div>
+      </section>
+
+      <footer
+        style="
+          margin-top: 60px;
+          padding-top: 24px;
+          border-top: 1px solid var(--line);
+          color: var(--muted);
+          font-size: 13px;
+        ">
+        <p>Com-Org &middot; Manual de usuario &mdash; <em>Tu Nodo en la Red</em></p>
+      </footer>
+    </main>
+
+    <script>
+      function toggleSB() {
+        document.getElementById("sb").classList.toggle("open");
+      }
+      document.querySelectorAll("#nav a").forEach((a) => {
+        a.addEventListener("click", () => document.getElementById("sb").classList.remove("open"));
+      });
+      const allSecs = document.querySelectorAll("[id]");
+      const navLinks = document.querySelectorAll("#nav a");
+      function upNav() {
+        let cur = "";
+        allSecs.forEach((s) => {
+          if (s.getBoundingClientRect().top <= 80) cur = s.id;
+        });
+        navLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + cur));
+      }
+      function upProg() {
+        const pct =
+          document.body.scrollHeight - innerHeight > 0
+            ? (scrollY / (document.body.scrollHeight - innerHeight)) * 100
+            : 0;
+        document.getElementById("pf").style.width = pct + "%";
+      }
+      window.addEventListener("scroll", () => {
+        upNav();
+        upProg();
+      });
+      upNav();
+      upProg();
+    </script>
+  </body>
 </html>
