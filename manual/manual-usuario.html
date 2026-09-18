@@ -81,10 +81,9 @@
       .sb-logo .brand {
         font-size: 18px;
         font-weight: 800;
-        background: linear-gradient(90deg, var(--accent), var(--accent2));
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: var(--accent);
+        font-family: "Fira Code", monospace;
+        letter-spacing: 0.5px;
       }
       .sb-logo .sub {
         font-size: 11px;
@@ -324,24 +323,23 @@
 
       /* Tags */
       .tag {
-        display: inline-block;
-        padding: 4px 12px;
-        border-radius: 999px;
-        font-size: 12px;
+        display: inline-flex;
+        align-items: center;
+        padding: 5px 14px;
+        border-radius: 20px;
+        font-size: 12.5px;
         font-weight: 600;
-        margin: 3px 4px 3px 0;
+        background: rgba(255, 255, 255, 0.85);
+        color: var(--txt);
+        border: 1px solid var(--line);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
       }
-      .tag.b {
-        background: #103040;
-        color: var(--accent);
-      }
-      .tag.g {
-        background: #0f3018;
-        color: var(--accent2);
-      }
+      .tag.b,
+      .tag.g,
       .tag.w {
-        background: #33270f;
-        color: var(--warn);
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--txt);
+        border: 1px solid var(--line);
       }
 
       /* Panel */
