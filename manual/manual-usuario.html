@@ -10,21 +10,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet" />
     <style>
       :root {
-        --bg: #0f1419;
-        --bg2: #161d26;
-        --card: #1c2530;
-        --line: #2b3645;
-        --txt: #e6edf3;
-        --muted: #9aa7b4;
-        --accent: #3fb6ff;
-        --accent2: #7ee787;
-        --warn: #ffb454;
-        --pink: #ff7eb6;
-        --sw: 260px;
+        --bg:      rgba(164, 203, 222, 1);
+        --bg2:     rgba(255, 255, 255, 0.96);
+        --card:    rgb(255, 255, 255);
+        --line:    #e2e8f0;
+        --txt:     #1a202c;
+        --muted:   #4a5568;
+        --accent:  #cc7023;
+        --accent2: #059669;
+        --warn:    #d97706;
+        --pink:    #f43f5e;
+        --sw:      260px;
       }
       *,
       *::before,
@@ -73,7 +73,7 @@
         height: 36px;
         border-radius: 8px;
         object-fit: contain;
-        background: #0c1219;
+        background: var(--bg);
         padding: 2px;
         border: 1px solid var(--line);
         flex-shrink: 0;
@@ -104,10 +104,10 @@
         height: 52px;
         border-radius: 12px;
         object-fit: contain;
-        background: #0c1219;
+        background: var(--bg);
         padding: 4px;
         border: 1px solid var(--line);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
       }
       #nav {
         list-style: none;
@@ -147,12 +147,12 @@
       #nav a.active {
         color: var(--accent);
         border-left-color: var(--accent);
-        background: rgba(63, 182, 255, 0.08);
+        background: rgba(204, 112, 35, 0.08);
       }
       #nav a:hover .n,
       #nav a.active .n {
         background: var(--accent);
-        color: #04121d;
+        color: #fff;
       }
 
       /* Main */
@@ -196,11 +196,9 @@
         font-size: clamp(30px, 4vw, 52px);
         font-weight: 800;
         line-height: 1.05;
-        background: linear-gradient(90deg, #3fb6ff, #7ee787);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: var(--accent);
         margin-bottom: 16px;
+        font-family: "Fira Code", monospace;
       }
       .hero .lead {
         font-size: 17px;
@@ -227,8 +225,8 @@
         width: 36px;
         height: 36px;
         border-radius: 50%;
-        background: linear-gradient(135deg, var(--accent), #1a7db5);
-        color: #04121d;
+        background: var(--accent);
+        color: #fff;
         font-weight: 800;
         font-size: 15px;
         flex-shrink: 0;
@@ -308,7 +306,7 @@
         height: 34px;
         border-radius: 50%;
         background: var(--accent);
-        color: #04121d;
+        color: #fff;
         font-weight: 800;
         font-size: 15px;
         flex-shrink: 0;
@@ -420,7 +418,7 @@
         padding: 10px 16px;
         font-size: 13px;
         color: var(--accent);
-        background: rgba(63, 182, 255, 0.07);
+        background: rgba(204, 112, 35, 0.07);
         border-top: 1px solid var(--line);
         line-height: 1.5;
       }
@@ -445,7 +443,7 @@
         padding: 8px 12px;
         font-size: 12px;
         color: var(--accent);
-        background: rgba(63, 182, 255, 0.07);
+        background: rgba(204, 112, 35, 0.07);
         border-top: 1px solid var(--line);
       }
 
