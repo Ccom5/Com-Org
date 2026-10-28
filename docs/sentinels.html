@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sentinels — Ciberdefensa Activa y Anti-Spyware Android // Ecosistema Soberano</title>
+  <meta name="description" content="Ficha técnica y arquitectura de Sentinels: almacenamiento cifrado Zero-Trust, ensamblaje XOR triple factor, blindaje de RAM en C++ y detección de spyware como Pegasus.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+  <!-- Navegación -->
+  <header class="navbar">
+    <div class="container nav-wrapper">
+      <a href="../index.html" class="nav-brand">
+        <img src="../manual/img/com-org.png" alt="Logo">
+        <span>ECOSISTEMA<span class="accent">.SOBERANO</span></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">← Volver al Portal</a></li>
+        <li><a href="../index.html#desarrollos">Desarrollos</a></li>
+        <li><a href="../index.html#documentacion">Manuales</a></li>
+        <li><a href="../manifiesto.html">Manifiesto</a></li>
+        <li><a href="../estatuto.html">Estatuto</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container-narrow section-padding">
+
+    <div style="margin-bottom: 32px;">
+      <span class="badge badge-emerald" style="margin-bottom: 12px;">
+        <span class="badge-dot"></span> Grado Activista · Zero-Trust · Android OS
+      </span>
+      <h1 style="font-size: clamp(2rem, 3.8vw, 2.6rem); margin-bottom: 12px;">
+        🛡️ Sentinels v3.5
+      </h1>
+      <p style="font-size: 1.1rem; color: var(--text-secondary);">
+        Defensa activa, almacenamiento criptográfico y detección de vectores de espionaje avanzado (Pegasus / Cellebrite) en dispositivos móviles.
+      </p>
+    </div>
+
+    <!-- 1. Resumen y Propósito -->
+    <section style="margin-bottom: 48px;">
+      <div class="card card-tactical-border" style="padding: 28px; margin-bottom: 24px;">
+        <h2 style="font-size: 1.3rem; color: var(--accent-emerald); margin-bottom: 12px;">
+          ¿Qué problema soluciona?
+        </h2>
+        <p style="margin-bottom: 14px;">
+          Los dispositivos móviles son el blanco principal de herramientas forenses comerciales (Cellebrite, GrayKey) e implantes gubernamentales de espionaje teledirigido (como <strong>Pegasus</strong> de NSO Group). La seguridad estándar de Android (bloqueo por PIN y cifrado en reposo) resulta insuficiente ante extracciones físicas de memoria o degradaciones de red forzadas.
+        </p>
+        <p>
+          <strong>Sentinels</strong> implementa un paradigma donde la clave maestra <strong>nunca existe en disco</strong>, los buffers de memoria están blindados contra lecturas forenses, y el sistema reacciona activamente ante anomalías físicas o de entorno.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+        <div class="card">
+          <h4 style="color: var(--accent-emerald); margin-bottom: 6px;">🎭 Camuflaje Total</h4>
+          <p style="font-size: 0.88rem;">
+            Disfrazado semánticamente como <code class="codigo">Manual de Usuario</code>. Excluido de aplicaciones recientes y con <code class="codigo">FLAG_SECURE</code> global anti-capturas.
+          </p>
+        </div>
+        <div class="card">
+          <h4 style="color: var(--accent-emerald); margin-bottom: 6px;">📡 Anti-Stingray</h4>
+          <p style="font-size: 0.88rem;">
+            Detecta degradaciones forzadas de conectividad a 2G (típico de IMSI-Catchers en protestas o vigilancia) y bloquea el acceso.
+          </p>
+        </div>
+        <div class="card">
+          <h4 style="color: var(--accent-emerald); margin-bottom: 6px;">💥 Purga Irreversible</h4>
+          <p style="font-size: 0.88rem;">
+            Ante detección de depuración ADB o intentos de fuerza bruta, borra el alias del Android KeyStore haciendo irrecuperable el contenido.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Arquitectura Criptográfica -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="font-size: 1.4rem; margin-bottom: 20px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+        Arquitectura Criptográfica: Ensamblaje XOR Triple Factor
+      </h2>
+      <p style="margin-bottom: 20px;">
+        A diferencia de los gestores convencionales, la clave simétrica maestra no se almacena en ninguna base de datos ni archivo de configuración. Se ensambla en memoria volátil únicamente durante la sesión activa:
+      </p>
+
+      <div class="card" style="background: var(--bg-surface); padding: 20px; font-family: var(--font-mono); font-size: 0.95rem; text-align: center; color: var(--accent-emerald); margin-bottom: 24px; border: 1px solid var(--border-strong);">
+        MasterKey = SHA256(PIN) ⊕ SHA256(BSSID_Wi-Fi) ⊕ TEE_Secret (Android KeyStore)
+      </div>
+
+      <div class="docs-table-wrapper">
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Factor</th>
+              <th>Naturaleza</th>
+              <th>Mecanismo Técnico</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Factor 1: Usuario</strong></td>
+              <td>Conocimiento</td>
+              <td>PIN o patrón derivado con SHA-256.</td>
+            </tr>
+            <tr>
+              <td><strong>Factor 2: Entorno</strong></td>
+              <td>Geofencing Lógico</td>
+              <td>Hash del BSSID (MAC física) del router Wi-Fi de confianza. Fuera de esa zona, la clave no ensambla.</td>
+            </tr>
+            <tr>
+              <td><strong>Factor 3: Hardware</strong></td>
+              <td>Criptoprocesador</td>
+              <td>Secreto de 256 bits resguardado en el chip TEE (Trusted Execution Environment) vía Android KeyStore RSA-2048.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 3. Blindaje de Memoria RAM en C++ / NDK -->
+    <section style="margin-bottom: 48px;" id="auditoria">
+      <h2 style="font-size: 1.4rem; margin-bottom: 20px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+        Blindaje de Memoria Nativa (C++ / JNI)
+      </h2>
+      <p style="margin-bottom: 16px;">
+        Para evitar ataques de volcado de memoria (RAM dumping) mediante equipos como Cellebrite:
+      </p>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
+        <li class="card" style="padding: 16px;">
+          <strong>Páginas Fuera del Heap de la JVM:</strong> Asignación directa con <code class="codigo">mmap(MAP_ANONYMOUS)</code> para que el recolector de basura de Java no deje copias residuales en RAM.
+        </li>
+        <li class="card" style="padding: 16px;">
+          <strong>Anti-Swap (<code class="codigo">mlock</code>):</strong> Prohíbe al kernel de Linux paginar o volcar la memoria de las llaves en disco de intercambio (ZRAM/Swap).
+        </li>
+        <li class="card" style="padding: 16px;">
+          <strong>Zeroización Irreversible:</strong> Al cerrar sesión o disparar el modo pánico, se invoca <code class="codigo">explicit_bzero</code> reforzado con barreras de ensamblador (inline ASM) para evitar que el compilador optimice la limpieza.
+        </li>
+      </ul>
+    </section>
+
+    <!-- 4. Compilación e Instalación -->
+    <section style="margin-bottom: 48px;" id="compilacion">
+      <h2 style="font-size: 1.4rem; margin-bottom: 20px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+        Guía de Compilación y Puesta en Marcha
+      </h2>
+      <div class="card" style="padding: 24px;">
+        <p style="margin-bottom: 12px;">
+          Sentinel está estructurado como un proyecto nativo en Kotlin y C++ (NDK). Para compilar el binario release firmado de forma anónima:
+        </p>
+        <pre><code># 1. Clonar el repositorio y acceder a Sentimel
+cd d:\Sitio\Sentimel
+
+# 2. Compilar paquete APK con ofuscación R8 / ProGuard
+./gradlew assembleRelease
+
+# 3. El binario generado se ubica en:
+# app/build/outputs/apk/release/Sentinel_Service.apk</code></pre>
+        <p style="margin-top: 14px; font-size: 0.88rem; color: var(--text-muted);">
+          Nota: En dispositivos no rooteados funciona transparentemente como app de sistema con almacenamiento seguro en espacio aislado.
+        </p>
+      </div>
+    </section>
+
+    <!-- Navegación final -->
+    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 28px; flex-wrap: wrap; gap: 16px;">
+      <a href="../index.html" class="btn btn-outline">← Volver al Portal</a>
+      <a href="com-org.html" class="btn btn-primary">Ver Ficha Com Org →</a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-bottom">
+      <div>Sentinel v3.5 · Defensa Activa y Soberanía Criptográfica</div>
+      <div>Código Source-Available · Auditoría Estricta</div>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('is-open');
+      });
+    }
+  </script>
+</body>
+</html>
+

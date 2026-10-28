@@ -14,16 +14,16 @@
       rel="stylesheet" />
     <style>
       :root {
-        --bg:      rgba(164, 203, 222, 1);
-        --bg2:     rgba(255, 255, 255, 0.96);
-        --card:    rgb(255, 255, 255);
-        --line:    #e2e8f0;
-        --txt:     #1a202c;
-        --muted:   #4a5568;
-        --accent:  #cc7023;
-        --accent2: #059669;
-        --warn:    #d97706;
-        --pink:    #f43f5e;
+        --bg:      var(--bg-core);
+        --bg2:     var(--bg-surface);
+        --card:    var(--bg-card);
+        --line:    var(--border-subtle);
+        --txt:     var(--text-primary);
+        --muted:   var(--text-secondary);
+        --accent:  var(--accent-emerald);
+        --accent2: var(--accent-emerald-hover);
+        --warn:    var(--accent-amber);
+        --pink:    var(--accent-rose);
         --sw:      260px;
       }
       *,
@@ -146,7 +146,7 @@
       #nav a.active {
         color: var(--accent);
         border-left-color: var(--accent);
-        background: rgba(204, 112, 35, 0.08);
+        background: rgba(15, 118, 110, 0.08);
       }
       #nav a:hover .n,
       #nav a.active .n {
@@ -329,7 +329,7 @@
         border-radius: 20px;
         font-size: 12.5px;
         font-weight: 600;
-        background: rgba(255, 255, 255, 0.85);
+        background: var(--bg-surface);
         color: var(--txt);
         border: 1px solid var(--line);
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
@@ -337,7 +337,7 @@
       .tag.b,
       .tag.g,
       .tag.w {
-        background: rgba(255, 255, 255, 0.9);
+        background: var(--bg-surface);
         color: var(--txt);
         border: 1px solid var(--line);
       }
@@ -517,6 +517,7 @@
         }
       }
     </style>
+      <link rel="stylesheet" href="../css/main.css" />
   </head>
   <body>
     <button id="mtog" aria-label="Abrir menu" onclick="toggleSB()">&#9776;</button>

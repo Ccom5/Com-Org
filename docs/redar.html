@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RedAr — Inteligencia Territorial y Datos Abiertos // Ecosistema Soberano</title>
+  <meta name="description" content="Ficha técnica de RedAr: plataforma de descubrimiento y catalogación de datos públicos, matriz de triangulación de confianza y arquitectura P2P territorial.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+  <!-- Navegación -->
+  <header class="navbar">
+    <div class="container nav-wrapper">
+      <a href="../index.html" class="nav-brand">
+        <img src="../manual/img/com-org.png" alt="Logo">
+        <span>ECOSISTEMA<span class="accent">.SOBERANO</span></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">← Volver al Portal</a></li>
+        <li><a href="../index.html#desarrollos">Desarrollos</a></li>
+        <li><a href="../index.html#documentacion">Manuales</a></li>
+        <li><a href="../manifiesto.html">Manifiesto</a></li>
+        <li><a href="../estatuto.html">Estatuto</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container-narrow section-padding">
+
+    <div style="margin-bottom: 32px;">
+      <span class="badge badge-emerald" style="margin-bottom: 12px;">
+        <span class="badge-dot"></span> Datos Territoriales · CKAN Crawler · Triangulación OSINT
+      </span>
+      <h1 style="font-size: clamp(2rem, 3.8vw, 2.6rem); margin-bottom: 12px;">
+        🗺️ RedAr: Inteligencia Territorial
+      </h1>
+      <p style="font-size: 1.1rem; color: var(--text-secondary);">
+        Plataforma de descubrimiento, catalogación y triangulación de datos abiertos para cooperativas, agro y organización comunitaria.
+      </p>
+    </div>
+
+    <!-- 1. El Problema y la Solución -->
+    <section style="margin-bottom: 48px;">
+      <div class="card card-tactical-border" style="padding: 28px; margin-bottom: 24px;">
+        <h2 style="font-size: 1.3rem; color: var(--accent-emerald); margin-bottom: 12px;">
+          ¿Por qué nace RedAr?
+        </h2>
+        <p style="margin-bottom: 14px;">
+          En la Argentina actual, múltiples organismos e institutos que proveían datos públicos esenciales (INTA, SMN, Vialidad, INAES) sufren desfinanciamiento o discontinuidad en sus APIs oficiales. Depender de un portal centralizado estatal deja desamparadas a cooperativas rurales, productores agrícolas y talleres regionales.
+        </p>
+        <p>
+          <strong>RedAr</strong> propone una estrategia de <strong>triangulación distribuida</strong>: recopilar fuentes satelitales globales que no dependen del gobierno, cruzarlas con feeds RSS de medios provinciales y validar los eventos con reportes vecinales directos.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+        <div class="card">
+          <h4 style="color: var(--accent-emerald); margin-bottom: 6px;">🌱 Agro y Clima</h4>
+          <p style="font-size: 0.88rem;">
+            Focos de calor en tiempo real (NASA FIRMS directo), modelos climáticos abiertos (Open-Meteo) y cuencas hídricas.
+          </p>
+        </div>
+        <div class="card">
+          <h4 style="color: var(--accent-emerald); margin-bottom: 6px;">🚛 Vialidad y Logística</h4>
+          <p style="font-size: 0.88rem;">
+            Estado de rutas nacionales y caminos rurales, puertos y centros de acopio en formato GeoJSON.
+          </p>
+        </div>
+        <div class="card">
+          <h4 style="color: var(--accent-emerald); margin-bottom: 6px;">⚡ Energía y Servicios</h4>
+          <p style="font-size: 0.88rem;">
+            Monitoreo de cooperativas eléctricas locales, cortes de suministro y redes de agua.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Arquitectura de Triangulación -->
+    <section style="margin-bottom: 48px;" id="arquitectura">
+      <h2 style="font-size: 1.4rem; margin-bottom: 20px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+        Matriz de Credibilidad y Motor de Confianza
+      </h2>
+      <p style="margin-bottom: 20px;">
+        Para evitar desinformación o reportes manipulados, el sistema clasifica las observaciones en tres niveles y las cruza automáticamente:
+      </p>
+
+      <div class="docs-table-wrapper" style="margin-bottom: 24px;">
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Nivel</th>
+              <th>Origen del Dato</th>
+              <th>Criterio de Validación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Nivel 1: Satélite / Global</strong></td>
+              <td>NASA FIRMS, Open-Meteo, OpenSky, IGN.</td>
+              <td>Lectura directa automatizada sin intermediarios locales.</td>
+            </tr>
+            <tr>
+              <td><strong>Nivel 2: Intermedio / Institucional</strong></td>
+              <td>Bolsas de cereales, cooperativas eléctricas, radios locales.</td>
+              <td>Ingesta estructurada de tablas y scrapers RSS.</td>
+            </tr>
+            <tr>
+              <td><strong>Nivel 3: Vecinal / Telemetría</strong></td>
+              <td>Sensores IoT (ESP32), productores rurales, asambleas.</td>
+              <td>Requiere coincidencia con al menos 1 fuente de Nivel 1 o 2 para confirmarse.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card" style="background: var(--bg-surface); padding: 20px; font-family: var(--font-mono); font-size: 0.88rem; color: var(--accent-emerald); border: 1px solid var(--border-strong);">
+        [Reporte Comunitario] + [Lectura Satelital] + [Radio/RSS Local] ──► [Índice de Confianza Triangulado]
+      </div>
+    </section>
+
+    <!-- 3. Uso y Exportación RAG -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="font-size: 1.4rem; margin-bottom: 20px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+        Uso Rápido del Motor de Descubrimiento
+      </h2>
+      <div class="card" style="padding: 24px;">
+        <pre><code># 1. Instalar dependencias del motor
+cd d:\Sitio\RedAr
+pip install -r requirements.txt
+
+# 2. Ejecutar descubrimiento y validación de fuentes CKAN
+python main.py
+
+# 3. Exportar catálogo verificado a formato Markdown/Obsidian (listo para RAG en Nexo)
+python -m output.exportar_obsidian</code></pre>
+      </div>
+    </section>
+
+    <!-- Navegación final -->
+    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 28px; flex-wrap: wrap; gap: 16px;">
+      <a href="nexo.html" class="btn btn-outline">← Ficha Nexo Suite</a>
+      <a href="../index.html" class="btn btn-primary">Volver al Inicio →</a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-bottom">
+      <div>RedAr · Inteligencia Territorial y Datos Libres</div>
+      <div>Desarrollo para la Comunidad Organizada</div>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('is-open');
+      });
+    }
+  </script>
+</body>
+</html>
+

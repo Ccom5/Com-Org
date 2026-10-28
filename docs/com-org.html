@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Com Org — Red P2P de Debate Soberano // Ecosistema Soberano</title>
+  <meta name="description" content="Ficha técnica de Com Org: red P2P descentralizada sobre túneles Nebula, identidad Ed25519 de silicio, faros a ciegas (Blind Rendezvous) y moderación sin censura.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+  <!-- Navegación -->
+  <header class="navbar">
+    <div class="container nav-wrapper">
+      <a href="../index.html" class="nav-brand">
+        <img src="../manual/img/com-org.png" alt="Logo">
+        <span>ECOSISTEMA<span class="accent">.SOBERANO</span></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">← Volver al Portal</a></li>
+        <li><a href="../index.html#desarrollos">Desarrollos</a></li>
+        <li><a href="../index.html#documentacion">Manuales</a></li>
+        <li><a href="../manifiesto.html">Manifiesto</a></li>
+        <li><a href="../estatuto.html">Estatuto</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container-narrow section-padding">
+
+    <div style="margin-bottom: 32px;">
+      <span class="badge badge-cyan" style="margin-bottom: 12px;">
+        <span class="badge-dot"></span> P2P Mesh · Nebula Engine · SQLite Local
+      </span>
+      <h1 style="font-size: clamp(2rem, 3.8vw, 2.6rem); margin-bottom: 12px;">
+        ◆ Com Org: Red de Debate Soberano
+      </h1>
+      <p style="font-size: 1.1rem; color: var(--text-secondary);">
+        La plaza pública inexpugnable. Herramienta de deliberación comunitaria blindada contra censura, sin servidores corporativos y sin algoritmos adictivos.
+      </p>
+    </div>
+
+    <!-- 1. El Problema que Resuelve -->
+    <section style="margin-bottom: 48px;">
+      <div class="card card-tactical-border" style="padding: 28px; margin-bottom: 24px;">
+        <h2 style="font-size: 1.3rem; color: var(--accent-emerald); margin-bottom: 12px;">
+          ¿Por qué no usar redes comerciales o federadas convencionales?
+        </h2>
+        <p style="margin-bottom: 14px;">
+          Las redes sociales comerciales (como X/Twitter o Meta) convierten al ciudadano en consumidor y monetizan la indignación mediante algoritmos adictivos de dopamina. Por otro lado, las redes federadas convencionales (como Mastodon o Bluesky) siguen dependiendo de administradores de servidores con poder de censura y filtran metadatos hacia servidores centrales.
+        </p>
+        <p>
+          <strong>Com Org</strong> elimina el intermediario: las computadoras de los participantes se conectan directamente entre sí en una malla cifrada. <strong>Si borrás un mensaje en tu máquina, desaparece de la red.</strong>
+        </p>
+      </div>
+
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="../manual/manual-usuario.html" class="btn btn-primary btn-sm">📖 Manual de Usuario Completo</a>
+        <a href="../manual/faro.html" class="btn btn-outline btn-sm">📜 Guía: Levanta tu Faro Comunitario</a>
+        <a href="../estatuto.html" class="btn btn-outline btn-sm">⚖️ Estatuto de la Red</a>
+      </div>
+    </section>
+
+    <!-- 2. Arquitectura de Red y Seguridad -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="font-size: 1.4rem; margin-bottom: 20px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+        Mecanismos Técnicos Clave
+      </h2>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+        <div class="card">
+          <h3 style="font-size: 1.05rem; color: var(--accent-emerald); margin-bottom: 8px;">
+            1. Superando el NAT (Nebula Mesh)
+          </h3>
+          <p style="font-size: 0.9rem;">
+            Utiliza redes superpuestas criptográficas. La autenticación se basa en <em>quién sos</em> (certificado CA comunitario emitido para tu máquina) y no en <em>dónde estás</em> (dirección IP).
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size: 1.05rem; color: var(--accent-emerald); margin-bottom: 8px;">
+            2. Faros como "Cajero a Ciegas"
+          </h3>
+          <p style="font-size: 0.9rem;">
+            Los puntos de encuentro (Lighthouses) unen nodos mediante llaves públicas sin registrar sus IPs en texto plano. Operan con Salt rotativo en RAM volátil. Al reiniciar el servidor, el rastro desaparece.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size: 1.05rem; color: var(--accent-emerald); margin-bottom: 8px;">
+            3. Moderación Física por Aislamiento
+          </h3>
+          <p style="font-size: 0.9rem;">
+            No existe un comité central ni algoritmo de shadowban. Si bloqueás a un usuario dañino, tu nodo corta la conexión física en el túnel. El spam consume únicamente los recursos de quien lo emite.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size: 1.05rem; color: var(--accent-emerald); margin-bottom: 8px;">
+            4. Restricción Semántica Antispam
+          </h3>
+          <p style="font-size: 0.9rem;">
+            La interfaz impone un límite de 12.000 a 15.000 caracteres, exigiendo profundidad conceptual y debate con argumentos en lugar de respuestas reactivas instantáneas.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navegación final -->
+    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 28px; flex-wrap: wrap; gap: 16px;">
+      <a href="sentinels.html" class="btn btn-outline">← Ficha Sentinels</a>
+      <a href="nexo.html" class="btn btn-primary">Ver Ficha Nexo Suite →</a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-bottom">
+      <div>Com Org · Red de Debate Soberano P2P</div>
+      <div>Desarrollo Libre · Infraestructura Inexpugnable</div>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('is-open');
+      });
+    }
+  </script>
+</body>
+</html>
+

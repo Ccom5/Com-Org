@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexo ∞ & Nexo-CABA — Motor Cognitivo e IA para Escuelas // Ecosistema Soberano</title>
+  <meta name="description" content="Ficha técnica de Nexo Suite: Segundo Cerebro e IA local offline (Vulkan/GPU), RAG híbrido BM25 + ChromaDB, y su variante escolar Nexo-CABA en escuelas públicas.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+  <!-- Navegación -->
+  <header class="navbar">
+    <div class="container nav-wrapper">
+      <a href="../index.html" class="nav-brand">
+        <img src="../manual/img/com-org.png" alt="Logo">
+        <span>ECOSISTEMA<span class="accent">.SOBERANO</span></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">← Volver al Portal</a></li>
+        <li><a href="../index.html#desarrollos">Desarrollos</a></li>
+        <li><a href="../index.html#documentacion">Manuales</a></li>
+        <li><a href="../manifiesto.html">Manifiesto</a></li>
+        <li><a href="../estatuto.html">Estatuto</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container-narrow section-padding">
+
+    <div style="margin-bottom: 32px;">
+      <span class="badge badge-amber" style="margin-bottom: 12px;">
+        <span class="badge-dot"></span> Inferencia Local Offline · PySide6 · RAG Híbrido
+      </span>
+      <h1 style="font-size: clamp(2rem, 3.8vw, 2.6rem); margin-bottom: 12px;">
+        ⚡ Nexo ∞ & Nexo-CABA
+      </h1>
+      <p style="font-size: 1.1rem; color: var(--text-secondary);">
+        Entorno de optimización cognitiva privada y asistente pedagógico institucional para directivos y docentes de escuelas públicas.
+      </p>
+    </div>
+
+    <!-- 1. Nexo ∞ Segundo Cerebro -->
+    <section style="margin-bottom: 48px;">
+      <div class="card card-tactical-amber" style="padding: 28px; margin-bottom: 24px;">
+        <h2 style="font-size: 1.3rem; color: var(--accent-amber); margin-bottom: 12px;">
+          Nexo ∞: Segundo Cerebro e IA Local
+        </h2>
+        <p style="margin-bottom: 14px;">
+          Aplicación nativa de escritorio construida en Python y PySide6 (Qt) para la gestión soberana de conocimiento privado bajo formato de vault Obsidian. Permite ingestar, relacionar y consultar grandes volúmenes de documentos normativos, técnicos o literarios con un LLM cuantizado ejecutándose <strong>100% en local mediante llama.cpp (aceleración GPU Vulkan)</strong>, sin conexión a internet ni fuga de datos.
+        </p>
+        <p>
+          Incorpora búsqueda híbrida con ranking BM25 + ChromaDB unificado mediante <em>Reciprocal Rank Fusion</em> (RRF) y generación de grafos conceptuales interactivos para detectar contradicciones y puntos ciegos.
+        </p>
+      </div>
+
+      <div class="docs-table-wrapper" style="margin-bottom: 24px;">
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Capacidad</th>
+              <th>Mecanismo Técnico</th>
+              <th>Ventaja</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Inferencia Local</strong></td>
+              <td>llama-server.exe (Vulkan x64) + modelos GGUF (Qwen2.5 / LFM2.5).</td>
+              <td>Cero costo de API, total privacidad y latencia ultra baja.</td>
+            </tr>
+            <tr>
+              <td><strong>RAG Híbrido</strong></td>
+              <td>Capa 0 (anclaje léxico) + Capa 1 (BM25 + ChromaDB RRF) + Capa 2 (Lost-in-the-Middle).</td>
+              <td>Elimina alucinaciones al responder ceñido a las leyes y documentos reales.</td>
+            </tr>
+            <tr>
+              <td><strong>Enriquecimiento IA</strong></td>
+              <td>Extracción automática de YAML frontmatter y taxonomías temáticas.</td>
+              <td>Estructura el conocimiento sin requerir etiquetado manual.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 2. Caso de Éxito: Nexo-CABA para Escuelas -->
+    <section style="margin-bottom: 48px;" id="educacion">
+      <h2 style="font-size: 1.4rem; margin-bottom: 20px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+        Nexo-CABA: Asistente Pedagógico para Escuelas Públicas
+      </h2>
+
+      <div class="card card-tactical-border" style="padding: 24px; margin-bottom: 24px;">
+        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 12px;">
+          <span class="badge badge-emerald">En Prueba Piloto Activa</span>
+          <span style="font-size: 0.85rem; color: var(--text-muted);">Escuela Pública CABA · Octubre 2026</span>
+        </div>
+        <p style="margin-bottom: 14px;">
+          Nexo-CABA adapta el motor Nexo a las necesidades de directores y docentes de escuelas públicas de la Ciudad de Buenos Aires. Elimina la burocracia administrativa asistiendo en la redacción de <strong>Planificaciones Anuales</strong> y <strong>Proyectos Docentes</strong> alineados con el Diseño Curricular de CABA y leyes nacionales (ESI 26.150, NNyA 26.061, Educación Ambiental 27.621).
+        </p>
+        <p style="font-size: 0.95rem; font-weight: 500; color: var(--text-primary);">
+          Principios clave de diseño:
+        </p>
+        <ul style="list-style: none; margin-top: 8px; display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem;">
+          <li>✓ <strong>Cero tecnicismos:</strong> La interfaz no muestra palabras como "RAG", "Vault", "Embeddings" ni "Markdown".</li>
+          <li>✓ <strong>Flujo guiado en 4 pasos:</strong> Parámetros institucionales → Núcleo temático → Borrador asistido → Validación.</li>
+          <li>✓ <strong>11 Reglas de Coherencia Normativa:</strong> Validaciones automáticas deterministas sin consumir cuota de red.</li>
+          <li>✓ <strong>Exportación Directa a Word (.docx):</strong> Genera el documento listo para entregar con membrete institucional oficial en un solo clic.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 3. Descarga y Despliegue -->
+    <section style="margin-bottom: 48px;" id="descarga">
+      <h2 style="font-size: 1.4rem; margin-bottom: 20px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+        Despliegue y Ejecución
+      </h2>
+      <div class="card" style="padding: 24px;">
+        <p style="margin-bottom: 12px;">
+          Nexo-CABA se empaqueta como aplicación nativa standalone para Windows sin dependencias externas:
+        </p>
+        <pre><code># Estructura del instalador ejecutable
+NexoCABA_Setup_1.0.0.exe (Inno Setup 6 + PyInstaller)
+- No requiere instalar Python ni Obsidian previamente.
+- Incluye la base normativa pre-indexada de CABA en ChromaDB local.</code></pre>
+      </div>
+    </section>
+
+    <!-- Navegación final -->
+    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 28px; flex-wrap: wrap; gap: 16px;">
+      <a href="com-org.html" class="btn btn-outline">← Ficha Com Org</a>
+      <a href="redar.html" class="btn btn-primary">Ver Ficha RedAr →</a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-bottom">
+      <div>Nexo Suite · Inteligencia Local Soberana</div>
+      <div>Filosofía del Discernimiento y Gestión Comunitaria</div>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('is-open');
+      });
+    }
+  </script>
+</body>
+</html>
+
