@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rastreo-Cero — Detección Forense Local de Spyware Mercenario // Ecosistema Soberano</title>
+  <meta name="description" content="Ficha técnica de Rastreo-Cero: kit de triaje forense local de solo lectura para auditar indicios de spyware mercenario (Pegasus, Predator, Candiru) en Windows, Mac, Linux, Android e iOS.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+  <!-- Navegación -->
+  <header class="navbar">
+    <div class="container nav-wrapper">
+      <a href="../index.html" class="nav-brand">
+        <img src="../manual/img/com-org.png" alt="Logo">
+        <span>ECOSISTEMA<span class="accent">.SOBERANO</span></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">← Volver al Portal</a></li>
+        <li><a href="../index.html#desarrollos">Desarrollos</a></li>
+        <li><a href="../index.html#documentacion">Manuales</a></li>
+        <li><a href="../manifiesto.html">Manifiesto</a></li>
+        <li><a href="../estatuto.html">Estatuto</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container-narrow section-padding">
+
+    <div style="margin-bottom: 32px;">
+      <span class="badge badge-emerald" style="margin-bottom: 12px;">
+        <span class="badge-dot"></span> Triaje Forense · Read-Only · Zero-Network
+      </span>
+      <h1 style="font-size: clamp(2rem, 3.8vw, 2.6rem); margin-bottom: 12px;">
+        🔍 Rastreo-Cero (Rastro Cero)
+      </h1>
+      <p style="font-size: 1.1rem; color: var(--text-secondary);">
+        Kit de auditoría forense local de solo lectura para rastreo de vectores de spyware mercenario de grado estatal (Pegasus, Predator, Candiru, Graphite) en ordenadores y copias de seguridad móviles.
+      </p>
+    </div>
+
+    <!-- 1. Resumen y Propósito -->
+    <section class="card" style="margin-bottom: 24px;">
+      <h3 style="margin-bottom: 12px; font-family: var(--font-mono); color: var(--accent-emerald);">
+        01. Propósito y Filosofía Operativa
+      </h3>
+      <p style="margin-bottom: 12px;">
+        <strong>Rastreo-Cero</strong> es una herramienta de ciberdefensa cívica construida sobre el motor de triaje de <em>Zero Breach</em>. Su objetivo primordial es permitir que periodistas, activistas, dirigentes sociales y ciudadanos puedan verificar sus propios dispositivos sin entregar datos sensibles ni confiar en plataformas de diagnóstico basadas en la nube.
+      </p>
+      <div class="alert alert-info" style="margin: 12px 0;">
+        <strong>🔒 Principio Read-Only estricto:</strong> Rastreo-Cero jamás altera configuraciones de sistema, llaves ni archivos auditados. Durante el análisis técnico, las conexiones de red están completamente bloqueadas a nivel de proceso para imposibilitar fugas de datos o alertar a atacantes remotos.
+      </div>
+    </section>
+
+    <!-- 2. Arquitectura de Ciberdefensa -->
+    <section class="card" style="margin-bottom: 24px;">
+      <h3 style="margin-bottom: 12px; font-family: var(--font-mono); color: var(--accent-emerald);">
+        02. Arquitectura Técnica y Capacidades
+      </h3>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; padding-left: 0;">
+        <li style="display: flex; gap: 10px; align-items: flex-start;">
+          <span style="color: var(--accent-emerald); font-family: var(--font-mono);">[A]</span>
+          <div>
+            <strong>Cobertura Multiplataforma:</strong> Análisis directo de estaciones de trabajo (Windows 10/11, macOS, distribuciones Linux) e inspección de dispositivos móviles (teléfonos Android vía puente ADB y copias de seguridad de iPhone/iOS).
+          </div>
+        </li>
+        <li style="display: flex; gap: 10px; align-items: flex-start;">
+          <span style="color: var(--accent-emerald); font-family: var(--font-mono);">[B]</span>
+          <div>
+            <strong>Aislamiento de Red durante el Escaneo:</strong> Las llamadas de red en tiempo de análisis quedan inhabilitadas. No se efectúan consultas DNS ni subidas de telemetría hacia ningún servidor.
+          </div>
+        </li>
+        <li style="display: flex; gap: 10px; align-items: flex-start;">
+          <span style="color: var(--accent-emerald); font-family: var(--font-mono);">[C]</span>
+          <div>
+            <strong>Indicadores Curados (IoCs / YARA):</strong> Cruce exhaustivo con bases de firmas STIX, reglas YARA específicas (Candiru, DevilsTongue) y huellas de dominios atribuidos a consorcios de cibervigilancia (NSO Group, Cytrox/Intellexa).
+          </div>
+        </li>
+        <li style="display: flex; gap: 10px; align-items: flex-start;">
+          <span style="color: var(--accent-emerald); font-family: var(--font-mono);">[D]</span>
+          <div>
+            <strong>Reporte Honesto y No Conclusivo:</strong> La herramienta detalla la certeza del hallazgo y las limitaciones del análisis. Un resultado sin indicios detectados se informa con rigurosidad ética, aclarando siempre las áreas que no pudieron ser auditadas.
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 3. Guía Rápida de Despliegue -->
+    <section class="card" style="margin-bottom: 24px;">
+      <h3 style="margin-bottom: 12px; font-family: var(--font-mono); color: var(--accent-emerald);">
+        03. Instrucciones de Uso Rápido
+      </h3>
+      <p style="margin-bottom: 14px;">
+        Rastreo-Cero no requiere cuentas ni conocimientos técnicos avanzados. Se ejecuta en entorno local mediante Python 3.10+:
+      </p>
+
+      <div style="margin-bottom: 16px;">
+        <h4 style="font-size: 0.92rem; font-family: var(--font-mono); margin-bottom: 6px; color: var(--text-primary);">
+          A. Lanzador en Windows (CMD / PowerShell):
+        </h4>
+        <pre><code>cd D:\Sitio\Rastreo-Cero
+run-gui.cmd</code></pre>
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <h4 style="font-size: 0.92rem; font-family: var(--font-mono); margin-bottom: 6px; color: var(--text-primary);">
+          B. Modo Terminal / Escaneo Rápido (Linux / macOS):
+        </h4>
+        <pre><code>python3 -X utf8 scan/zero-breach-toolkit.py --lang es</code></pre>
+      </div>
+
+      <div class="alert alert-warning" style="margin: 12px 0;">
+        <strong>⚠️ Nota de Emergencia:</strong> Si sospechas que eres blanco de un ataque activo de espionaje estatal, preserva el equipo sin reiniciar ni actualizar el sistema operativo y recurre a laboratorios de seguridad cívica independientes antes de manipular evidencias.
+      </div>
+    </section>
+
+    <!-- 4. Complementariedad con el Ecosistema -->
+    <section class="card" style="margin-bottom: 24px;">
+      <h3 style="margin-bottom: 12px; font-family: var(--font-mono); color: var(--accent-emerald);">
+        04. Articulación con Sentinels y Com Org
+      </h3>
+      <p style="margin-bottom: 10px;">
+        Dentro del Ecosistema Soberano, <strong>Rastreo-Cero</strong> y <strong>Sentinels</strong> forman una pinza de ciberdefensa complementaria:
+      </p>
+      <ul style="padding-left: 20px; line-height: 1.8;">
+        <li><strong>Sentinels:</strong> Actúa como guardián residente y activo dentro del dispositivo Android (cifrado XOR en memoria RAM, defensa contra stingrays de telefonía y zeroización inmediata ante coacción física).</li>
+        <li><strong>Rastreo-Cero:</strong> Actúa como estación de diagnóstico forense de alta profundidad para auditar desde el exterior sistemas operativos de escritorio, móviles vinculados y backups de iOS.</li>
+      </ul>
+    </section>
+
+    <div style="display: flex; gap: 12px; justify-content: center; margin-top: 32px;">
+      <a href="../index.html" class="btn btn-primary">← Volver al Portal Principal</a>
+      <a href="../index.html#descargas" class="btn btn-outline">Sección Descargas</a>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="container footer-bottom">
+      <div>© Ecosistema Soberano · Las Malvinas son Argentinas</div>
+      <div>Sin cookies de rastreo · Sin telemetría · Soberanía de Silicio</div>
+    </div>
+  </footer>
+
+</body>
+</html>
+

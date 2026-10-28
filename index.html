@@ -153,13 +153,35 @@
           <h2 style="font-size: 1.8rem;">Herramientas del Ecosistema</h2>
         </div>
         <p style="color: var(--text-muted); font-size: 0.9rem;">
-          4 componentes modulares listos para su uso y despliegue.
+          5 componentes modulares listos para su uso y despliegue.
         </p>
       </div>
 
       <div class="grid-ecosystem">
 
-        <!-- 1. SENTINELS -->
+        <!-- 1. RASTREO-CERO -->
+        <article class="card card-tactical-border product-card">
+          <div class="product-header">
+            <div class="product-title">
+              <span>🔍 Rastreo-Cero</span>
+            </div>
+            <span class="badge badge-emerald">Triaje Forense</span>
+          </div>
+          <p class="product-desc">
+            Kit forense local de solo lectura para la <strong>detección de spyware mercenario de grado estatal (Pegasus, Predator, Candiru, Graphite)</strong> en ordenadores Windows, Mac y Linux, teléfonos Android y copias de seguridad de iOS.
+          </p>
+          <ul class="product-features">
+            <li><strong>Modo Read-Only Estricto:</strong> No altera datos del sistema ni configuraciones; sólo genera reportes temporales.</li>
+            <li><strong>Zero-Network durante Análisis:</strong> Bloqueo absoluto de tráfico de red en la ejecución para impedir fugas.</li>
+            <li><strong>Firmas Curadas & YARA:</strong> Indicadores de compromiso STIX y reglas YARA adaptadas para evitar falsas alarmas.</li>
+          </ul>
+          <div class="product-actions">
+            <a href="docs/rastreo-cero.html" class="btn btn-outline btn-sm">Ficha Técnica</a>
+            <a href="#descargas" class="btn btn-outline btn-sm">Instrucciones de Uso</a>
+          </div>
+        </article>
+
+        <!-- 2. SENTINELS -->
         <article class="card card-tactical-border product-card">
           <div class="product-header">
             <div class="product-title">
@@ -312,6 +334,12 @@
           </thead>
           <tbody>
             <tr>
+              <td><strong>Rastreo-Cero</strong></td>
+              <td>Ficha Técnica & Triaje Forense</td>
+              <td>Análisis de indicios de spyware estatal (Pegasus / Candiru) en PC y móviles.</td>
+              <td><a href="docs/rastreo-cero.html">Consultar Ficha →</a></td>
+            </tr>
+            <tr>
               <td><strong>Sentinels</strong></td>
               <td>Ficha Técnica & Guía Anti-Spyware</td>
               <td>Cifrado XOR, blindaje RAM C++ y defensa contra Pegasus / Cellebrite.</td>
@@ -370,6 +398,12 @@
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 32px;">
         <div class="card" style="text-align: center; padding: 20px;">
+          <h4 style="font-family: var(--font-mono); margin-bottom: 8px;">Rastreo-Cero</h4>
+          <p style="font-size: 0.82rem; margin-bottom: 16px;">Kit forense anti-spyware (Python/GUI).</p>
+          <a href="docs/rastreo-cero.html#guia" class="btn btn-outline btn-sm">Guía de Inicio</a>
+        </div>
+
+        <div class="card" style="text-align: center; padding: 20px;">
           <h4 style="font-family: var(--font-mono); margin-bottom: 8px;">Com Org (P2P)</h4>
           <p style="font-size: 0.82rem; margin-bottom: 16px;">Cliente de escritorio para debate soberano.</p>
           <a href="#" class="btn btn-outline btn-sm" onclick="alert('Paquete disponible para Windows y Linux en el repositorio oficial.'); return false;">Descargar v1.0</a>
@@ -406,6 +440,7 @@
       <div>
         <h4 style="font-size: 0.95rem; margin-bottom: 12px;">Desarrollos</h4>
         <ul class="footer-links">
+          <li><a href="docs/rastreo-cero.html">Rastreo-Cero (Forense Anti-Spyware)</a></li>
           <li><a href="docs/sentinels.html">Sentinels (Defensa Android)</a></li>
           <li><a href="docs/com-org.html">Com Org (Red P2P)</a></li>
           <li><a href="docs/nexo.html">Nexo ∞ & Nexo-CABA</a></li>
