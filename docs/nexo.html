@@ -114,22 +114,67 @@
           <li>✓ <strong>11 Reglas de Coherencia Normativa:</strong> Validaciones automáticas deterministas sin consumir cuota de red.</li>
           <li>✓ <strong>Exportación Directa a Word (.docx):</strong> Genera el documento listo para entregar con membrete institucional oficial en un solo clic.</li>
         </ul>
+        <p style="margin-top: 16px; font-size: 0.9rem; color: var(--text-secondary);">
+          El acceso al instalador se otorga mediante <strong>demo de 30 días con licencia personalizada</strong> para la escuela solicitante, con uso completo y sin funciones restringidas.
+        </p>
+        <div style="margin-top: 18px;">
+          <a href="#descarga" class="btn btn-primary btn-sm">Solicitar Demo Docente</a>
+        </div>
       </div>
     </section>
 
-    <!-- 3. Descarga y Despliegue -->
+    <!-- 3. Descarga y Despliegue: entrega bajo solicitud de demo -->
     <section style="margin-bottom: 48px;" id="descarga">
       <h2 style="font-size: 1.4rem; margin-bottom: 20px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
-        Despliegue y Ejecución
+        Descarga y Entrega del Instalador
       </h2>
+
+      <div class="card card-tactical-amber" style="padding: 26px; margin-bottom: 24px;">
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 14px;">
+          <span class="badge badge-amber">Entrega por Solicitud</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono);">Demo 30 días · Licencia personalizada</span>
+        </div>
+
+        <p style="margin-bottom: 12px;">
+          El instalador <code class="codigo">NexoCABA_Setup_1.0.0.exe</code> <strong>no se descarga libremente desde este portal</strong>. Se entrega únicamente como <strong>demo de 30 días con licencia personalizada</strong>, habilitada para el <strong>uso completo de la aplicación, sin funciones restringidas ni módulos bloqueados</strong>.
+        </p>
+
+        <p style="font-size: 0.95rem; font-weight: 600; margin-bottom: 8px;">Para solicitar el demo, escribir a:</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.92rem; margin-bottom: 18px;">
+          <li>
+            ✉️ Correo electrónico:
+            <a href="mailto:comorg026@gmail.com?subject=Solicitud%20de%20demo%20Nexo-CABA&amp;body=Nombre%20y%20apellido%20del%20docente%20o%20directivo%3A%0ARol%20(docente%2C%20director%2C%20vicedirector%2C%20secretario)%3A%0AEscuela%20publica%20(nombre%20y%20numero)%3A%0AJurisdiccion%20%2F%20ciudad%20%2F%20barrio%3A%0ADistrito%20escolar%3A%0ANivel%20y%20area%20(inicial%2C%20primaria%2C%20secundaria%20%2F%20materia)%3A%0ACorreo%20de%20contacto%3A%0ATelefono%20(opcional)%3A" style="font-family: var(--font-mono); font-weight: 600;">comorg026@gmail.com</a>
+          </li>
+          <li>
+            𝕏 Red social X:
+            <a href="https://x.com/Miguel_CCom5" target="_blank" rel="noopener" style="font-family: var(--font-mono); font-weight: 600;">@Miguel_CCom5</a>
+            <span style="color: var(--text-muted);"> (mensaje directo)</span>
+          </li>
+        </ul>
+
+        <p style="font-size: 0.95rem; font-weight: 600; margin-bottom: 8px;">Datos que debe incluir la petición del demo:</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 7px; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">
+          <li>• Nombre y número de la <strong>escuela pública</strong> solicitante.</li>
+          <li>• Nombre y apellido del <strong>docente o directivo</strong> responsable, con su rol (docente, director, vicedirector, secretario).</li>
+          <li>• <strong>Ciudad, barrio y distrito escolar</strong> de la institución.</li>
+          <li>• <strong>Nivel y área</strong> de desempeño (inicial, primaria, secundaria / materia).</li>
+          <li>• <strong>Correo de contacto</strong> para el envío de la licencia y del instalador.</li>
+        </ul>
+
+        <p style="font-size: 0.86rem; color: var(--text-muted);">
+          La licencia se emite a nombre de la institución solicitante, se activa con la entrega del instalador y tiene una vigencia de <strong>30 días corridos</strong>. Durante ese período la aplicación opera de forma completa: sin funciones restringidas, sin límites de uso y sin módulos de demostración bloqueados.
+        </p>
+      </div>
+
       <div class="card" style="padding: 24px;">
         <p style="margin-bottom: 12px;">
-          Nexo-CABA se empaqueta como aplicación nativa standalone para Windows sin dependencias externas:
+          Una vez concedida la licencia, Nexo-CABA se distribuye como aplicación nativa standalone para Windows, sin dependencias externas:
         </p>
         <pre><code># Estructura del instalador ejecutable
 NexoCABA_Setup_1.0.0.exe (Inno Setup 6 + PyInstaller)
 - No requiere instalar Python ni Obsidian previamente.
-- Incluye la base normativa pre-indexada de CABA en ChromaDB local.</code></pre>
+- Incluye la base normativa pre-indexada de CABA en ChromaDB local.
+- Requiere aceptación de la licencia de uso al instalar (legales.txt).</code></pre>
       </div>
     </section>
 
@@ -143,7 +188,12 @@ NexoCABA_Setup_1.0.0.exe (Inno Setup 6 + PyInstaller)
 
   <!-- Footer -->
   <footer>
-    <div class="container footer-bottom">
+    <div class="container footer-bottom" style="flex-direction: column; gap: 10px;">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px; font-size: 0.85rem; color: var(--text-muted);">
+        <span style="font-weight: 600; font-family: var(--font-mono);">Solicitud de demo:</span>
+        <a href="mailto:comorg026@gmail.com" style="color: var(--accent-emerald); font-family: var(--font-mono);">comorg026@gmail.com</a>
+        <a href="https://x.com/Miguel_CCom5" target="_blank" rel="noopener" style="color: var(--accent-emerald); font-family: var(--font-mono);">@Miguel_CCom5</a>
+      </div>
       <div>Nexo Suite · Inteligencia Local Soberana</div>
       <div>Filosofía del Discernimiento y Gestión Comunitaria</div>
     </div>

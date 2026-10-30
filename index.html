@@ -177,7 +177,7 @@
           </ul>
           <div class="product-actions">
             <a href="docs/rastreo-cero.html" class="btn btn-outline btn-sm">Ficha Técnica</a>
-            <a href="#descargas" class="btn btn-outline btn-sm">Instrucciones de Uso</a>
+            <a href="#descarga-rastreo-cero" class="btn btn-outline btn-sm">Descarga e Instalación</a>
           </div>
         </article>
 
@@ -241,10 +241,11 @@
             <li><strong>Inferencia 100% Local:</strong> Backend llama.cpp con aceleración Vulkan (GPU). Datos sensibles nunca viajan a la nube.</li>
             <li><strong>Búsqueda Híbrida RAG:</strong> ChromaDB + BM25 con Reciprocal Rank Fusion (RRF) y grafos conceptuales.</li>
             <li><strong>Módulo Escolar CABA:</strong> 11 reglas deterministas de coherencia curricular GCBA sin exponer términos técnicos.</li>
+            <li><strong>Entrega bajo Demo Docente:</strong> 30 días con licencia personalizada y acceso completo, sin funciones restringidas.</li>
           </ul>
           <div class="product-actions">
             <a href="docs/nexo.html" class="btn btn-outline btn-sm">Ficha Técnica</a>
-            <a href="docs/nexo.html#educacion" class="btn btn-outline btn-sm">Caso Escuelas CABA</a>
+            <a href="docs/nexo.html#descarga" class="btn btn-primary btn-sm">Solicitar Demo Docente</a>
           </div>
         </article>
 
@@ -335,9 +336,9 @@
           <tbody>
             <tr>
               <td><strong>Rastreo-Cero</strong></td>
-              <td>Ficha Técnica & Triaje Forense</td>
+              <td>Ficha Técnica & Instalación Windows / Linux</td>
               <td>Análisis de indicios de spyware estatal (Pegasus / Candiru) en PC y móviles.</td>
-              <td><a href="docs/rastreo-cero.html">Consultar Ficha →</a></td>
+              <td><a href="docs/rastreo-cero.html#guia">Ficha e Instalación →</a></td>
             </tr>
             <tr>
               <td><strong>Sentinels</strong></td>
@@ -366,8 +367,8 @@
             <tr>
               <td><strong>Nexo-CABA</strong></td>
               <td>Guía Docente Escuelas Públicas</td>
-              <td>Generación de planificaciones y validación curricular CABA.</td>
-              <td><a href="docs/nexo.html#educacion">Ver Guía Escolar →</a></td>
+              <td>Generación de planificaciones, validación curricular CABA y solicitud de demo de 30 días.</td>
+              <td><a href="docs/nexo.html#descarga">Solicitar Demo →</a></td>
             </tr>
             <tr>
               <td><strong>RedAr</strong></td>
@@ -393,14 +394,15 @@
       <span class="badge badge-emerald" style="margin-bottom: 12px;">Descargas & Despliegue</span>
       <h2 style="font-size: 1.8rem; margin-bottom: 16px;">Acceso a los Binarios y Paquetes</h2>
       <p style="color: var(--text-secondary); margin-bottom: 32px;">
-        Descargá los clientes locales o instaladores para tu plataforma. Sin telemetría y con firma criptográfica verificable.
+        Descargá los clientes locales o instaladores para tu plataforma. Sin telemetría y con firma criptográfica verificable. El instalador de <strong>Nexo-CABA</strong> se entrega bajo solicitud de demo docente.
       </p>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 32px;">
         <div class="card" style="text-align: center; padding: 20px;">
           <h4 style="font-family: var(--font-mono); margin-bottom: 8px;">Rastreo-Cero</h4>
-          <p style="font-size: 0.82rem; margin-bottom: 16px;">Kit forense anti-spyware (Python/GUI).</p>
-          <a href="docs/rastreo-cero.html#guia" class="btn btn-outline btn-sm">Guía de Inicio</a>
+          <p style="font-size: 0.82rem; margin-bottom: 16px;">Kit forense anti-spyware para Windows 10/11 y Linux x86-64.</p>
+          <a href="#descarga-rastreo-cero" class="btn btn-primary btn-sm">Descargar / Instalar</a>
+          <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 10px;">Instalador .exe · AppImage · .tar.gz</p>
         </div>
 
         <div class="card" style="text-align: center; padding: 20px;">
@@ -417,9 +419,142 @@
 
         <div class="card" style="text-align: center; padding: 20px;">
           <h4 style="font-family: var(--font-mono); margin-bottom: 8px;">Nexo-CABA</h4>
-          <p style="font-size: 0.82rem; margin-bottom: 16px;">Instalador standalone para escuelas (.exe).</p>
-          <a href="docs/nexo.html#descarga" class="btn btn-outline btn-sm">Instalador Docente</a>
+          <p style="font-size: 0.82rem; margin-bottom: 16px;">Instalador docente para escuelas (.exe) — entrega por solicitud.</p>
+          <a href="#demo-nexo-caba" class="btn btn-primary btn-sm">Solicitar Demo Docente</a>
+          <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 10px;">Demo de 30 días · Licencia personalizada</p>
         </div>
+      </div>
+
+      <!-- Detalle: instalación de Rastreo-Cero en Windows y Linux -->
+      <div class="card" id="descarga-rastreo-cero" style="text-align: left; padding: 26px; margin-bottom: 24px; border-left: 3px solid var(--accent-emerald);">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px;">
+          <span class="badge badge-emerald">Rastreo-Cero · v0.1.4</span>
+          <span style="font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-mono);">Binarios compilados · sin Python instalado</span>
+        </div>
+
+        <p style="font-size: 0.93rem; margin-bottom: 16px;">
+          Dos plataformas soportadas con paquetes ya compilados. En <strong>Linux</strong> hay tres vías de instalación según el tipo de equipo: AppImage para escritorio, paquete <code class="codigo">.tar.gz</code> portable para servidores o sistemas sin FUSE, y binario ELF único con modo consola.
+        </p>
+
+        <div class="docs-table-wrapper" style="margin-bottom: 20px;">
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>Archivo</th>
+                <th>Plataforma</th>
+                <th>Tamaño</th>
+                <th>Uso</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code class="codigo">Rastro-cero-instalador.exe</code></td>
+                <td>Windows 10/11 x64</td>
+                <td>16,6 MB</td>
+                <td>Instalador por usuario, sin permisos de administrador.</td>
+              </tr>
+              <tr>
+                <td><code class="codigo">Rastro-cero.exe</code></td>
+                <td>Windows 10/11 x64</td>
+                <td>14,8 MB</td>
+                <td>Portable: se abre sin instalar.</td>
+              </tr>
+              <tr>
+                <td><code class="codigo">Rastro-cero-x86_64.AppImage</code></td>
+                <td>Linux x86-64</td>
+                <td>16,3 MB</td>
+                <td>Un archivo, doble clic. Requiere <code class="codigo">libfuse2</code>.</td>
+              </tr>
+              <tr>
+                <td><code class="codigo">Rastro-cero-linux-x86_64.tar.gz</code></td>
+                <td>Linux x86-64</td>
+                <td>15,4 MB</td>
+                <td>Portable para servidores y equipos sin FUSE.</td>
+              </tr>
+              <tr>
+                <td><code class="codigo">Rastro-cero</code></td>
+                <td>Linux x86-64 (ELF)</td>
+                <td>15,5 MB</td>
+                <td>Binario único con modo consola <code class="codigo">--cli</code>.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 style="font-size: 0.95rem; font-family: var(--font-mono); margin-bottom: 8px;">Windows 10 / 11</h4>
+        <pre><code># Instalador (recomendado): se instala en el perfil del usuario, sin admin
+Rastro-cero-instalador.exe
+#   Windows mostrará "Windows protegió su PC" -> Más información -> Ejecutar de todas formas
+#   (el proyecto no tiene certificado de firma comercial: el aviso es esperado)
+
+# Alternativa portable
+Rastro-cero.exe</code></pre>
+
+        <h4 style="font-size: 0.95rem; font-family: var(--font-mono); margin: 18px 0 8px;">Linux (x86-64, glibc 2.35 o posterior)</h4>
+        <pre><code># B.1 AppImage - escritorio, sin instalar nada
+chmod +x Rastro-cero-x86_64.AppImage
+./Rastro-cero-x86_64.AppImage
+
+#   Falta FUSE 2 (libfuse.so.2)?
+sudo apt install libfuse2          # Debian/Ubuntu  (24.04: libfuse2t64)
+sudo dnf install fuse-libs         # Fedora
+sudo pacman -S fuse2               # Arch
+#   O ejecutar sin FUSE:
+./Rastro-cero-x86_64.AppImage --appimage-extract-and-run
+
+# B.2 Paquete portable - servidores y equipos sin FUSE
+tar -xzf Rastro-cero-linux-x86_64.tar.gz
+cd Rastro-cero && chmod +x Rastro-cero && ./Rastro-cero
+
+# B.3 Binario único + modo consola (SSH, sin escritorio)
+chmod +x Rastro-cero
+./Rastro-cero --cli --lang es --scan-type default --no-menu</code></pre>
+
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin: 14px 0 0;">
+          Verificación de integridad: <code class="codigo">sha256sum</code> en Linux y <code class="codigo">certutil -hashfile ... SHA256</code> en Windows, contra la huella publicada. El AppImage no empaqueta <code class="codigo">libX11</code> ni <code class="codigo">libfontconfig</code>: se toman del escritorio del equipo.
+        </p>
+
+        <div style="margin-top: 18px;">
+          <a href="docs/rastreo-cero.html#guia" class="btn btn-primary btn-sm">Guía completa de instalación</a>
+          <a href="docs/rastreo-cero.html" class="btn btn-outline btn-sm">Ficha Técnica</a>
+        </div>
+      </div>
+
+      <!-- Aviso: el instalador de Nexo-CABA se entrega bajo solicitud de demo -->
+      <div class="card" id="demo-nexo-caba" style="text-align: left; padding: 26px; margin-bottom: 28px; border-left: 3px solid var(--accent-amber);">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px;">
+          <span class="badge badge-amber">Nexo-CABA · Instalador Docente</span>
+          <span style="font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-mono);">Demo 30 días · Licencia personalizada</span>
+        </div>
+
+        <p style="font-size: 0.93rem; margin-bottom: 12px;">
+          El instalador de <strong>Nexo-CABA</strong> no es de descarga pública. Se entrega exclusivamente como <strong>demo de 30 días con licencia personalizada</strong>, habilitada para el <strong>uso completo de todas las funciones, sin restricciones ni módulos bloqueados</strong>. Para recibirla, la solicitud debe enviarse a:
+        </p>
+
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; margin-bottom: 18px;">
+          <li>
+            ✉️ Correo electrónico:
+            <a href="mailto:comorg026@gmail.com?subject=Solicitud%20de%20demo%20Nexo-CABA&amp;body=Nombre%20y%20apellido%20del%20docente%20o%20directivo%3A%0ARol%20(docente%2C%20director%2C%20vicedirector%2C%20secretario)%3A%0AEscuela%20publica%20(nombre%20y%20numero)%3A%0AJurisdiccion%20%2F%20ciudad%20%2F%20barrio%3A%0ADistrito%20escolar%3A%0ANivel%20y%20area%20(inicial%2C%20primaria%2C%20secundaria%20%2F%20materia)%3A%0ACorreo%20de%20contacto%3A%0ATelefono%20(opcional)%3A" style="font-family: var(--font-mono); font-weight: 600;">comorg026@gmail.com</a>
+          </li>
+          <li>
+            𝕏 Red social X:
+            <a href="https://x.com/Miguel_CCom5" target="_blank" rel="noopener" style="font-family: var(--font-mono); font-weight: 600;">@Miguel_CCom5</a>
+            <span style="color: var(--text-muted);"> (mensaje directo)</span>
+          </li>
+        </ul>
+
+        <p style="font-size: 0.93rem; font-weight: 600; margin-bottom: 8px;">Datos obligatorios que debe incluir la petición del demo:</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 7px; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">
+          <li>• Nombre y número de la <strong>escuela pública</strong> solicitante.</li>
+          <li>• Nombre y apellido del <strong>docente o directivo</strong> responsable, con su rol (docente, director, vicedirector, secretario).</li>
+          <li>• <strong>Ciudad, barrio y distrito escolar</strong> de la institución.</li>
+          <li>• <strong>Nivel y área</strong> de desempeño (inicial, primaria, secundaria / materia).</li>
+          <li>• <strong>Correo de contacto</strong> para el envío de la licencia y del instalador.</li>
+        </ul>
+
+        <p style="font-size: 0.84rem; color: var(--text-muted);">
+          La licencia se emite a nombre de la institución solicitante, se activa al recibir el instalador y tiene una vigencia de <strong>30 días corridos</strong>. Durante ese período la aplicación funciona de forma completa: no hay funciones restringidas, límites de uso ni módulos de demostración bloqueados.
+        </p>
       </div>
 
       <p style="font-size: 0.82rem; color: var(--text-muted); font-style: italic;">

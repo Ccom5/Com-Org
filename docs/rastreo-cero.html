@@ -93,39 +93,267 @@
       </ul>
     </section>
 
-    <!-- 3. Guía Rápida de Despliegue -->
-    <section class="card" style="margin-bottom: 24px;">
+    <!-- 3. Descarga e Instalación: Windows y Linux -->
+    <section class="card" id="guia" style="margin-bottom: 24px;">
       <h3 style="margin-bottom: 12px; font-family: var(--font-mono); color: var(--accent-emerald);">
-        03. Instrucciones de Uso Rápido
+        03. Descarga e Instalación — Windows y Linux
       </h3>
       <p style="margin-bottom: 14px;">
-        Rastreo-Cero no requiere cuentas ni conocimientos técnicos avanzados. Se ejecuta en entorno local mediante Python 3.10+:
+        Los binarios se entregan ya compilados (<strong>versión 0.1.4</strong>) y <strong>no requieren instalar Python</strong> en el equipo de destino. Cada plataforma tiene su propio artefacto; elija según el sistema operativo y el modo de uso.
       </p>
 
-      <div style="margin-bottom: 16px;">
-        <h4 style="font-size: 0.92rem; font-family: var(--font-mono); margin-bottom: 6px; color: var(--text-primary);">
-          A. Lanzador en Windows (CMD / PowerShell):
-        </h4>
-        <pre><code>cd D:\Sitio\Rastreo-Cero
-run-gui.cmd</code></pre>
+      <div class="docs-table-wrapper" style="margin-bottom: 24px;">
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Archivo</th>
+              <th>Plataforma</th>
+              <th>Tamaño</th>
+              <th>Forma de uso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code class="codigo">Rastro-cero-instalador.exe</code></td>
+              <td>Windows 10/11 · x64</td>
+              <td>16,6 MB</td>
+              <td>Instalador guiado, por usuario, sin permisos de administrador.</td>
+            </tr>
+            <tr>
+              <td><code class="codigo">Rastro-cero.exe</code></td>
+              <td>Windows 10/11 · x64</td>
+              <td>14,8 MB</td>
+              <td>Ejecutable portable: se abre sin instalar nada.</td>
+            </tr>
+            <tr>
+              <td><code class="codigo">Rastro-cero-x86_64.AppImage</code></td>
+              <td>Linux · x86-64</td>
+              <td>16,3 MB</td>
+              <td>Un solo archivo, doble clic. Requiere <code class="codigo">libfuse2</code>.</td>
+            </tr>
+            <tr>
+              <td><code class="codigo">Rastro-cero-linux-x86_64.tar.gz</code></td>
+              <td>Linux · x86-64</td>
+              <td>15,4 MB</td>
+              <td>Portable: servidores, equipos sin FUSE e instalaciones mínimas.</td>
+            </tr>
+            <tr>
+              <td><code class="codigo">Rastro-cero</code></td>
+              <td>Linux · x86-64 (ELF)</td>
+              <td>15,5 MB</td>
+              <td>Binario único sin empaquetar; incluye el modo consola <code class="codigo">--cli</code>.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
-      <div style="margin-bottom: 16px;">
-        <h4 style="font-size: 0.92rem; font-family: var(--font-mono); margin-bottom: 6px; color: var(--text-primary);">
-          B. Modo Terminal / Escaneo Rápido (Linux / macOS):
-        </h4>
-        <pre><code>python3 -X utf8 scan/zero-breach-toolkit.py --lang es</code></pre>
+      <!-- Windows -->
+      <h4 style="font-size: 1rem; font-family: var(--font-mono); margin: 24px 0 10px; color: var(--text-primary);">
+        A. Windows 10 u 11 (x64)
+      </h4>
+
+      <p style="margin-bottom: 10px; font-size: 0.93rem;">
+        <strong>Instalador recomendado.</strong> Se instala en el perfil del usuario (<code class="codigo">%LOCALAPPDATA%\Programs\Rastro Cero</code>), <strong>no pide contraseña de administrador</strong>, crea acceso en el menú Inicio, ofrece un icono opcional en el escritorio e incluye desinstalador. Antes de copiar un solo archivo muestra el <em>Aviso de instalación</em> con el detalle de lo que el programa hace y no hace.
+      </p>
+
+      <pre><code># 1. Descargar y ejecutar el instalador
+Rastro-cero-instalador.exe
+
+# 2. Windows mostrará "Windows protegió su PC" (SmartScreen)
+#    Más información  ->  Ejecutar de todas formas
+#    Motivo: el proyecto es anónimo y no tiene certificado de firma comercial.
+
+# 3. Verificar la huella antes de instalar (opcional, recomendado)
+certutil -hashfile Rastro-cero-instalador.exe SHA256</code></pre>
+
+      <p style="margin: 12px 0; font-size: 0.93rem;">
+        <strong>Alternativa portable:</strong> <code class="codigo">Rastro-cero.exe</code> funciona sin instalación desde una carpeta de confianza o una unidad extraíble. No crea entradas en el sistema ni deja rastros de instalación; el informe se guarda donde usted indique.
+      </p>
+
+      <!-- Linux -->
+      <h4 style="font-size: 1rem; font-family: var(--font-mono); margin: 28px 0 10px; color: var(--text-primary);">
+        B. Linux (x86-64) — tres opciones de instalación
+      </h4>
+
+      <div class="alert alert-info" style="margin: 12px 0;">
+        <strong>Requisitos comunes:</strong> procesador <strong>x86-64</strong>, <strong>glibc 2.35 o posterior</strong> (el binario se compila en Ubuntu 22.04 para conservar ese piso de compatibilidad) y un entorno gráfico con <code class="codigo">libX11</code> y <code class="codigo">libfontconfig</code>, presentes en cualquier escritorio. No es un contenedor: Python, Tk y las listas de indicadores van dentro del paquete, pero las bibliotecas gráficas del sistema se usan del sistema. <strong>No requiere permisos de root</strong> para ejecutarse.
       </div>
+
+      <p style="margin: 14px 0 8px; font-size: 0.93rem;">
+        <strong>B.1 — AppImage (opción recomendada para escritorio).</strong> Un solo archivo que se abre con doble clic, sin instalar ni desinstalar nada.
+      </p>
+
+      <pre><code># Permiso de ejecución (solo la primera vez)
+chmod +x Rastro-cero-x86_64.AppImage
+
+# Abrir la ventana
+./Rastro-cero-x86_64.AppImage
+
+# Comprobar la versión sin abrir la ventana
+./Rastro-cero-x86_64.AppImage --version</code></pre>
+
+      <p style="margin: 10px 0 6px; font-size: 0.9rem; color: var(--text-secondary);">
+        El AppImage necesita <strong>FUSE 2</strong> para montarse. Instalación según distribución:
+      </p>
+
+      <pre><code># Debian / Ubuntu (hasta 23.10)
+sudo apt install libfuse2
+
+# Ubuntu 24.04 y derivadas (paquete renombrado)
+sudo apt install libfuse2t64
+
+# Fedora
+sudo dnf install fuse-libs
+
+# Arch / Manjaro
+sudo pacman -S fuse2
+
+# openSUSE
+sudo zypper install fuse</code></pre>
+
+      <p style="margin: 10px 0 6px; font-size: 0.9rem; color: var(--text-secondary);">
+        Si no puede o no quiere instalar FUSE, el mismo AppImage funciona en modo extraído:
+      </p>
+
+      <pre><code># Opción 1: extraer y ejecutar en un paso, sin FUSE
+./Rastro-cero-x86_64.AppImage --appimage-extract-and-run
+
+# Opción 2: extraer de forma permanente y ejecutar desde la carpeta
+./Rastro-cero-x86_64.AppImage --appimage-extract
+./squashfs-root/AppRun</code></pre>
+
+      <p style="margin: 16px 0 8px; font-size: 0.93rem;">
+        <strong>B.2 — Paquete .tar.gz (servidores, equipos sin FUSE, instalaciones mínimas).</strong> Es la vía más robusta en Linux: no depende de FUSE ni de ningún montaje. Incluye el binario, la entrada de menú y los iconos.
+      </p>
+
+      <pre><code># 1. Descomprimir
+tar -xzf Rastro-cero-linux-x86_64.tar.gz
+
+# 2. Dar permiso de ejecución y abrir
+cd Rastro-cero
+chmod +x Rastro-cero
+./Rastro-cero</code></pre>
+
+      <p style="margin: 10px 0 6px; font-size: 0.9rem; color: var(--text-secondary);">
+        Contenido del paquete:
+      </p>
+
+      <pre><code>Rastro-cero/
+├── Rastro-cero            binario ELF x86-64 (sin dependencias de Python)
+├── rastro-cero.desktop    entrada de menú
+├── rastro-cero.png        icono 256x256
+└── rastro-cero.svg        icono vectorial</code></pre>
+
+      <p style="margin: 10px 0 6px; font-size: 0.9rem; color: var(--text-secondary);">
+        Para dejarlo integrado en el menú de aplicaciones del usuario (sin root):
+      </p>
+
+      <pre><code>mkdir -p ~/.local/share/applications ~/.local/share/icons/hicolor/256x256/apps
+cp rastro-cero.desktop ~/.local/share/applications/
+cp rastro-cero.png     ~/.local/share/icons/hicolor/256x256/apps/
+
+# Apuntar la entrada a la ruta real del binario
+sed -i "s|^Exec=.*|Exec=$PWD/Rastro-cero|" ~/.local/share/applications/rastro-cero.desktop
+update-desktop-database ~/.local/share/applications 2>/dev/null || true</code></pre>
+
+      <p style="margin: 16px 0 8px; font-size: 0.93rem;">
+        <strong>B.3 — Binario ELF único.</strong> Si ya dispone del archivo <code class="codigo">Rastro-cero</code> sin empaquetar, basta con darle permiso y ejecutarlo; es la forma habitual de llevarlo a un servidor por <code class="codigo">scp</code>.
+      </p>
+
+      <pre><code>chmod +x Rastro-cero
+./Rastro-cero</code></pre>
+
+      <p style="margin: 16px 0 8px; font-size: 0.93rem;">
+        <strong>B.4 — Modo consola (sin escritorio gráfico).</strong> El mismo binario abre la ventana o funciona como herramienta de línea de comandos. Útil en servidores, sesiones SSH o auditorías desatendidas:
+      </p>
+
+      <pre><code># Menú interactivo en terminal, en español
+./Rastro-cero --cli --lang es
+
+# Escaneo estándar del equipo sin menús
+./Rastro-cero --cli --lang es --scan-type default --no-menu
+
+# Tipos de escaneo disponibles:
+#   default   revisión estándar del equipo
+#   full      revisión completa (más lenta)
+#   browser   solo navegadores y perfiles web
+#   targeted  rutas concretas indicadas por el usuario</code></pre>
+
+      <div class="alert alert-warning" style="margin: 16px 0;">
+        <strong>⚠️ Diagnóstico rápido de fallos en Linux:</strong>
+        <ul style="padding-left: 20px; margin-top: 8px; line-height: 1.7; font-size: 0.9rem;">
+          <li><code class="codigo">error while loading shared libraries: libfuse.so.2</code> → falta FUSE 2: instálelo o use <code class="codigo">--appimage-extract-and-run</code> / el <code class="codigo">.tar.gz</code>.</li>
+          <li><code class="codigo">cannot execute binary file: Exec format error</code> → el equipo no es x86-64 (por ejemplo ARM): no hay binario publicado para esa arquitectura; debe compilarse en el equipo.</li>
+          <li><code class="codigo">version 'GLIBC_2.35' not found</code> → distribución más antigua que Ubuntu 22.04: use el paquete portable recompilado o compile localmente.</li>
+          <li>El AppImage no abre tras copiarlo → perdió el permiso de ejecución: <code class="codigo">chmod +x</code>.</li>
+          <li>Sin ventana en un servidor → no hay servidor gráfico: use el modo <code class="codigo">--cli</code>.</li>
+        </ul>
+      </div>
+
+      <p style="margin: 16px 0 8px; font-size: 0.93rem;">
+        <strong>Verificación de integridad (Windows y Linux).</strong> Ningún artefacto está firmado con certificado comercial: el proyecto es anónimo y un certificado exige una identidad legal con nombre. La garantía disponible es la huella SHA-256 publicada junto a cada archivo:
+      </p>
+
+      <pre><code># Linux
+sha256sum Rastro-cero-x86_64.AppImage
+
+# Windows (PowerShell o CMD)
+certutil -hashfile Rastro-cero-instalador.exe SHA256</code></pre>
+
+      <p style="margin: 10px 0; font-size: 0.88rem; color: var(--text-muted);">
+        Si la huella no coincide con la publicada, no abra el archivo. Tenga en cuenta que el binario de PyInstaller no es reproducible byte a byte: una recompilación propia dará un SHA-256 distinto, aunque el código sea el mismo. Para auditar el código, se entrega el fuente a quien lo solicite y puede compilarse con <code class="codigo">python3 build/build_gui_linux.py</code> (Linux) o <code class="codigo">python build\build_gui_exe.py</code> (Windows).
+      </p>
 
       <div class="alert alert-warning" style="margin: 12px 0;">
         <strong>⚠️ Nota de Emergencia:</strong> Si sospechas que eres blanco de un ataque activo de espionaje estatal, preserva el equipo sin reiniciar ni actualizar el sistema operativo y recurre a laboratorios de seguridad cívica independientes antes de manipular evidencias.
       </div>
     </section>
 
-    <!-- 4. Complementariedad con el Ecosistema -->
+    <!-- 4. Uso Rápido desde el Código Fuente -->
     <section class="card" style="margin-bottom: 24px;">
       <h3 style="margin-bottom: 12px; font-family: var(--font-mono); color: var(--accent-emerald);">
-        04. Articulación con Sentinels y Com Org
+        04. Uso desde el Código Fuente (sin binarios)
+      </h3>
+      <p style="margin-bottom: 14px;">
+        Para auditar o modificar antes de confiar, el proyecto se ejecuta en entorno local con Python 3.9 o posterior y <code class="codigo">customtkinter</code>:
+      </p>
+
+      <div style="margin-bottom: 16px;">
+        <h4 style="font-size: 0.92rem; font-family: var(--font-mono); margin-bottom: 6px; color: var(--text-primary);">
+          A. Ventana gráfica:
+        </h4>
+        <pre><code># Linux / macOS
+sh run-gui.sh
+python3 gui/app.py
+
+# Windows
+run-gui.cmd</code></pre>
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <h4 style="font-size: 0.92rem; font-family: var(--font-mono); margin-bottom: 6px; color: var(--text-primary);">
+          B. Herramienta de línea de comandos:
+        </h4>
+        <pre><code>python3 -X utf8 scan/zero-breach-toolkit.py --lang es</code></pre>
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <h4 style="font-size: 0.92rem; font-family: var(--font-mono); margin-bottom: 6px; color: var(--text-primary);">
+          C. Compilar su propio binario:
+        </h4>
+        <pre><code># Linux: requiere python3-tk y pyinstaller; no hay compilación cruzada
+python3 build/build_gui_linux.py
+sh build/build_appimage.sh --tarball
+
+# Windows
+python build\build_gui_exe.py</code></pre>
+      </div>
+    </section>
+
+    <!-- 5. Complementariedad con el Ecosistema -->
+    <section class="card" style="margin-bottom: 24px;">
+      <h3 style="margin-bottom: 12px; font-family: var(--font-mono); color: var(--accent-emerald);">
+        05. Articulación con Sentinels y Com Org
       </h3>
       <p style="margin-bottom: 10px;">
         Dentro del Ecosistema Soberano, <strong>Rastreo-Cero</strong> y <strong>Sentinels</strong> forman una pinza de ciberdefensa complementaria:
