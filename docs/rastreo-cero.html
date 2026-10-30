@@ -102,6 +102,24 @@
         Los binarios se entregan ya compilados (<strong>versión 0.1.4</strong>) y <strong>no requieren instalar Python</strong> en el equipo de destino. Cada plataforma tiene su propio artefacto; elija según el sistema operativo y el modo de uso.
       </p>
 
+      <!-- Enlaces de descarga (Proton Drive) -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-bottom: 14px;">
+        <div style="border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px; background: var(--bg-surface);">
+          <p style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); margin-bottom: 6px;">WINDOWS 10/11 · x64</p>
+          <p style="font-size: 0.88rem; margin-bottom: 12px;">Instalador y versión portable.</p>
+          <a href="https://drive.proton.me/urls/R680CTWMZR#dPX3rPl0udUK" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Descargar para Windows</a>
+        </div>
+        <div style="border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px; background: var(--bg-surface);">
+          <p style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); margin-bottom: 6px;">LINUX · x86-64</p>
+          <p style="font-size: 0.88rem; margin-bottom: 12px;">AppImage y paquete portable <code class="codigo">.tar.gz</code>.</p>
+          <a href="https://drive.proton.me/urls/BV1HSJ0VP0#atJsTSdx8yA2" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Descargar para Linux</a>
+        </div>
+      </div>
+
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;">
+        Descarga alojada en <strong>Proton Drive</strong> (almacenamiento cifrado extremo a extremo). El enlace abre la carpeta de descarga: conservá la parte posterior al símbolo <code class="codigo">#</code>, que contiene la clave de acceso.
+      </p>
+
       <div class="docs-table-wrapper" style="margin-bottom: 24px;">
         <table class="docs-table">
           <thead>
@@ -152,6 +170,10 @@
         A. Windows 10 u 11 (x64)
       </h4>
 
+      <p style="margin-bottom: 12px;">
+        <a href="https://drive.proton.me/urls/R680CTWMZR#dPX3rPl0udUK" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Descargar paquete para Windows</a>
+      </p>
+
       <p style="margin-bottom: 10px; font-size: 0.93rem;">
         <strong>Instalador recomendado.</strong> Se instala en el perfil del usuario (<code class="codigo">%LOCALAPPDATA%\Programs\Rastro Cero</code>), <strong>no pide contraseña de administrador</strong>, crea acceso en el menú Inicio, ofrece un icono opcional en el escritorio e incluye desinstalador. Antes de copiar un solo archivo muestra el <em>Aviso de instalación</em> con el detalle de lo que el programa hace y no hace.
       </p>
@@ -174,6 +196,10 @@ certutil -hashfile Rastro-cero-instalador.exe SHA256</code></pre>
       <h4 style="font-size: 1rem; font-family: var(--font-mono); margin: 28px 0 10px; color: var(--text-primary);">
         B. Linux (x86-64) — tres opciones de instalación
       </h4>
+
+      <p style="margin-bottom: 12px;">
+        <a href="https://drive.proton.me/urls/BV1HSJ0VP0#atJsTSdx8yA2" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Descargar paquete para Linux</a>
+      </p>
 
       <div class="alert alert-info" style="margin: 12px 0;">
         <strong>Requisitos comunes:</strong> procesador <strong>x86-64</strong>, <strong>glibc 2.35 o posterior</strong> (el binario se compila en Ubuntu 22.04 para conservar ese piso de compatibilidad) y un entorno gráfico con <code class="codigo">libX11</code> y <code class="codigo">libfontconfig</code>, presentes en cualquier escritorio. No es un contenedor: Python, Tk y las listas de indicadores van dentro del paquete, pero las bibliotecas gráficas del sistema se usan del sistema. <strong>No requiere permisos de root</strong> para ejecutarse.
